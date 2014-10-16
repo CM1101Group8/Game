@@ -65,9 +65,10 @@ def print_inventory_items(items):
     <BLANKLINE>
 
     """
-    items = list_of_items(inventory)
-    print("You have", items + ".")
-    print()
+    items = list_of_items(items)
+    if items:
+      print("You have", items + ".")
+      print()
 
 
 def print_room(room):
@@ -247,7 +248,7 @@ def execute_take(item_id):
         else:
             print ("\nYou do not have room for an item that heavy")
     else:
-        print ("You cannot take that.") 
+        print ("You cannot take that.")
 
 def execute_drop(item_id):
     """This function takes an item_id as an argument and moves this item from the
@@ -265,8 +266,8 @@ def execute_drop(item_id):
         current_room["items"].append(item_to_drop)
         inventory_weight -= item_to_drop["mass"]
     else:
-        print ("You cannt drop that")
-    
+        print ("You cannot drop that.")
+
 
 def execute_command(command):
     """This function takes a command (a list of words as returned by
@@ -357,4 +358,3 @@ def main():
 # See https://docs.python.org/3.4/library/__main__.html for explanation
 if __name__ == "__main__":
     main()
-

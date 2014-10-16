@@ -9,8 +9,8 @@ Print room items: Mike
 Print inventory items: Mike  
 Print room: Izzy   
 Print menu: Izzy     
-Execute go: Sam   
-**Execute take: Jamie**   
-**Execute drop: Jamie**    
-**Adding mass property: Ed**  
+Execute go: Sam  
+Execute take: Jamie  
+Execute drop: Jamie  
+Adding mass property: Ed  
 

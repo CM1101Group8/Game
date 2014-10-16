@@ -65,9 +65,10 @@ def print_inventory_items(items):
     <BLANKLINE>
 
     """
-    items = list_of_items(inventory)
-    print("You have", items + ".")
-    print()
+    items = list_of_items(items)
+    if items:
+      print("You have", items + ".")
+      print()
 
 
 def print_room(room):
@@ -237,6 +238,7 @@ def execute_take(item_id):
     item_taken = 0
     for item in current_room["items"]:
         if item_id == item["id"]:
+<<<<<<< HEAD
             item_taken = 1
             if inventory_weight + item["mass"] < 3000:
                 current_room["items"].remove(item)
@@ -248,6 +250,21 @@ def execute_take(item_id):
         print ("You cannot take that")
 
 def execute_drop(item_ident):
+=======
+            item_to_take = item
+
+    if item_to_take:
+        if inventory_weight +  item_to_take["mass"] < 3000:
+            current_room["items"].remove(item_to_take)
+            inventory.append(item_to_take)
+            inventory_weight += item_to_take["mass"]
+        else:
+            print ("\nYou do not have room for an item that heavy")
+    else:
+        print ("You cannot take that.")
+
+def execute_drop(item_id):
+>>>>>>> 70c71e2c7721bf40d5c25e526122e39e3f75f756
     """This function takes an item_id as an argument and moves this item from the
     player's inventory to list of items in the current room. However, if there is
     no such item in the inventory, this function prints "You cannot drop that."
@@ -256,6 +273,7 @@ def execute_drop(item_ident):
     item_dropped = 0
     for item in inventory:
         if item_ident == item["id"]:
+<<<<<<< HEAD
             item_dropped = 1
             inventory.remove(item)
             current_room["items"].append(item)
@@ -263,6 +281,17 @@ def execute_drop(item_ident):
     if not item_dropped:
         print ("You cannot drop that")
     
+=======
+            item_to_drop = item
+
+    if item_to_drop:
+        inventory.remove(item_to_drop)
+        current_room["items"].append(item_to_drop)
+        inventory_weight -= item_to_drop["mass"]
+    else:
+        print ("You cannot drop that.")
+
+>>>>>>> 70c71e2c7721bf40d5c25e526122e39e3f75f756
 
 def execute_command(command):
     """This function takes a command (a list of words as returned by
@@ -353,4 +382,3 @@ def main():
 # See https://docs.python.org/3.4/library/__main__.html for explanation
 if __name__ == "__main__":
     main()
-

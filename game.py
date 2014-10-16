@@ -218,10 +218,10 @@ def execute_go(direction):
     moving). Otherwise, it prints "You cannot go there."
     """
     global current_room
-    if is_valid_exit( current_room['exits'], direction ):
-	current_room = move( current_room['exits'], direction )
+    if is_valid_exit(current_room['exits'], direction):
+        current_room = move(current_room['exits'], direction)
     else:
-	print("You cannot go there!")
+        print("You cannot go there!")
 
 
 def execute_take(item_id):

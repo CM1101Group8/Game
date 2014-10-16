@@ -62,7 +62,9 @@ def print_inventory_items(items):
     <BLANKLINE>
 
     """
-    pass
+    items = list_of_items(inventory)
+    print("You have", items + ".")
+    print()
 
 
 def print_room(room):

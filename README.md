@@ -5,7 +5,7 @@ Lab sheet 5 assignments:
 Filter words: Caitlin   
 Normalise input: Caitlin   
 **List of items: Tom**  
-**Print room items: Mike**  
+Print room items: Mike  
 Print inventory items: Mike  
 Print room: Izzy   
 Print menu: Izzy     

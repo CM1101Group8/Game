@@ -7,8 +7,8 @@ Lab sheet 5 assignments:
 **List of items: Tom**  
 **Print room: Mike**  
 **Print inventory items: Mike**  
-**Print room: Izzy**    
-**Print menu: Izzy**    
+Print room: Izzy   
+Print menu: Izzy     
 **Execute go: Sam**   
 **Execute take: Jamie**   
 **Execute drop: Jamie**    

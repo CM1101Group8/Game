@@ -2,11 +2,11 @@ Lab sheet 5 assignments:
 
 **Bold** = not done  
 
-**Filter words: Caitlin**   
-**Normalise input: Caitlin**    
+Filter words: Caitlin   
+Normalise input: Caitlin   
 **List of items: Tom**  
 **Print room items: Mike**  
-**Print inventory items: Mike**  
+Print inventory items: Mike  
 Print room: Izzy   
 Print menu: Izzy     
 Execute go: Sam   

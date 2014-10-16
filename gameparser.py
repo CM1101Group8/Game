@@ -27,9 +27,12 @@ def filter_words(words, skip_words):
     ['go', 'passage', 'south']
 
     """
-    pass
+    temp = words[:]
+    for word in words:
+        if word in skip_words:
+            temp.remove(word)
+    return temp
 
-    
 def remove_punct(text):
     """This function is used to remove all punctuation
     marks from a string. Spaces do not count as punctuation and should
@@ -77,8 +80,9 @@ def normalise_input(user_input):
 
     """
     # Remove punctuation and convert to lower case
-    no_punct = remove_punct(user_input).lower()
-
+    user_input = remove_punct(user_input).strip().lower().split()
+    user_input = filter_words(user_input, skip_words)
+    return user_input
     #
     # COMPLETE ME!
     #

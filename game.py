@@ -111,17 +111,12 @@ def print_room(room):
 
     Note: <BLANKLINE> here means that doctest should expect a blank line.
     """
-    # Display room name
     print()
     print(room["name"].upper())
     print()
-    # Display room description
     print(room["description"])
     print()
-
-    #
-    # COMPLETE ME!
-    #
+    print_room_items(room)
 
 def exit_leads_to(exits, direction):
     """This function takes a dictionary of exits and a direction (a particular
@@ -185,15 +180,13 @@ def print_menu(exits, room_items, inv_items):
 
     """
     print("You can:")
-    # Iterate over available exits
     for direction in exits:
-        # Print the exit name and where it leads to
         print_exit(direction, exit_leads_to(exits, direction))
+    for things in room_items:
+        print("TAKE " + things["id"].upper() + " to take " + things["name"] + ".")
+    for things in inv_items:
+        print("DROP " + things["id"].upper() + " to drop your " + things["name"] + ".")
 
-    #
-    # COMPLETE ME!
-    #
-    
     print("What do you want to do?")
 
 

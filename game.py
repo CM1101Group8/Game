@@ -233,15 +233,39 @@ def execute_take(item_id):
     there is no such item in the room, this function prints
     "You cannot take that."
     """
-    pass
-    
+    global inventory_weight
+    item_to_take = ""
+    for item in current_room["items"]:
+        if item_id == item["id"]:
+            item_to_take = item
+
+    if item_to_take:
+        if inventory_weight +  item_to_take["mass"] < 3000:
+            current_room["items"].remove(item_to_take)
+            inventory.append(item_to_take)
+            inventory_weight += item_to_take["mass"]
+        else:
+            print ("\nYou do not have room for an item that heavy")
+    else:
+        print ("You cannot take that.") 
 
 def execute_drop(item_id):
     """This function takes an item_id as an argument and moves this item from the
     player's inventory to list of items in the current room. However, if there is
     no such item in the inventory, this function prints "You cannot drop that."
     """
-    pass
+    global inventory_weight
+    item_to_drop = ""
+    for item in inventory:
+        if item_ident == item["id"]:
+            item_to_drop = item
+
+    if item_to_drop:
+        inventory.remove(item_to_drop)
+        current_room["items"].append(item_to_drop)
+        inventory_weight -= item_to_drop["mass"]
+    else:
+        print ("You cannt drop that")
     
 
 def execute_command(command):

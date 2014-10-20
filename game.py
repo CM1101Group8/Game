@@ -5,7 +5,23 @@ from player import *
 from items import *
 from gameparser import *
 
+def item_damage(item):
+    #calculates item damage
+    import math
+    return int(math.sqrt(item['mass']))
 
+def take_damage(player, damage):
+    #inflicts damage on the player
+    player['health'] = player['health'] - int(damage)
+    nice_print(""+ player['name'] +" took "+ str(damage) +" damage.")
+    nice_print(""+ player['name'] +" health is now "+ str(player['health']) +".")
+    return player
+
+def print_player(player):
+    #prints the player status
+    nice_print("Your health is: "+str(player["health"]))
+    nice_print("Your experience is: "+str(player["experience"]))
+    print()
 
 def list_of_items(items):
     """This function takes a list of items (see items.py for the definition) and
@@ -55,7 +71,7 @@ def print_room_items(room):
     """
     items = list_of_items(room["items"])
     if items:
-        print("There is", items, "here.")
+        nice_print("There is "+ items + " here.")
         print()
 
 
@@ -71,7 +87,7 @@ def print_inventory_items(items):
     """
     items = list_of_items(items)
     if items:
-      print("You have", items + ".")
+      nice_print("You have "+ items + ".")
       print()
 
 
@@ -122,9 +138,9 @@ def print_room(room):
     Note: <BLANKLINE> here means that doctest should expect a blank line.
     """
     print()
-    print(room["name"].upper())
+    nice_print(room["name"].upper())
     print()
-    print(room["description"])
+    nice_print(room["description"])
     print()
     print_room_items(room)
 
@@ -156,7 +172,7 @@ def print_exit(direction, leads_to):
     >>> print_exit("south", "Robs' room")
     GO SOUTH to Robs' room.
     """
-    print("GO " + direction.upper() + " to " + leads_to + ".")
+    nice_print("GO " + direction.upper() + " to " + leads_to + ".")
 
 
 def print_menu(exits, room_items, inv_items):
@@ -189,15 +205,15 @@ def print_menu(exits, room_items, inv_items):
     What do you want to do?
 
     """
-    print("You can:")
+    nice_print("You can:")
     for direction in exits:
         print_exit(direction, exit_leads_to(exits, direction))
     for things in room_items:
-        print("TAKE " + things["id"].upper() + " to take " + things["name"] + ".")
+        nice_print("TAKE " + things["id"].upper() + " to take " + things["name"] + ".")
     for things in inv_items:
-        print("DROP " + things["id"].upper() + " to drop your " + things["name"] + ".")
+        nice_print("DROP " + things["id"].upper() + " to drop your " + things["name"] + ".")
 
-    print("What do you want to do?")
+    nice_print("What do you want to do?")
 
 
 def is_valid_exit(exits, chosen_exit):
@@ -229,7 +245,7 @@ def execute_go(direction):
     if is_valid_exit(current_room['exits'], direction):
         current_room = move(current_room['exits'], direction)
     else:
-        print("You cannot go there!")
+        nice_print("You cannot go there!")
 
 
 def execute_take(item_id):
@@ -268,6 +284,20 @@ def execute_drop(item_ident):
     if not item_dropped:
         print ("You cannot drop that")
 
+def execute_use(item_ident):
+    global player
+    for item in inventory:
+        if item_ident == item['id']:
+            damage = item_damage(item)
+            take_damage(player, damage)
+            if item['mass'] < 50:
+                nice_print("You cannot attack with that")
+            return
+    if True:
+        nice_print("You cannot use that item")
+        
+
+
 def execute_command(command):
     """This function takes a command (a list of words as returned by
     normalise_input) and, depending on the type of action (the first word of
@@ -279,22 +309,27 @@ def execute_command(command):
         if len(command) > 1:
             execute_go(command[1])
         else:
-            print("Go where?")
+            nice_print("Go where?")
 
     elif command[0] == "take":
         if len(command) > 1:
             execute_take(command[1])
         else:
-            print("Take what?")
+            nice_print("Take what?")
 
     elif command[0] == "drop":
         if len(command) > 1:
             execute_drop(command[1])
         else:
-            print("Drop what?")
+            nice_print("Drop what?")
+    elif command[0] == "use":
+        if len(command) > 1:
+            execute_use(command[1])
+        else:
+            nice_print("Use what?")
 
     else:
-        print("This makes no sense.")
+        nice_print("This makes no sense.")
 
 
 def menu(exits, room_items, inv_items):
@@ -311,7 +346,8 @@ def menu(exits, room_items, inv_items):
 
     # Read player's input
     user_input = input("> ")
-
+    while user_input == "":
+        user_input = input("> ")
     # Normalise the input
     normalised_user_input = normalise_input(user_input)
 
@@ -328,13 +364,27 @@ def move(exits, direction):
     >>> move(rooms["Reception"]["exits"], "east") == rooms["Tutor"]
     True
     >>> move(rooms["Reception"]["exits"], "west") == rooms["Office"]
-    False
-    """
+    False    """
 
     # Next room to go to
     return rooms[exits[direction]]
 
+def nice_print(text):
+    #"Takes a text and displays it character by character"
+    import time
+    import sys, select
+    for index, char in enumerate(text):
+        if sys.stdin in select.select([sys.stdin], [], [], 0)[0]:
+            sys.stdout.write(str(text[index:]))
+            sys.stdout.flush()
+            line = input()
+            break
+        time.sleep(0.05)
+        sys.stdout.write(char)
+        sys.stdout.flush()
+    print()
 
+        
 # This is the entry point of our program
 def main():
 
@@ -343,6 +393,7 @@ def main():
         # Display game status (room description, inventory etc.)
         print_room(current_room)
         print_inventory_items(inventory)
+        print_player(player)
 
         # Show the menu with possible actions and ask the player
         command = menu(current_room["exits"], current_room["items"], inventory)

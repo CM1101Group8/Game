@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 
+from colorama import init, Fore
+
 from map import rooms
 from player import *
 from items import *
 from gameparser import *
 
-
+init()
 
 def list_of_items(items):
     """This function takes a list of items (see items.py for the definition) and
@@ -192,6 +194,9 @@ def print_menu(exits, room_items, inv_items):
     print("You can:")
     for direction in exits:
         print_exit(direction, exit_leads_to(exits, direction))
+    for things in inv_items:
+        if "use" in things.keys():
+            print("USE " + things["id"].upper() + " to use your " + things["name"] + ".")
     for things in room_items:
         print("TAKE " + things["id"].upper() + " to take " + things["name"] + ".")
     for things in inv_items:
@@ -268,6 +273,19 @@ def execute_drop(item_ident):
     if not item_dropped:
         print ("You cannot drop that")
 
+
+def execute_use(item_id):
+    for item in inventory:
+        if item_id == item["id"]:
+            if "use" in item.keys():
+                item["use"]()
+                return
+            else:
+                print("You cannot use this.")
+                return
+    print("You don't have this!")
+
+
 def execute_command(command):
     """This function takes a command (a list of words as returned by
     normalise_input) and, depending on the type of action (the first word of
@@ -292,6 +310,12 @@ def execute_command(command):
             execute_drop(command[1])
         else:
             print("Drop what?")
+
+    elif command[0] == "use":
+        if len(command) > 1:
+            execute_use(command[1])
+        else:
+            print("Use what?")
 
     else:
         print("This makes no sense.")

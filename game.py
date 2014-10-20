@@ -140,8 +140,9 @@ def print_room(room):
     Note: <BLANKLINE> here means that doctest should expect a blank line.
     """
     print()
+    print(Back.WHITE + Fore.BLACK)
     nice_print(room["name"].upper())
-    print(Back.WHITE + Fore.BLACK + room["name"].upper() + Fore.RESET + Back.RESET)
+    print(Fore.RESET + Back.RESET)
     print()
     nice_print(room["description"])
     print()
@@ -314,7 +315,7 @@ def execute_use(item_ident):
             return
     if True:
         nice_print("You cannot use that item")
-        
+
 
 
 def execute_command(command):
@@ -390,24 +391,18 @@ def move(exits, direction):
     return rooms[exits[direction]]
 
 def nice_print(text):
-    #"Takes a text and displays it character by character"
-    import time
-    import sys, select
-    for index, char in enumerate(text):
-        if sys.stdin in select.select([sys.stdin], [], [], 0)[0]:
-            sys.stdout.write(str(text[index:]))
-            sys.stdout.flush()
-            line = input()
-            break
-        time.sleep(0.05)
-        sys.stdout.write(char)
-        sys.stdout.flush()
-    print()
+    import sys, time
 
-        
+    for character in text:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    print("\n", end='')
+
 # This is the entry point of our program
 def main():
-
+    # Initialise colorama
+    init()
     # Main game loop
     while True:
         # Display game status (room description, inventory etc.)

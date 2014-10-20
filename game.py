@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from colorama import init, Fore
+from colorama import init, Fore, Back
 
 from map import rooms
 from player import *
@@ -124,7 +124,7 @@ def print_room(room):
     Note: <BLANKLINE> here means that doctest should expect a blank line.
     """
     print()
-    print(room["name"].upper())
+    print(Back.WHITE + Fore.BLACK + room["name"].upper() + Fore.RESET + Back.RESET)
     print()
     print(room["description"])
     print()
@@ -234,7 +234,7 @@ def execute_go(direction):
     if is_valid_exit(current_room['exits'], direction):
         current_room = move(current_room['exits'], direction)
     else:
-        print("You cannot go there!")
+        print(Fore.RED + "You cannot go there!" + Fore.RESET)
 
 
 def execute_take(item_id):
@@ -253,9 +253,9 @@ def execute_take(item_id):
                 inventory.append(item)
                 inventory_weight += item["mass"]
             else:
-                print ("\nYou do not have room for an item that heavy")
+                print (Fore.RED + "\nYou do not have room for an item that heavy" + Fore.RESET)
     if not item_taken:
-        print ("You cannot take that")
+        print (Fore.RED + "You cannot take that" + Fore.RESET)
 
 def execute_drop(item_ident):
     """This function takes an item_id as an argument and moves this item from the
@@ -271,7 +271,7 @@ def execute_drop(item_ident):
             current_room["items"].append(item)
             inventory_weight -= item["mass"]
     if not item_dropped:
-        print ("You cannot drop that")
+        print (Fore.RED + "You cannot drop that" + Fore.RESET)
 
 
 def execute_use(item_id):
@@ -281,9 +281,9 @@ def execute_use(item_id):
                 item["use"]()
                 return
             else:
-                print("You cannot use this.")
+                print(Fore.RED + "You cannot use this." + Fore.RESET)
                 return
-    print("You don't have this!")
+    print(Fore.RED + "You don't have this!" + Fore.RESET)
 
 
 def execute_command(command):
@@ -297,28 +297,28 @@ def execute_command(command):
         if len(command) > 1:
             execute_go(command[1])
         else:
-            print("Go where?")
+            print(Fore.YELLOW + "Go where?" + Fore.RESET)
 
     elif command[0] == "take":
         if len(command) > 1:
             execute_take(command[1])
         else:
-            print("Take what?")
+            print(Fore.YELLOW + "Take what?" + Fore.RESET)
 
     elif command[0] == "drop":
         if len(command) > 1:
             execute_drop(command[1])
         else:
-            print("Drop what?")
+            print(Fore.YELLOW + "Drop what?" + Fore.RESET)
 
     elif command[0] == "use":
         if len(command) > 1:
             execute_use(command[1])
         else:
-            print("Use what?")
+            print(Fore.YELLOW + "Use what?" + Fore.RESET)
 
     else:
-        print("This makes no sense.")
+        print(Fore.RED + "This makes no sense." + Fore.RESET)
 
 
 def menu(exits, room_items, inv_items):

@@ -251,11 +251,7 @@ def execute_go(direction):
     if is_valid_exit(current_room['exits'], direction):
         current_room = move(current_room['exits'], direction)
     else:
-<<<<<<< HEAD
-        nice_print("You cannot go there!")
-=======
-        print(Fore.RED + "You cannot go there!" + Fore.RESET)
->>>>>>> eb1983baa1635ace4856eb374a14a2f9ba208c0f
+        nice_print(Fore.RED + "You cannot go there!" + Fore.RESET)
 
 
 def execute_take(item_id):
@@ -332,47 +328,31 @@ def execute_command(command):
         if len(command) > 1:
             execute_go(command[1])
         else:
-<<<<<<< HEAD
-            nice_print("Go where?")
-=======
-            print(Fore.YELLOW + "Go where?" + Fore.RESET)
->>>>>>> eb1983baa1635ace4856eb374a14a2f9ba208c0f
+            nice_print(Fore.YELLOW + "Go where?" + Fore.RESET)
 
     elif command[0] == "take":
         if len(command) > 1:
             execute_take(command[1])
         else:
-<<<<<<< HEAD
-            nice_print("Take what?")
-=======
-            print(Fore.YELLOW + "Take what?" + Fore.RESET)
->>>>>>> eb1983baa1635ace4856eb374a14a2f9ba208c0f
+            nice_print(Fore.YELLOW + "Take what?" + Fore.RESET)
 
     elif command[0] == "drop":
         if len(command) > 1:
             execute_drop(command[1])
         else:
-<<<<<<< HEAD
-            nice_print("Drop what?")
-=======
-            print(Fore.YELLOW + "Drop what?" + Fore.RESET)
+            nice_print(Fore.YELLOW + "Drop what?" + Fore.RESET)
 
->>>>>>> eb1983baa1635ace4856eb374a14a2f9ba208c0f
     elif command[0] == "use":
         if len(command) > 1:
             execute_use(command[1])
         else:
-<<<<<<< HEAD
             nice_print("Use what?")
 
     else:
-        nice_print("This makes no sense.")
-=======
-            print(Fore.YELLOW + "Use what?" + Fore.RESET)
+        nice_print(Fore.YELLOW + "Use what?" + Fore.RESET)
 
     else:
-        print(Fore.RED + "This makes no sense." + Fore.RESET)
->>>>>>> eb1983baa1635ace4856eb374a14a2f9ba208c0f
+        nice_print(Fore.RED + "This makes no sense." + Fore.RESET)
 
 
 def menu(exits, room_items, inv_items):

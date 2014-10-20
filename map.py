@@ -5,7 +5,7 @@ location_plane = {
 
     "description":
     """
-
+    TODO
     """,
 
     "exits": {"east": "MON1", "north": "MON2", "west": "MON3"},
@@ -18,7 +18,7 @@ location_mon1 = {
 
     "description":
     """
-
+    TODO
     """,
 
     "exits": {"west": "Plane", "north": "Ravine", "west": "Rockside"},
@@ -31,7 +31,7 @@ location_mon2 = {
 
     "description":
     """
-
+    TODO
     """,
 
     "exits": {"north": "HOF", "south": "Plane", "west": "Ravine", "east": "Woods"},
@@ -44,7 +44,7 @@ location_mon3 = {
 
     "description":
     """
-
+    TODO
     """,
 
     "exits": {"west": "Plane", "east": "Beach", "north": "Woods"},
@@ -57,12 +57,12 @@ location_hof = {
 
     "description":
     """
-
+    TODO
     """,
 
     "exits": {"south": "MON2", "north": "Passage"},
 
-    "items": []
+    "items": [item_wood]
 }
 
 location_ravine = {
@@ -70,7 +70,7 @@ location_ravine = {
 
     "description":
     """
-
+    TODO
     """,
 
     "exits": {"south": "MON1", "west": "Brush", "east": "MON2", },
@@ -83,12 +83,12 @@ location_brush = {
 
     "description":
     """
-
+    TODO
     """,
 
     "exits": {"east": "Ravine"},
 
-    "items": []
+    "items": [item_machete, item_wood]
 }
 
 location_rockside = {
@@ -96,12 +96,12 @@ location_rockside = {
 
     "description":
     """
-
+    TODO
     """,
 
     "exits": {"east": "MON1"},
 
-    "items": []
+    "items": [item_sparktool]
 }
 
 location_woods = {
@@ -109,12 +109,12 @@ location_woods = {
 
     "description":
     """
-
+    TODO
     """,
 
     "exits": {"west": "MON2", "east": "Cliffs", "south": "MON3"},
 
-    "items": []
+    "items": [item_wood]
 }
 
 location_cliffs = {
@@ -122,7 +122,7 @@ location_cliffs = {
 
     "description":
     """
-
+    TODO
     """,
 
     "exits": {"west": "Woods"},
@@ -135,20 +135,20 @@ location_beach = {
 
     "description":
     """
-
+    TODO
     """,
 
     "exits": {"west": "MON3"},
 
-    "items": []
+    "items": [item_medkit, item_crisps]
 }
 
 location_passage = {
-    "name": "Middle of Nowhere",
+    "name": "Dark Passage",
 
     "description":
     """
-
+    TODO
     """,
 
     "exits": {"south": "HOF"},

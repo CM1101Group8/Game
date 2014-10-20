@@ -1,3 +1,4 @@
+# PLANE ITEMS
 item_toolkit = {
     "id": "toolkit",
 
@@ -26,22 +27,24 @@ item_headtorch = {
     "name": "a headtorch",
 
     "description":
-    """The headtorch can be used to see in dark areas. This could allow you to explored dark places such as caves.""",
+    """The headtorch can be used to see in dark areas. This could allow you to explore dark places such as caves.""",
 
     "mass": 150
 }
 
 item_compass = {
-    "id": "toolkit",
+    "id": "compass",
 
     "name": "a compass",
 
     "description":
-    """The compass will allow you to navigate directions, aiding you in your attemp for rescue.""",
+    """The compass will allow you to navigate directions, aiding you in your attempt for rescue.""",
 
     "mass": 250
 }
 
+
+# END-GAME ITEMS
 item_parachute = {
     "id": "parachute",
 
@@ -86,12 +89,75 @@ item_greenleaves = {
     "mass": 100
 }
 
-item_wood= {
+item_wood = {
     "id": "wood",
-    
+
     "name": "a pile of wood",
 
     "description": "The wood pile can be used as fuel for a fire.",
 
     "mass": 1000
+}
+
+
+# SURVIVAL ITEMS
+item_medkit = {
+    "id": "medkit",
+
+    "name": "a Med Kit",
+
+    "description": "TODO",
+
+    "mass": 0 #TODO
+}
+
+item_crisps = {
+    "id": "crisps",
+
+    "name": "a bag of crisps",
+
+    "description": "TODO",
+
+    "mass": 0 #TODO
+}
+
+item_water = {
+    "id": "water",
+
+    "name": "a bottle of water",
+
+    "description": "TODO",
+
+    "mass": 0 #TODO
+}
+
+item_chocolate = {
+    "id": "chocolate",
+
+    "name": "a chocolate bar",
+
+    "description": "TODO",
+
+    "mass": 0 #TODO
+}
+
+item_bandaids = {
+    "id": "bandaids",
+
+    "name": "some band aids",
+
+    "description": "TODO",
+
+    "mass": 0 #TODO
+}
+
+# WEAPONS
+item_machete = {
+    "id": "machete",
+
+    "name": "a rusty machete",
+
+    "description": "TODO",
+
+    "mass": 0 #TODO
 }

@@ -216,7 +216,7 @@ def print_menu(exits, location_items, inv_items):
     for things in location_items:
         nice_print("TAKE " + things["id"].upper() + " to take " + things["name"] + ".")
     for things in inv_items:
-        nice_print("DROP " + things["id"].upper() + " to drop your " + things["name"] + ".")
+        nice_print("DROP " + things["id"].upper() + " to drop " + things["name"] + ".")
 
     nice_print("What do you want to do?")
 

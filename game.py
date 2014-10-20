@@ -346,10 +346,7 @@ def execute_command(command):
         if len(command) > 1:
             execute_use(command[1])
         else:
-            nice_print("Use what?")
-
-    else:
-        nice_print(Fore.YELLOW + "Use what?" + Fore.RESET)
+            nice_print(Fore.YELLOW + "Use what?" + Fore.RESET)
 
     else:
         nice_print(Fore.RED + "This makes no sense." + Fore.RESET)

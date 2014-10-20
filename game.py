@@ -2,7 +2,7 @@
 
 from colorama import init, Fore, Back
 
-from map import rooms
+from map import locations
 from player import *
 from items import *
 from gameparser import *
@@ -49,29 +49,29 @@ def list_of_items(items):
     return ', '.join(list)
 
 
-def print_room_items(room):
-    """This function takes a room as an input and nicely displays a list of items
-    found in this room (followed by a blank line). If there are no items in
-    the room, nothing is printed. See map.py for the definition of a room, and
+def print_location_items(location):
+    """This function takes a location as an input and nicely displays a list of items
+    found in this location (followed by a blank line). If there are no items in
+    the location, nothing is printed. See map.py for the definition of a location, and
     items.py for the definition of an item. This function uses list_of_items()
     to produce a comma-separated list of item names. For example:
 
-    >>> print_room_items(rooms["Reception"])
+    >>> print_location_items(locations["Reception"])
     There is a pack of biscuits, a student handbook here.
     <BLANKLINE>
 
-    >>> print_room_items(rooms["Office"])
+    >>> print_location_items(locations["Office"])
     There is a pen here.
     <BLANKLINE>
 
-    >>> print_room_items(rooms["Robs"])
+    >>> print_location_items(locations["Robs"])
 
     (no output)
 
     Note: <BLANKLINE> here means that doctest should expect a blank line.
 
     """
-    items = list_of_items(room["items"])
+    items = list_of_items(location["items"])
     if items:
         nice_print("There is "+ items + " here.")
         print()
@@ -79,7 +79,7 @@ def print_room_items(room):
 
 def print_inventory_items(items):
     """This function takes a list of inventory items and displays it nicely, in a
-    manner similar to print_room_items(). The only difference is in formatting:
+    manner similar to print_location_items(). The only difference is in formatting:
     print "You have ..." instead of "There is ... here.". For example:
 
     >>> print_inventory_items(inventory)
@@ -93,16 +93,16 @@ def print_inventory_items(items):
       print()
 
 
-def print_room(room):
-    """This function takes a room as an input and nicely displays its name
-    and description. The room argument is a dictionary with entries "name",
-    "description" etc. (see map.py for the definition). The name of the room
+def print_location(location):
+    """This function takes a location as an input and nicely displays its name
+    and description. The location argument is a dictionary with entries "name",
+    "description" etc. (see map.py for the definition). The name of the location
     is printed in all capitals and framed by blank lines. Then follows the
-    description of the room and a blank line again. If there are any items
-    in the room, the list of items is printed next followed by a blank line
-    (use print_room_items() for this). For example:
+    description of the location and a blank line again. If there are any items
+    in the location, the list of items is printed next followed by a blank line
+    (use print_location_items() for this). For example:
 
-    >>> print_room(rooms["Office"])
+    >>> print_location(locations["Office"])
     <BLANKLINE>
     THE GENERAL OFFICE
     <BLANKLINE>
@@ -114,7 +114,7 @@ def print_room(room):
     There is a pen here.
     <BLANKLINE>
 
-    >>> print_room(rooms["Reception"])
+    >>> print_location(locations["Reception"])
     <BLANKLINE>
     RECEPTION
     <BLANKLINE>
@@ -128,42 +128,42 @@ def print_room(room):
     There is a pack of biscuits, a student handbook here.
     <BLANKLINE>
 
-    >>> print_room(rooms["Robs"])
+    >>> print_location(locations["Robs"])
     <BLANKLINE>
     ROBS' ROOM
     <BLANKLINE>
     You are leaning agains the door of the systems managers'
-    room. Inside you notice Rob Evans and Rob Davies. They
+    location. Inside you notice Rob Evans and Rob Davies. They
     ignore you. To the north is the reception.
     <BLANKLINE>
 
     Note: <BLANKLINE> here means that doctest should expect a blank line.
     """
     print()
-    nice_print(room["name"].upper(), Fore.BLACK, Back.WHITE)
+    nice_print(location["name"].upper(), Fore.BLACK, Back.WHITE)
     print()
-    nice_print(room["description"])
+    nice_print(location["description"])
     print()
-    print_room_items(room)
+    print_location_items(location)
 
 def exit_leads_to(exits, direction):
     """This function takes a dictionary of exits and a direction (a particular
-    exit taken from this dictionary). It returns the name of the room into which
+    exit taken from this dictionary). It returns the name of the location into which
     this exit leads. For example:
 
-    >>> exit_leads_to(rooms["Reception"]["exits"], "south")
+    >>> exit_leads_to(locations["Reception"]["exits"], "south")
     "Robs' room"
-    >>> exit_leads_to(rooms["Reception"]["exits"], "east")
+    >>> exit_leads_to(locations["Reception"]["exits"], "east")
     "your personal tutor's office"
-    >>> exit_leads_to(rooms["Tutor"]["exits"], "west")
+    >>> exit_leads_to(locations["Tutor"]["exits"], "west")
     'Reception'
     """
-    return rooms[exits[direction]]["name"]
+    return locations[exits[direction]]["name"]
 
 
 def print_exit(direction, leads_to):
     """This function prints a line of a menu of exits. It takes a direction (the
-    name of an exit) and the name of the room into which it leads (leads_to),
+    name of an exit) and the name of the location into which it leads (leads_to),
     and should print a menu line in the following format:
 
     GO <EXIT NAME UPPERCASE> to <where it leads>.
@@ -174,18 +174,18 @@ def print_exit(direction, leads_to):
     >>> print_exit("south", "Robs' room")
     GO SOUTH to Robs' room.
     """
-    nice_print("GO " + direction.upper() + " to " + leads_to + ".")
+    nice_print("GO " + direction.upper() + " to the " + leads_to + ".")
 
 
-def print_menu(exits, room_items, inv_items):
+def print_menu(exits, location_items, inv_items):
     """This function displays the menu of available actions to the player. The
     argument exits is a dictionary of exits as exemplified in map.py. The
-    arguments room_items and inv_items are the items lying around in the room
+    arguments location_items and inv_items are the items lying around in the location
     and carried by the player respectively. The menu should, for each exit,
     call the function print_exit() to print the information about each exit in
-    the appropriate format. The room into which an exit leads is obtained
+    the appropriate format. The location into which an exit leads is obtained
     using the function exit_leads_to(). Then, it should print a list of commands
-    related to items: for each item in the room print
+    related to items: for each item in the location print
 
     "TAKE <ITEM ID> to take <item name>."
 
@@ -213,7 +213,7 @@ def print_menu(exits, room_items, inv_items):
     for things in inv_items:
         if "use" in things.keys():
             print("USE " + things["id"].upper() + " to use your " + things["name"] + ".")
-    for things in room_items:
+    for things in location_items:
         nice_print("TAKE " + things["id"].upper() + " to take " + things["name"] + ".")
     for things in inv_items:
         nice_print("DROP " + things["id"].upper() + " to drop your " + things["name"] + ".")
@@ -228,27 +228,27 @@ def is_valid_exit(exits, chosen_exit):
     the name of the exit has been normalised by the function normalise_input().
     For example:
 
-    >>> is_valid_exit(rooms["Reception"]["exits"], "south")
+    >>> is_valid_exit(locations["Reception"]["exits"], "south")
     True
-    >>> is_valid_exit(rooms["Reception"]["exits"], "up")
+    >>> is_valid_exit(locations["Reception"]["exits"], "up")
     False
-    >>> is_valid_exit(rooms["Parking"]["exits"], "west")
+    >>> is_valid_exit(locations["Parking"]["exits"], "west")
     False
-    >>> is_valid_exit(rooms["Parking"]["exits"], "east")
+    >>> is_valid_exit(locations["Parking"]["exits"], "east")
     True
     """
     return chosen_exit in exits
 
 
 def execute_go(direction):
-    """This function, given the direction (e.g. "south") updates the current room
+    """This function, given the direction (e.g. "south") updates the current location
     to reflect the movement of the player if the direction is a valid exit
-    (and prints the name of the room into which the player is
+    (and prints the name of the location into which the player is
     moving). Otherwise, it prints "You cannot go there."
     """
-    global current_room
-    if is_valid_exit(current_room['exits'], direction):
-        current_room = move(current_room['exits'], direction)
+    global player
+    if is_valid_exit(player["current_location"]['exits'], direction):
+        player["current_location"] = move(player["current_location"]['exits'], direction)
         return True
     else:
         nice_print("You cannot go there!", Fore.RED)
@@ -257,19 +257,18 @@ def execute_go(direction):
 
 def execute_take(item_id):
     """This function takes an item_id as an argument and moves this item from the
-    list of items in the current room to the player's inventory. However, if
-    there is no such item in the room, this function prints
+    list of items in the current location to the player's inventory. However, if
+    there is no such item in the location, this function prints
     "You cannot take that."
     """
-    global inventory_weight
     item_taken = 0
-    for item in current_room["items"]:
+    for item in player["current_location"]["items"]:
         if item_id == item["id"]:
             item_taken = 1
-            if inventory_weight + item["mass"] < 3000:
-                current_room["items"].remove(item)
-                inventory.append(item)
-                inventory_weight += item["mass"]
+            if player["inventory_weight"] + item["mass"] < 3000:
+                player["current_location"]["items"].remove(item)
+                player["inventory"].append(item)
+                player["inventory_weight"] += item["mass"]
                 return True
             else:
                 nice_print("\nYou do not have room for an item that heavy", Fore.RED)
@@ -280,17 +279,16 @@ def execute_take(item_id):
 
 def execute_drop(item_ident):
     """This function takes an item_id as an argument and moves this item from the
-    player's inventory to list of items in the current room. However, if there is
+    player's inventory to list of items in the current location. However, if there is
     no such item in the inventory, this function prints "You cannot drop that."
     """
-    global inventory_weight
     item_dropped = 0
-    for item in inventory:
+    for item in player["inventory"]:
         if item_ident == item["id"]:
             item_dropped = 1
-            inventory.remove(item)
-            current_room["items"].append(item)
-            inventory_weight -= item["mass"]
+            player["inventory"].remove(item)
+            player["current_location"]["items"].append(item)
+            player["inventory_weight"] -= item["mass"]
             return True
     if not item_dropped:
         nice_print("You cannot drop that", Fore.RED)
@@ -298,7 +296,7 @@ def execute_drop(item_ident):
 
 
 def execute_use(item_id):
-    for item in inventory:
+    for item in player["inventory"]:
         if item_id == item["id"]:
             if "use" in item.keys():
                 item["use"]()
@@ -350,9 +348,9 @@ def execute_command(command):
         return False
 
 
-def menu(exits, room_items, inv_items):
-    """This function, given a dictionary of possible exits from a room, and a list
-    of items found in the room and carried by the player, prints the menu of
+def menu(exits, location_items, inv_items):
+    """This function, given a dictionary of possible exits from a location, and a list
+    of items found in the location and carried by the player, prints the menu of
     actions using print_menu() function. It then prompts the player to type an
     action. The players's input is normalised using the normalise_input()
     function before being returned.
@@ -360,7 +358,7 @@ def menu(exits, room_items, inv_items):
     """
 
     # Display menu
-    print_menu(exits, room_items, inv_items)
+    print_menu(exits, location_items, inv_items)
 
     # Read player's input
     user_input = input("> ")
@@ -373,19 +371,19 @@ def menu(exits, room_items, inv_items):
 
 
 def move(exits, direction):
-    """This function returns the room into which the player will move if, from a
+    """This function returns the location into which the player will move if, from a
     dictionary "exits" of avaiable exits, they choose to move towards the exit
     with the name given by "direction". For example:
 
-    >>> move(rooms["Reception"]["exits"], "south") == rooms["Robs"]
+    >>> move(locations["Reception"]["exits"], "south") == locations["Robs"]
     True
-    >>> move(rooms["Reception"]["exits"], "east") == rooms["Tutor"]
+    >>> move(locations["Reception"]["exits"], "east") == locations["Tutor"]
     True
-    >>> move(rooms["Reception"]["exits"], "west") == rooms["Office"]
+    >>> move(locations["Reception"]["exits"], "west") == locations["Office"]
     False    """
 
-    # Next room to go to
-    return rooms[exits[direction]]
+    # Next location to go to
+    return locations[exits[direction]]
 
 def nice_print(text, fore=Fore.WHITE, back=Back.BLACK):
     import sys, time
@@ -403,17 +401,17 @@ def main():
     init()
     # Main game loop
     while True:
-        # Display game status (room description, inventory etc.)
-        print_room(current_room)
-        print_inventory_items(inventory)
+        # Display game status (location description, inventory etc.)
+        print_location(player["current_location"])
+        print_inventory_items(player["inventory"])
         print_player(player)
 
         # Show the menu with possible actions and ask the player
-        command = menu(current_room["exits"], current_room["items"], inventory)
+        command = menu(player["current_location"]["exits"], player["current_location"]["items"], player["inventory"])
 
         # Execute the player's command
         while not execute_command(command):
-            command = menu(current_room["exits"], current_room["items"], inventory)
+            command = menu(player["current_location"]["exits"], player["current_location"]["items"], player["inventory"])
 
 
 

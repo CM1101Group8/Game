@@ -1,81 +1,172 @@
 from items import *
 
-room_reception = {
-    "name": "Reception",
+location_plane = {
+    "name": "Plane",
 
     "description":
-    """You are in a maze of twisty little passages, all alike.
-Next to you is the School of Computer Science and
-Informatics reception. The receptionist, Matt Strangis,
-seems to be playing an old school text-based adventure
-game on his computer. There are corridors leading to the
-south and east. The exit is to the west.""",
+    """
 
-    "exits": {"south": "Robs", "east": "Tutor", "west": "Parking"},
+    """,
+
+    "exits": {"east": "MON1", "north": "MON2", "west": "MON3"},
 
     "items": []
 }
 
-room_robs = {
-    "name": "Robs' room",
+location_mon1 = {
+    "name": "Middle of Nowhere",
 
     "description":
-    """You are leaning agains the door of the systems managers'
-room. Inside you notice Rob Evans and Rob Davies. They
-ignore you. To the north is the reception.""",
+    """
 
-    "exits":  {"north": "Reception"},
+    """,
+
+    "exits": {"west": "Plane", "north": "Ravine", "west": "Rockside"},
 
     "items": []
 }
 
-room_tutor = {
-    "name": "your personal tutor's office",
+location_mon2 = {
+    "name": "Middle of Nowhere",
 
     "description":
-    """You are in your personal tutor's office. He intently
-stares at his huge monitor, ignoring you completely.
-On the desk you notice a cup of coffee and an empty
-pack of biscuits. The reception is to the west.""",
+    """
 
-    "exits": {"west": "Reception"},
+    """,
+
+    "exits": {"north": "HOF", "south": "Plane", "west": "Ravine", "east": "Woods"},
 
     "items": []
 }
 
-room_parking = {
-    "name": "the parking lot",
+location_mon3 = {
+    "name": "Middle of Nowhere",
 
     "description":
-    """You are standing in the Queen's Buildings parking lot.
-You can go south to the COMSC reception, or east to the
-general office.""",
+    """
 
-    "exits": {"east": "Office", "south": "Reception"},
+    """,
+
+    "exits": {"west": "Plane", "east": "Beach", "north": "Woods"},
 
     "items": []
 }
 
-room_office = {
-    "name": "the general office",
+location_hof = {
+    "name": "Heart of the Forest",
 
     "description":
-    """You are standing next to the cashier's till at
-30-36 Newport Road. The cashier looks at you with hope
-in their eyes. If you go west you can return to the
-Queen's Buildings.""",
+    """
 
-    "exits": {"west": "Parking"},
+    """,
+
+    "exits": {"south": "MON2", "north": "Passage"},
 
     "items": []
 }
 
+location_ravine = {
+    "name": "Ravine",
 
+    "description":
+    """
 
-rooms = {
-    "Reception": room_reception,
-    "Robs": room_robs,
-    "Tutor": room_tutor,
-    "Parking": room_parking,
-    "Office": room_office
+    """,
+
+    "exits": {"south": "MON1", "west": "Brush", "east": "MON2", },
+
+    "items": []
+}
+
+location_brush = {
+    "name": "Barbed Brush",
+
+    "description":
+    """
+
+    """,
+
+    "exits": {"east": "Ravine"},
+
+    "items": []
+}
+
+location_rockside = {
+    "name": "Rockside",
+
+    "description":
+    """
+
+    """,
+
+    "exits": {"east": "MON1"},
+
+    "items": []
+}
+
+location_woods = {
+    "name": "Dry Woods",
+
+    "description":
+    """
+
+    """,
+
+    "exits": {"west": "MON2", "east": "Cliffs", "south": "MON3"},
+
+    "items": []
+}
+
+location_cliffs = {
+    "name": "Cliffs",
+
+    "description":
+    """
+
+    """,
+
+    "exits": {"west": "Woods"},
+
+    "items": []
+}
+
+location_beach = {
+    "name": "Beach",
+
+    "description":
+    """
+
+    """,
+
+    "exits": {"west": "MON3"},
+
+    "items": []
+}
+
+location_passage = {
+    "name": "Middle of Nowhere",
+
+    "description":
+    """
+
+    """,
+
+    "exits": {"south": "HOF"},
+
+    "items": []
+}
+
+locations = {
+    "Plane": location_plane,
+    "MON1": location_mon1,
+    "MON2": location_mon2,
+    "MON3": location_mon3,
+    "HOF": location_hof,
+    "Ravine": location_ravine,
+    "Brush": location_brush,
+    "Rockside": location_rockside,
+    "Woods": location_woods,
+    "Cliffs": location_cliffs,
+    "Beach": location_beach,
+    "Passage": location_passage
 }

@@ -140,9 +140,7 @@ def print_room(room):
     Note: <BLANKLINE> here means that doctest should expect a blank line.
     """
     print()
-    print(Back.WHITE + Fore.BLACK)
-    nice_print(room["name"].upper())
-    print(Fore.RESET + Back.RESET)
+    nice_print(room["name"].upper(), Fore.BLACK, Back.WHITE)
     print()
     nice_print(room["description"])
     print()
@@ -251,8 +249,10 @@ def execute_go(direction):
     global current_room
     if is_valid_exit(current_room['exits'], direction):
         current_room = move(current_room['exits'], direction)
+        return True
     else:
-        nice_print(Fore.RED + "You cannot go there!" + Fore.RESET)
+        nice_print("You cannot go there!", Fore.RED)
+        return False
 
 
 def execute_take(item_id):
@@ -270,10 +270,13 @@ def execute_take(item_id):
                 current_room["items"].remove(item)
                 inventory.append(item)
                 inventory_weight += item["mass"]
+                return True
             else:
-                print (Fore.RED + "\nYou do not have room for an item that heavy" + Fore.RESET)
+                nice_print("\nYou do not have room for an item that heavy", Fore.RED)
+                return False
     if not item_taken:
-        print (Fore.RED + "You cannot take that" + Fore.RESET)
+        nice_print("You cannot take that", Fore.RED)
+        return False
 
 def execute_drop(item_ident):
     """This function takes an item_id as an argument and moves this item from the
@@ -288,8 +291,10 @@ def execute_drop(item_ident):
             inventory.remove(item)
             current_room["items"].append(item)
             inventory_weight -= item["mass"]
+            return True
     if not item_dropped:
-        print (Fore.RED + "You cannot drop that" + Fore.RESET)
+        nice_print("You cannot drop that", Fore.RED)
+        return False
 
 
 def execute_use(item_id):
@@ -297,25 +302,12 @@ def execute_use(item_id):
         if item_id == item["id"]:
             if "use" in item.keys():
                 item["use"]()
-                return
+                return True
             else:
-                print(Fore.RED + "You cannot use this." + Fore.RESET)
-                return
-    print(Fore.RED + "You don't have this!" + Fore.RESET)
-
-
-def execute_use(item_ident):
-    global player
-    for item in inventory:
-        if item_ident == item['id']:
-            damage = item_damage(item)
-            take_damage(player, damage)
-            if item['mass'] < 50:
-                nice_print("You cannot attack with that")
-            return
-    if True:
-        nice_print("You cannot use that item")
-
+                nice_print("You cannot use this.", Fore.RED)
+                return False
+    nice_print("You don't have that!", Fore.RED)
+    return False
 
 
 def execute_command(command):
@@ -327,30 +319,35 @@ def execute_command(command):
     """
     if command[0] == "go":
         if len(command) > 1:
-            execute_go(command[1])
+            return execute_go(command[1])
         else:
-            nice_print(Fore.YELLOW + "Go where?" + Fore.RESET)
+            nice_print("Go where?", Fore.YELLOW)
+            return False
 
     elif command[0] == "take":
         if len(command) > 1:
-            execute_take(command[1])
+            return execute_take(command[1])
         else:
-            nice_print(Fore.YELLOW + "Take what?" + Fore.RESET)
+            nice_print("Take what?", Fore.YELLOW)
+            return False
 
     elif command[0] == "drop":
         if len(command) > 1:
-            execute_drop(command[1])
+            return execute_drop(command[1])
         else:
-            nice_print(Fore.YELLOW + "Drop what?" + Fore.RESET)
+            nice_print("Drop what?", Fore.YELLOW)
+            return False
 
     elif command[0] == "use":
         if len(command) > 1:
-            execute_use(command[1])
+            return execute_use(command[1])
         else:
-            nice_print(Fore.YELLOW + "Use what?" + Fore.RESET)
+            nice_print("Use what?", Fore.YELLOW)
+            return False
 
     else:
-        nice_print(Fore.RED + "This makes no sense." + Fore.RESET)
+        nice_print("This makes no sense.", Fore.YELLOW)
+        return False
 
 
 def menu(exits, room_items, inv_items):
@@ -390,14 +387,15 @@ def move(exits, direction):
     # Next room to go to
     return rooms[exits[direction]]
 
-def nice_print(text):
+def nice_print(text, fore=Fore.WHITE, back=Back.BLACK):
     import sys, time
 
+    print(fore + back, end='')
     for character in text:
         sys.stdout.write(character)
         sys.stdout.flush()
         time.sleep(0.05)
-    print("\n", end='')
+    print(Fore.RESET + Back.RESET, end='\n')
 
 # This is the entry point of our program
 def main():
@@ -414,7 +412,8 @@ def main():
         command = menu(current_room["exits"], current_room["items"], inventory)
 
         # Execute the player's command
-        execute_command(command)
+        while not execute_command(command):
+            command = menu(current_room["exits"], current_room["items"], inventory)
 
 
 

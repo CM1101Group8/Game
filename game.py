@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import sys, time
 from colorama import init, Fore, Back
 
 from map import locations
@@ -15,14 +16,14 @@ def item_damage(item):
 def take_damage(player, damage):
     #inflicts damage on the player
     player['health'] = player['health'] - int(damage)
-    nice_print(""+ player['name'] +" took "+ str(damage) +" damage.")
-    nice_print(""+ player['name'] +" health is now "+ str(player['health']) +".")
+    nice_print_line(""+ player['name'] +" took "+ str(damage) +" damage.")
+    nice_print_line(""+ player['name'] +" health is now "+ str(player['health']) +".")
     return player
 
 def print_player(player):
     #prints the player status
-    nice_print("Your health is: "+str(player["health"]))
-    nice_print("Your experience is: "+str(player["experience"]))
+    nice_print_line("Your health is: " + str(player["health"]), Fore.RED)
+    nice_print_line("Your experience is: "+str(player["experience"]), Fore.YELLOW)
     print()
 
 def list_of_items(items):
@@ -73,7 +74,7 @@ def print_location_items(location):
     """
     items = list_of_items(location["items"])
     if items:
-        nice_print("There is "+ items + " here.")
+        nice_print_line("There is "+ items + " here.")
         print()
 
 
@@ -89,7 +90,7 @@ def print_inventory_items(items):
     """
     items = list_of_items(items)
     if items:
-      nice_print("You have "+ items + ".")
+      nice_print_line("You have "+ items + ".")
       print()
 
 
@@ -174,7 +175,7 @@ def print_exit(direction, leads_to):
     >>> print_exit("south", "Robs' room")
     GO SOUTH to Robs' room.
     """
-    nice_print("GO " + direction.upper() + " to the " + leads_to + ".")
+    nice_print_line("GO " + direction.upper() + " to the " + leads_to + ".")
 
 
 def print_menu(exits, location_items, inv_items):
@@ -207,16 +208,16 @@ def print_menu(exits, location_items, inv_items):
     What do you want to do?
 
     """
-    nice_print("You can:")
+    nice_print_line("You can:")
     for direction in exits:
         print_exit(direction, exit_leads_to(exits, direction))
     for things in inv_items:
         if "use" in things.keys():
-            print("USE " + things["id"].upper() + " to use your " + things["name"] + ".")
+            nice_print_line("USE " + things["id"].upper() + " to use your " + things["name"] + ".")
     for things in location_items:
-        nice_print("TAKE " + things["id"].upper() + " to take " + things["name"] + ".")
+        nice_print_line("TAKE " + things["id"].upper() + " to take " + things["name"] + ".")
     for things in inv_items:
-        nice_print("DROP " + things["id"].upper() + " to drop " + things["name"] + ".")
+        nice_print_line("DROP " + things["id"].upper() + " to drop " + things["name"] + ".")
 
     nice_print("What do you want to do?")
 
@@ -269,6 +270,7 @@ def execute_take(item_id):
                 player["current_location"]["items"].remove(item)
                 player["inventory"].append(item)
                 player["inventory_weight"] += item["mass"]
+                nice_print("You picked up " + item["name"] + ".", Fore.GREEN)
                 return True
             else:
                 nice_print("\nYou do not have room for an item that heavy", Fore.RED)
@@ -289,6 +291,7 @@ def execute_drop(item_ident):
             player["inventory"].remove(item)
             player["current_location"]["items"].append(item)
             player["inventory_weight"] -= item["mass"]
+            nice_print("You dropped " + item["name"] + ".", Fore.GREEN)
             return True
     if not item_dropped:
         nice_print("You cannot drop that", Fore.RED)
@@ -386,13 +389,17 @@ def move(exits, direction):
     return locations[exits[direction]]
 
 def nice_print(text, fore=Fore.WHITE, back=Back.BLACK):
-    import sys, time
-
     print(fore + back, end='')
     for character in text:
         sys.stdout.write(character)
         sys.stdout.flush()
         time.sleep(0.05)
+    print(Fore.RESET + Back.RESET, end='\n')
+
+def nice_print_line(text, fore=Fore.WHITE, back=Back.BLACK):
+    print(fore + back, end='')
+    print(text, end='')
+    time.sleep(0.35)
     print(Fore.RESET + Back.RESET, end='\n')
 
 # This is the entry point of our program

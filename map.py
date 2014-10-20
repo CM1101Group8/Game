@@ -5,7 +5,14 @@ location_plane = {
 
     "description":
     """
-    TODO
+    The plane ends up crash landing into a forest on an island,
+    killing all passengers & crew on board, apart from YOU,
+    as far as you're aware anyway. Upon waking, it seems you
+    do not know where the plane took off from, where it is,
+    and where it was going; amnesia it seems. Most of the
+    supplies were either lost when the plane was in freefall,
+    taken considerable damage, been burnt out by the fires,
+    or simply lost amongst the destruction and rubble.
     """,
 
     "exits": {"east": "MON1", "north": "MON2", "west": "MON3"},

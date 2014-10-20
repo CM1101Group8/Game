@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+from colorama import init, Fore, Back
+
 from map import rooms
 from player import *
 from items import *
@@ -139,6 +141,7 @@ def print_room(room):
     """
     print()
     nice_print(room["name"].upper())
+    print(Back.WHITE + Fore.BLACK + room["name"].upper() + Fore.RESET + Back.RESET)
     print()
     nice_print(room["description"])
     print()
@@ -208,6 +211,9 @@ def print_menu(exits, room_items, inv_items):
     nice_print("You can:")
     for direction in exits:
         print_exit(direction, exit_leads_to(exits, direction))
+    for things in inv_items:
+        if "use" in things.keys():
+            print("USE " + things["id"].upper() + " to use your " + things["name"] + ".")
     for things in room_items:
         nice_print("TAKE " + things["id"].upper() + " to take " + things["name"] + ".")
     for things in inv_items:
@@ -245,7 +251,11 @@ def execute_go(direction):
     if is_valid_exit(current_room['exits'], direction):
         current_room = move(current_room['exits'], direction)
     else:
+<<<<<<< HEAD
         nice_print("You cannot go there!")
+=======
+        print(Fore.RED + "You cannot go there!" + Fore.RESET)
+>>>>>>> eb1983baa1635ace4856eb374a14a2f9ba208c0f
 
 
 def execute_take(item_id):
@@ -264,9 +274,9 @@ def execute_take(item_id):
                 inventory.append(item)
                 inventory_weight += item["mass"]
             else:
-                print ("\nYou do not have room for an item that heavy")
+                print (Fore.RED + "\nYou do not have room for an item that heavy" + Fore.RESET)
     if not item_taken:
-        print ("You cannot take that")
+        print (Fore.RED + "You cannot take that" + Fore.RESET)
 
 def execute_drop(item_ident):
     """This function takes an item_id as an argument and moves this item from the
@@ -282,7 +292,20 @@ def execute_drop(item_ident):
             current_room["items"].append(item)
             inventory_weight -= item["mass"]
     if not item_dropped:
-        print ("You cannot drop that")
+        print (Fore.RED + "You cannot drop that" + Fore.RESET)
+
+
+def execute_use(item_id):
+    for item in inventory:
+        if item_id == item["id"]:
+            if "use" in item.keys():
+                item["use"]()
+                return
+            else:
+                print(Fore.RED + "You cannot use this." + Fore.RESET)
+                return
+    print(Fore.RED + "You don't have this!" + Fore.RESET)
+
 
 def execute_use(item_ident):
     global player
@@ -309,27 +332,47 @@ def execute_command(command):
         if len(command) > 1:
             execute_go(command[1])
         else:
+<<<<<<< HEAD
             nice_print("Go where?")
+=======
+            print(Fore.YELLOW + "Go where?" + Fore.RESET)
+>>>>>>> eb1983baa1635ace4856eb374a14a2f9ba208c0f
 
     elif command[0] == "take":
         if len(command) > 1:
             execute_take(command[1])
         else:
+<<<<<<< HEAD
             nice_print("Take what?")
+=======
+            print(Fore.YELLOW + "Take what?" + Fore.RESET)
+>>>>>>> eb1983baa1635ace4856eb374a14a2f9ba208c0f
 
     elif command[0] == "drop":
         if len(command) > 1:
             execute_drop(command[1])
         else:
+<<<<<<< HEAD
             nice_print("Drop what?")
+=======
+            print(Fore.YELLOW + "Drop what?" + Fore.RESET)
+
+>>>>>>> eb1983baa1635ace4856eb374a14a2f9ba208c0f
     elif command[0] == "use":
         if len(command) > 1:
             execute_use(command[1])
         else:
+<<<<<<< HEAD
             nice_print("Use what?")
 
     else:
         nice_print("This makes no sense.")
+=======
+            print(Fore.YELLOW + "Use what?" + Fore.RESET)
+
+    else:
+        print(Fore.RED + "This makes no sense." + Fore.RESET)
+>>>>>>> eb1983baa1635ace4856eb374a14a2f9ba208c0f
 
 
 def menu(exits, room_items, inv_items):

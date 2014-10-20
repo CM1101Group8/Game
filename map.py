@@ -13,7 +13,7 @@ south and east. The exit is to the west.""",
 
     "exits": {"south": "Robs", "east": "Tutor", "west": "Parking"},
 
-    "items": [item_biscuits, item_handbook]
+    "items": []
 }
 
 room_robs = {
@@ -67,7 +67,7 @@ Queen's Buildings.""",
 
     "exits": {"west": "Parking"},
 
-    "items": [item_pen]
+    "items": []
 }
 
 

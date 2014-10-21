@@ -335,6 +335,10 @@ location_hill = {
     "enemy": ""
 }
 
+def on_enter_cave(player, locations, nice_print, Fore, Back, take_damage):
+    take_damage(player, 70)
+    return True
+
 location_cave = {
     "name": "Fire cave",
 
@@ -352,7 +356,9 @@ location_cave = {
 
     "visited": True,
 
-    "enemy": ""
+    "enemy": "",
+
+    "on_enter": on_enter_cave
 }
 
 location_cave2 = {
@@ -416,7 +422,7 @@ locations = {
     "Hill": location_hill,
     "Cave": location_cave,
     "Cave2": location_cave2,
-    "Lair": location_cave
+    "Lair": location_lair
 
 
 

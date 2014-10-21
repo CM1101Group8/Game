@@ -305,6 +305,8 @@ def execute_go(direction):
     if is_valid_exit(player["current_location"]['exits'], direction):
         player["previous_location"] = player["current_location"]
         player["current_location"] = move(player["current_location"]['exits'], direction)
+        if "on_enter" in player["current_location"].keys():
+            return player["current_location"]["on_enter"](player, locations, nice_print, Fore, Back, take_damage)
         return True
     else:
         nice_print("You cannot go there!", Fore.RED)
@@ -542,6 +544,9 @@ def main():
     #title()
     # Main game loop
     while True:
+        if player["health"] <= 0:
+            nice_print("You have died! Game over!", Fore.RED)
+            quit()
         # Display game status (location description, inventory etc.)
         print_location(player["current_location"])
         if player["current_location"]["enemy"]:

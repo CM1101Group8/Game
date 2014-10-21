@@ -27,7 +27,7 @@ location_mon1 = {
 
     "description": 
     """
-    You reach the “The Middle of Nowhere”, and this is exactly
+    You reach 'The Middle of Nowhere', and this is exactly
     where you are situated. There is nothing of interest is in
     the immediate vicinity, besides wood and trees. At this point, 
     the only useful thing to do is to choose another direction to go in.
@@ -45,7 +45,7 @@ location_mon2 = {
 
     "description":
     """
-    You reach the “The Middle of Nowhere”, and this is exactly 
+    You reach 'The Middle of Nowhere', and this is exactly 
     where you are situated. There is nothing of interest is in 
     the immediate vicinity, besides wood and trees. At this point, 
     the only useful thing to do is to choose another direction to go in.
@@ -63,7 +63,7 @@ location_mon3 = {
 
     "description":
     """
-    You reach the “The Middle of Nowhere”, and this is exactly 
+    You reach 'The Middle of Nowhere', and this is exactly 
     where you are situated. You find the charred corpses of Owen 
     and Beru Lars. They have nothing to help you survive, it is 
     best to move on.

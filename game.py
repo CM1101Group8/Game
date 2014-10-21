@@ -322,7 +322,8 @@ def execute_use_with(item_one, item_two):
     #if player["current_location"] == locations["Cliffs"]:
         #for item in player["inventory"]: 
         #nice_print_line("You combined "+ item_one + " with "+ item_two +" and made "+ created_item + ".")
-
+    pass
+    
 def execute_command(command):
     """This function takes a command (a list of words as returned by
     normalise_input) and, depending on the type of action (the first word of

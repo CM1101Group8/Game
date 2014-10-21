@@ -133,15 +133,26 @@ location_brush = {
 
     "description":
     """
-    You've made it to some barbed brush. It looks
-    spikey and there is the corpse of Danny Trejo. 
-    It makes you want to turn around, but there is 
-    some wood and a rusty machete there.
+    You have stumbled into the barbed brush, an area covered
+    in horrible looking plants, both sharp and dry in appearance,
+    it appears dead. The breathing here isn't entirely pleasant,
+    the atmosphere is humid and the air is salty. Although it
+    would appear to be a very salty area, the brush here could
+    be easily set alight.
+    """,
+
+    "description_alight":
+    """
+    Whatever life remained in the plants here quickly
+    escape and the flames uncover a body of an unusual man;
+    a scarred face, a long, thin moustache, and a muscular
+    body with large tattoos holding a well-intact machete.
+    It is unknown how long this body has been here for.
     """,
 
     "exits": {"east": "Ravine"},
 
-    "items": [item_machete, item_wood],
+    "items": [item_wood],
 
     "visited": False,
 
@@ -180,7 +191,7 @@ location_woods = {
     You find yourself in an extremely dense part of the map. 
     You look above and see the abundance of trees that fight 
     over sunlight, as a result hardly any sunlight actually has 
-    a chance to make it to the ground, so the area isn’t well 
+    a chance to make it to the ground, so the area isn't well 
     lit and the plant life on ground level barely survives, they 
     do not have their natural colour. A lot of dead plant life 
     reside here. Fortunately, it is dry here and it is possible 
@@ -203,7 +214,7 @@ location_cliffs = {
     """
     Youfind yourself at the edge of a cliff. The sun graces 
     the sea and lights up your face and the surrounding area. 
-    However, it isn’t entirely idyllic here. At the cliffs, 
+    However, it isn't entirely idyllic here. At the cliffs, 
     is a man, a crazed man, with his clothes torn up, his face 
     and hair covered in mud and blood, and with razor cuts 
     covering his face and arms. You realise it's an engraged 
@@ -226,7 +237,7 @@ location_beach = {
     """
     You find yourself at the expansive beach of the island. 
     Although it is a beautiful vista to behold, especially when 
-    the sun sets, you can’t help but distrust its beauty as after 
+    the sun sets, you can't help but distrust its beauty as after 
     all, you are stranded on an island with a very high possibility 
     of remaining here and dying. There's a medi-kit and a bag of
     crisps. It's your lucky day... ish.
@@ -267,9 +278,9 @@ location_river = {
     "description":
     """
     You arrive at the main river that flows through the island. 
-    It’s a source of life for all the wildlife here. You 
+    It's a source of life for all the wildlife here. You 
     notice a brightly coloured cloth sat atop a hill of sorts 
-    to the West, although you can’t quite figure out what.
+    to the West, although you can't quite figure out what.
     """,
 
     "exits": {"west": "Waterfall", "east": "HOF", "south": "Ravine"},
@@ -309,10 +320,10 @@ location_hill = {
     "description":
     """
     You arrive at a forest hillside, the hill is quite steep 
-    but scalable, what isn’t easily scalable is the stone wall 
+    but scalable, what isn't easily scalable is the stone wall 
     atop of the hill. At the top of the wall you notice a small 
     opening, big enough for you to squeeze into, however you 
-    aren’t Spiderman so you won’t be climbing that in a hurry.
+    aren't Spiderman so you won't be climbing that in a hurry.
     """,
 
     "exits": {"west": "HOF", "south": "Woods"},
@@ -330,7 +341,7 @@ location_cave = {
     "description": 
     """
     You approach a sinister-looking cave with an entrance that 
-    is engulfed in flames. You see one of the plane’s engines is 
+    is engulfed in flames. You see one of the plane's engines is 
     lodged into the wall of the cave. You can enter the cave if 
     you wish but it will hurt; A LOT.
     """,

@@ -345,7 +345,7 @@ def execute_drop(item_ident):
     """
     item_dropped = 0
     for item in player["inventory"]:
-        if item_ident == item["id"]:
+        if item_ident == item["id"]:        #if player drops item it is removed from inventory and the mass subtracted
             item_dropped = 1
             player["inventory"].remove(item)
             player["current_location"]["items"].append(item)
@@ -358,7 +358,7 @@ def execute_drop(item_ident):
 
 
 def execute_use(item_id):
-#Allows player to use items they have in their inventory. If not in invewntory then it will print "You don't hav that"     
+#Allows player to use items they have in their inventory. If not in inventory then it will print "You don't have that"     
 
     for item in player["inventory"]:
         if item_id == item["id"]:
@@ -513,7 +513,7 @@ def title_input():      #starting menu at beginning of game. Allows user to star
     while command != "START" and command != "CREDITS":
         command = input("> ").upper()
 
-    if command == "START":
+    if command == "START":      #if user enters start, goes to main game function
         return
     elif command == "CREDITS":
         credits()

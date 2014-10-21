@@ -248,6 +248,17 @@ item_bandaids = {
     "mass": 75
 }
 #ACCESS ITEMS -----------------------------------------------------------------------
+def use_item_fireblanket(player, locations, nice_print, Fore, Back):
+    if player["current_location"] == locations["Passage"]:
+        nice_print("You use the fire blanket to put out the fire in the entrance to the cave.", Fore.GREEN)
+        locations["Passage"]["description"] = locations["Passage"]["description_extinguished"]
+        locations["Cave"]["fire"] = False
+        player["inventory"].remove(item_fireblanket)
+        return True
+    else:
+        nice_print("There is no way to use that here.", Fore.RED)
+        return False
+
 item_fireblanket = {
     "id": "fireblanket",
 
@@ -256,7 +267,9 @@ item_fireblanket = {
     "description":
     """The fire blanket will shield you from flames, allowing you to access areas blocked off from fire.""",
 
-    "mass": 250
+    "mass": 250, 
+
+    "use": use_item_fireblanket
 }
 
 def use_item_rope(player, locations, nice_print, Fore, Back):

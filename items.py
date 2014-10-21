@@ -10,6 +10,16 @@ item_toolkit = {
     "mass": 300
 }
 
+def use_item_headtorch(player, locations, nice_print, Fore, Back):
+    if not item_headtorch["on"]:
+        item_headtorch["on"] = True
+        nice_print("You turned on your headtorch. Everything looks a little bit brighter.", Fore.GREEN)
+        return True
+    else:
+        item_headtorch["on"] = False
+        nice_print("You turned off your headtorch. It's suddenly become a bit darker.", Fore.GREEN)
+        return True
+
 
 item_headtorch = {
     "id": "headtorch",
@@ -19,7 +29,11 @@ item_headtorch = {
     "description":
     """The headtorch can be used to see in dark areas. This could allow you to explore dark places such as caves.""",
 
-    "mass": 150
+    "mass": 150,
+
+    "on": False,
+
+    "use": use_item_headtorch
 }
 
 item_compass = {
@@ -233,15 +247,26 @@ item_fireblanket = {
     "mass": 250
 }
 
+def use_item_rope(player, locations, nice_print, Fore, Back):
+    if player["current_location"] == locations["Hill"]:
+        nice_print("You use the climbing rope to allow yourself to climb up to the flooded cave.", Fore.GREEN)
+        player["current_location"]["exits"]["north"] = "Cave2"
+        return True
+    else:
+        nice_print("There is no way to use that here.", Fore.RED)
+        return False
+
 item_rope = {
     "id": "rope",
 
-    "name": "climbimg rope",
+    "name": "climbing rope",
     
     "description":
-    """ The rope can be used to climb around obstacles which could be blocking your path. """,
+    """The rope can be used to climb around obstacles which could be blocking your path. """,
 
-    "mass": 300
+    "mass": 300,
+
+    "use": use_item_rope
 }
 
 

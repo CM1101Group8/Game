@@ -314,6 +314,9 @@ def execute_use(item_id):
     nice_print("You don't have that!", Fore.RED)
     return False
 
+def execute_use_with(item_one, item_two):
+    global locations
+    if player["current_location"] == 
 
 def execute_command(command):
     """This function takes a command (a list of words as returned by
@@ -345,7 +348,10 @@ def execute_command(command):
 
     elif command[0] == "use":
         if len(command) > 1:
-            return execute_use(command[1])
+            if command[2] == "with":
+                execute_use_with(command[1], command[3])
+            else:
+                return execute_use(command[1])
         else:
             nice_print("Use what?", Fore.YELLOW)
             return False

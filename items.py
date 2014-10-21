@@ -96,9 +96,9 @@ item_medkit = {
 
     "name": "a Med Kit",
 
-    "description": "TODO",
+    "description": "The medkit can be used to heal yourself.",
 
-    "mass": 0 #TODO
+    "mass": 400 
 }
 
 item_crisps = {
@@ -106,9 +106,9 @@ item_crisps = {
 
     "name": "a bag of crisps",
 
-    "description": "TODO",
+    "description": "a bag of crisps will replenish your hunger.",
 
-    "mass": 0 #TODO
+    "mass": 50
 }
 
 item_water = {
@@ -116,9 +116,9 @@ item_water = {
 
     "name": "a bottle of water",
 
-    "description": "TODO",
+    "description": "Water can be used to replenish your thirst.",
 
-    "mass": 0 #TODO
+    "mass": 150
 }
 
 item_chocolate = {
@@ -126,9 +126,9 @@ item_chocolate = {
 
     "name": "a chocolate bar",
 
-    "description": "TODO",
+    "description": "A chocolate bar provides nutrition which replenishes your hunger.",
 
-    "mass": 0 #TODO
+    "mass": 75
 }
 
 item_bandaids = {
@@ -136,9 +136,9 @@ item_bandaids = {
 
     "name": "some band aids",
 
-    "description": "TODO",
+    "description": "Bandaids can be used to heal yourself.",
 
-    "mass": 0 #TODO
+    "mass": 75
 }
 #ACCESS ITEMS -----------------------------------------------------------------------
 item_fireblanket = {
@@ -158,7 +158,7 @@ item_rope = {
     "name": "climbimg rope",
     
     "description":
-    """ TODO """,
+    """ The rope can be used to climb around obstacles which could be blocking your path. """,
 
     "mass": 300
 }
@@ -170,7 +170,7 @@ item_machete = {
 
     "name": "a rusty machete",
 
-    "description": "TODO",
+    "description": "The machete can be used to attack any animals or people who might try to attack you.",
 
-    "mass": 0 #TODO
+    "mass": 1000
 }

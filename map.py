@@ -28,7 +28,7 @@ location_mon1 = {
     "description":
     """
     You reach 'The Middle of Nowhere', and this is exactly
-    where you are situated. There is nothing of interest is in
+    where you are situated. There is nothing of interest in
     the immediate vicinity, besides wood and trees. At this point,
     the only useful thing to do is to choose another direction to go in.
     """,
@@ -46,7 +46,7 @@ location_mon2 = {
     "description":
     """
     You reach 'The Middle of Nowhere', and this is exactly
-    where you are situated. There is nothing of interest is in
+    where you are situated. There is nothing of interest in
     the immediate vicinity, besides wood and trees. At this point,
     the only useful thing to do is to choose another direction to go in.
     """,
@@ -209,7 +209,7 @@ location_passage = {
     TODO
     """,
 
-    "exits": {"south": "HOF", "north": "Lair", "west": "Cave", "east": "Cave2"},
+    "exits": {"south": "HOF", "north": "Lair", "west": "Cave"},
 
     "items": [],
 
@@ -253,9 +253,12 @@ location_hill = {
     "description":
     """
     TODO
+
+    It looks like there is a cave above you. If only you
+    had a way of getting there...
     """,
 
-    "exits": {"west": "HOF", "south": "Woods", "north": "Cave2"},
+    "exits": {"west": "HOF", "south": "Woods"},
 
     "items": [],
 

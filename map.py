@@ -286,7 +286,7 @@ location_passage = {
     on the floor of the entrance.
     """,
 
-    "exits": {"south": "HOF", "north": "Lair", "west": "Cave"},
+    "exits": {"south": "HOF", "north": "Lair", "west": "Cave", "east": "Cave2"},
 
     "items": [],
 
@@ -432,6 +432,7 @@ location_lair = {
 
     "enemy": enemy_wolf
 }
+
 #dictionary of locations
 locations = {
     "Plane": location_plane,
@@ -452,7 +453,4 @@ locations = {
     "Cave": location_cave,
     "Cave2": location_cave2,
     "Lair": location_lair
-
-
-
 }

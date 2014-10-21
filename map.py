@@ -252,6 +252,17 @@ location_beach = {
     "enemy": ""
 }
 
+def on_enter_passage(player, locations, nice_print, Fore, Back, take_damage):
+    if item_headtorch["on"]:
+        nice_print("Your headtorch illuminates the darkness, lighting your path")
+        return True
+    else:
+        nice_print("Ghouls rush forward from a darkness you cannot see into")
+        nice_print("They strike at your chest and tear scraps from your skin")
+        player["current_location"] = player["previous_location"]
+        player["health"] -= 30
+        return True
+
 location_passage = {
     "name": "Dark Passage",
 
@@ -269,7 +280,9 @@ location_passage = {
 
     "visited": True,
 
-    "enemy": ""
+    "enemy": "",
+
+    "on_enter": on_enter_passage
 }
 
 location_river = {

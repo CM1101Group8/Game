@@ -15,7 +15,7 @@ location_plane = {
     or simply lost amongst the destruction and rubble.
     """,
 
-    "exits": {"west": "MON1", "north": "MON2", "east": "MON3"},
+    "exits": {"west": "MON2", "north": "MON1", "east": "MON3"},
 
     "items": [],
 
@@ -32,7 +32,7 @@ location_mon1 = {
     have no choice but to move on.
     """,
 
-    "exits": {"east": "Plane", "north": "Ravine", "west": "Rockside"},
+    "exits": {"east": "Woods", "north": "HOF", "west": "Ravine", "south": "Plane"},
 
     "items": [],
 
@@ -49,7 +49,7 @@ location_mon2 = {
     have no choice but to move on.
     """,
 
-    "exits": {"north": "HOF", "south": "Plane", "west": "Ravine", "east": "Woods"},
+    "exits": {"north": "Ravine", "west": "Rockside", "east": "Plane"},
 
     "items": [],
 
@@ -86,7 +86,7 @@ location_hof = {
     your hearing; you fear something is approaching.
     """,
 
-    "exits": {"south": "MON2", "north": "Passage"},
+    "exits": {"south": "MON1", "north": "Passage", "west": "River", "east": "Hill"},
 
     "items": [item_wood],
 
@@ -103,7 +103,7 @@ location_ravine = {
     It is possible those may be useful.
     """,
 
-    "exits": {"south": "MON1", "west": "Brush", "east": "MON2", },
+    "exits": {"south": "MON2", "west": "Brush", "east": "MON1", "north": "River"},
 
     "items": [],
 
@@ -139,7 +139,7 @@ location_rockside = {
     There appears to be some sort of tool on his body.
     """,
 
-    "exits": {"east": "MON1"},
+    "exits": {"east": "MON2"},
 
     "items": [item_sparktool],
 
@@ -156,7 +156,7 @@ location_woods = {
     
     """,
 
-    "exits": {"west": "MON2", "east": "Cliffs", "south": "MON3"},
+    "exits": {"west": "MON1", "east": "Cliffs", "south": "MON3", "north": "Hill"},
 
     "items": [item_wood],
 
@@ -206,7 +206,7 @@ location_passage = {
     TODO
     """,
 
-    "exits": {"south": "HOF"},
+    "exits": {"south": "HOF", "north": "Lair", "west": "Cave", "east": "Cave2"},
 
     "items": [],
 
@@ -252,7 +252,7 @@ location_hill = {
     TODO
     """,
 
-    "exits": {"west": "HOF", "south": "Woods", "north": "Gate"},
+    "exits": {"west": "HOF", "south": "Woods", "north": "Cave2"},
 
     "items": [],
 
@@ -274,8 +274,8 @@ location_cave = {
     "visited": False
 }
 
-location_gate = {
-    "name": "Flooded gate",
+location_cave2 = {
+    "name": "Flooded cave",
 
     "description": 
     """
@@ -320,6 +320,6 @@ locations = {
     "Waterfall": location_waterfall
     "Hill": location_hill
     "Cave": location_cave
-    "Gate": location_gate
+    "Cave2": location_cave2
     "Lair": location_lair
 }

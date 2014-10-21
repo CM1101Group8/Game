@@ -102,13 +102,13 @@ location_ravine = {
     "description":
     """
     You are now at the ravine. It is peaceful here,
-    and there is a pile of green leaves on the floor.
+    and there is a pile of leaves on the ground.
     It is possible those may be useful.
     """,
 
     "exits": {"south": "MON2", "west": "Brush", "east": "MON1", "north": "River"},
 
-    "items": [item_greenleaves],
+    "items": [item_leaves],
 
     "visited": False
 }
@@ -192,7 +192,7 @@ location_beach = {
     until you remember you're stranded on an island
     trying not to die. There's a medi-kit and a bag of
     crisps. It's your lucky day... ish.
-    """,
+    """, 
 
     "exits": {"west": "MON3"},
 

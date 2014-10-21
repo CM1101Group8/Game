@@ -16,6 +16,9 @@ he used to be""",
 	"on_kill": on_kill_enemy_kirill
 }
 
+def on_kill_enemy_wolf(player, locations):
+	locations["Lair"]["description"] = locations["Lair"]["description_killed"]
+
 enemy_wolf = {
 	"id": "wolf",
 
@@ -26,5 +29,7 @@ you can see its sinewy muscle shift under it's skin with
 every movement, perfectly developed to hunt its prey,
 perfectly formed to hunt you...""",
 
-	"vuln": "gun"
+	"vuln": "gun",
+
+	"on_kill": on_kill_enemy_wolf
 }

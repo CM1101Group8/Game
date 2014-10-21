@@ -457,6 +457,16 @@ location_lair = {
     a brooding Werewolf emerges from the shadows...
     """,
 
+    "description_killed":
+    """
+    You already know this is a bad place to be. The
+    entrance to this place is covered in the carcasses
+    of other animals and dried blood paints the walls. There
+    is a foul stench that worsens the further you walk in this
+    cave. There is a canister of petrol on the ground. That
+    could be useful.
+    """,
+
     "exits": {"south": "Passage"},
 
     "items": [item_petrol],

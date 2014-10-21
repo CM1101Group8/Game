@@ -70,7 +70,7 @@ location_mon3 = {
 
     "description":
     """
-    You reach the “The Middle of Nowhere”, and this is exactly 
+    You reach 'The Middle of Nowhere', and this is exactly 
     where you are situated. You find the charred corpses of Owen 
     and Beru Lars. They have nothing to help you survive, it is 
     best to move on.

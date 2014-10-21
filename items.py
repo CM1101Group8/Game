@@ -46,6 +46,27 @@ item_parachute = {
     "mass": 1500
 }
 
+item_gun = {
+    "id": "gun",
+
+    "name": "a gun",
+
+    "description":
+    """The gun is a powerful weapon that can stop almost any foe.""",
+
+    "mass": 700
+}
+
+item_bullets = {
+    "id": "bullets",
+
+    "name": "bullets",
+
+    "description":
+    """Powerful ammo for a gun""",
+
+    "mass": 150
+}
 
 item_combined_leaves_wood = {
     
@@ -143,7 +164,11 @@ item_combinations = {
 
     "sparktool": item_combined_petrol_pile,
 
-    "leaves": item_wood
+    "leaves": item_wood,
+
+    "gun": item_bullets,
+
+    "bullets": item_gun
 }
 
 # SURVIVAL ITEMS -----------------------------------------------------------------------

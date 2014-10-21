@@ -269,7 +269,7 @@ location_cave = {
 
     "exits": {"east": "Passage"},
 
-    "items" [],
+    "items": [],
 
     "visited": False
 }
@@ -284,7 +284,7 @@ location_gate = {
 
     "exits": {"west": "Passage", "south": "Hill"},
 
-    "items" [],
+    "items": [],
 
     "visited": False
 }
@@ -299,7 +299,7 @@ location_lair = {
 
     "exits": {"south": "Passage"},
 
-    "items" [],
+    "items": [],
 
     "visited": False
 }
@@ -315,11 +315,11 @@ locations = {
     "Woods": location_woods,
     "Cliffs": location_cliffs,
     "Beach": location_beach,
-    "Passage": location_passage
-    "River": location_river
-    "Waterfall": location_waterfall
-    "Hill": location_hill
-    "Cave": location_cave
-    "Gate": location_gate
+    "Passage": location_passage,
+    "River": location_river,
+    "Waterfall": location_waterfall,
+    "Hill": location_hill,
+    "Cave": location_cave,
+    "Gate": location_gate,
     "Lair": location_lair
 }

@@ -275,6 +275,8 @@ def execute_take(item_id):
                 player["inventory"].append(item)
                 player["inventory_weight"] += item["mass"]
                 nice_print("You picked up " + item["name"] + ".", Fore.GREEN)
+                nice_print(item["description"])
+                print()
                 return True
             else:
                 nice_print("\nYou do not have room for an item that heavy", Fore.RED)
@@ -310,6 +312,8 @@ def execute_use(item_id):
                 return True
             else:
                 nice_print("You cannot use this.", Fore.RED)
+                nice_print(item["description"])
+                print()
                 return False
     nice_print("You don't have that!", Fore.RED)
     return False
@@ -452,7 +456,7 @@ def credits():
     print()
     nice_print("CREDITS", Fore.BLACK, Back.WHITE)
     print()
-    nice_print("   Stranded was developed by:")
+    nice_print("   Stranded was developed by:", Fore.YELLOW)
     nice_print_line("   Thomas Durston")
     nice_print_line("   Isobel Speed")
     nice_print_line("   Caitlin Taylor")
@@ -461,8 +465,9 @@ def credits():
     nice_print_line("   Michael Whitfield")
     nice_print_line("   Jamie Williamson")
     print()
-    nice_print("   Libraries used:")
+    nice_print("   With thanks to:", Fore.YELLOW)
     nice_print_line("   Colorama - https://pypi.python.org/pypi/colorama")
+    nice_print_line("   ASCII Text Art from - http://patorjk.com/software/taag")
     print()
     nice_print("   Thanks for playing!")
     print()

@@ -307,7 +307,7 @@ def execute_use(item_id):
     for item in player["inventory"]:
         if item_id == item["id"]:
             if "use" in item.keys():
-                item["use"]()
+                item["use"](player, locations, nice_print, Fore, Back)
                 return True
             else:
                 nice_print("You cannot use this.", Fore.RED)
@@ -354,10 +354,9 @@ def execute_command(command):
 
     elif command[0] == "use":
         if len(command) > 1:
-            if command[2] == "with":
-                execute_use_with(command[1], command[3])
-            else:
-                return execute_use(command[1])
+            if len(command) > 2 and command[2] == "with":
+                return execute_use_with(command[1], command[3])
+            return execute_use(command[1])
         else:
             nice_print("Use what?", Fore.YELLOW)
             return False
@@ -415,14 +414,13 @@ def nice_print(text, fore=Fore.WHITE, back=Back.BLACK):
 def nice_print_line(text, fore=Fore.WHITE, back=Back.BLACK):
     print(fore + back, end='')
     print(text, end='')
-    time.sleep(0.35)
+    time.sleep(0.1)
     print(Fore.RESET + Back.RESET, end='\n')
 
 def title():
     print()
     nice_print_line(
         """
-
            _____ _______ _____            _   _ _____  ______ _____  
           / ____|__   __|  __ \     /\   | \ | |  __ \|  ____|  __ \ 
          | (___    | |  | |__) |   /  \  |  \| | |  | | |__  | |  | |

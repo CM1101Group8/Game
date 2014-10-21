@@ -143,7 +143,11 @@ def print_location(location):
     print()
     nice_print(location["name"].upper(), Fore.BLACK, Back.WHITE)
     print()
-    nice_print(location["description"])
+    if not location["visited"]:
+        nice_print(location["description"])
+        location["visited"] = True
+    else:
+        nice_print_line(location["description"])
     print()
     print_location_items(location)
 
@@ -393,7 +397,7 @@ def nice_print(text, fore=Fore.WHITE, back=Back.BLACK):
     for character in text:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.035)
     print(Fore.RESET + Back.RESET, end='\n')
 
 def nice_print_line(text, fore=Fore.WHITE, back=Back.BLACK):
@@ -402,10 +406,66 @@ def nice_print_line(text, fore=Fore.WHITE, back=Back.BLACK):
     time.sleep(0.35)
     print(Fore.RESET + Back.RESET, end='\n')
 
+def title():
+    print()
+    nice_print("STRANDED", Fore.BLACK, Back.CYAN)
+    print()
+    nice_print(
+    """
+    You are an unwary passenger of a plane that is in freefall,
+    after what you now understand is because of an engine failure.
+    As you look outside of the window, you see the plane has found
+    itself in the middle of a horrific storm, the crew and passengers
+    are in an insane panic state; they viciously fight over the few
+    available parachutes. One of the passengers has managed to open
+    one of the exit doors, which does not result in fruitful salvation.
+    The passenger as well as others are sucked out of the plane in a
+    moment's notice, it's a devastating sight to witness. You accept
+    your fate, there is no hope, and your senses aren't as they should
+    be; your vision is blurred. You take your seat and close your eyes...
+    """)
+    print()
+    title_input()
+
+def title_input():
+    nice_print_line("Type START to start the game")
+    nice_print_line("Type CREDITS for the credits")
+
+    command = input("> ").upper()
+    while command != "START" and command != "CREDITS":
+        command = input("> ").upper()
+
+    if command == "START":
+        return
+    elif command == "CREDITS":
+        credits()
+
+def credits():
+    print()
+    nice_print("CREDITS", Fore.BLACK, Back.WHITE)
+    print()
+    nice_print("   Stranded was developed by:")
+    nice_print_line("   Thomas Durston")
+    nice_print_line("   Isobel Speed")
+    nice_print_line("   Caitlin Taylor")
+    nice_print_line("   Edward Trist")
+    nice_print_line("   Samuil Velichkov")
+    nice_print_line("   Michael Whitfield")
+    nice_print_line("   Jamie Williamson")
+    print()
+    nice_print("   Libraries used:")
+    nice_print_line("   Colorama - https://pypi.python.org/pypi/colorama")
+    print()
+    nice_print("   Thanks for playing!")
+    print()
+    title_input()
+
 # This is the entry point of our program
 def main():
     # Initialise colorama
     init()
+    # Show title screen
+    title()
     # Main game loop
     while True:
         # Display game status (location description, inventory etc.)

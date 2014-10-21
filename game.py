@@ -546,7 +546,7 @@ def main():
     # Initialise colorama
     init()
     # Show title screen
-    #title()
+    title()
     # Main game loop
     while True:
         if player["health"] <= 0:

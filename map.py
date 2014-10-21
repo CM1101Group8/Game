@@ -319,6 +319,13 @@ locations = {
     "Cliffs": location_cliffs,
     "Beach": location_beach,
     "Passage": location_passage,
+    "River": location_river,
+    "Waterfall": location_waterfall,
+    "Hill": location_hill,
+    "Cave": location_cave,
+    "Cave2": location_cave2,
+    "Lair": location_cave
+
 
 
 }

@@ -20,7 +20,7 @@ location_plane = {
 
     "items": [],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": ""
 }
@@ -40,7 +40,7 @@ location_mon1 = {
 
     "items": [item_wood],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": ""
 }
@@ -60,7 +60,7 @@ location_mon2 = {
 
     "items": [item_wood],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": ""
 }
@@ -70,7 +70,7 @@ location_mon3 = {
 
     "description":
     """
-    You reach the 'The Middle of Nowhere', and this is exactly 
+    You reach 'The Middle of Nowhere', and this is exactly 
     where you are situated. You find the charred corpses of Owen 
     and Beru Lars. They have nothing to help you survive, it is 
     best to move on.
@@ -80,7 +80,7 @@ location_mon3 = {
 
     "items": [item_wood],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": ""
 }
@@ -102,7 +102,7 @@ location_hof = {
 
     "items": [item_wood],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": ""
 }
@@ -123,7 +123,7 @@ location_ravine = {
 
     "items": [item_leaves],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": ""
 }
@@ -154,7 +154,7 @@ location_brush = {
 
     "items": [item_wood],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": ""
 }
@@ -178,7 +178,7 @@ location_rockside = {
 
     "items": [item_sparktool],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": ""
 }
@@ -202,7 +202,7 @@ location_woods = {
 
     "items": [item_wood, item_fireblanket],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": ""
 }
@@ -225,7 +225,7 @@ location_cliffs = {
 
     "items": [item_rope],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": enemy_kirill
 }
@@ -247,7 +247,7 @@ location_beach = {
 
     "items": [item_medkit, item_crisps],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": ""
 }
@@ -279,7 +279,7 @@ location_passage = {
 
     "items": [],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": ""
 }
@@ -299,7 +299,7 @@ location_river = {
 
     "items": [],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": ""
 }
@@ -321,7 +321,7 @@ location_waterfall = {
 
     "items": [item_parachute],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": ""
 }
@@ -342,7 +342,7 @@ location_hill = {
 
     "items": [item_wood],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": ""
 }
@@ -367,7 +367,7 @@ location_cave = {
 
     "items": [item_gun],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": "",
 
@@ -390,7 +390,7 @@ location_cave2 = {
 
     "items": [item_bullets],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": ""
 }
@@ -415,7 +415,7 @@ location_lair = {
 
     "items": [item_petrol],
 
-    "visited": False,
+    "visited": True,
 
     "enemy": enemy_wolf
 }

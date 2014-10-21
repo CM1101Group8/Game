@@ -230,3 +230,13 @@ item_machete = {
 
     "mass": 1000
 }
+
+item_gun = {
+    "id": "gun",
+
+    "name": "A gun",
+
+    "description": "A gun can be used for protection against enemies"
+
+    "mass": 2000
+}

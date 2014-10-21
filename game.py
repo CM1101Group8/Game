@@ -8,6 +8,40 @@ from player import *
 from items import *
 from gameparser import *
 
+def combat(enemy):
+    correct_item = 0
+    nice_print("WARNING")
+    warning = "There is a " + enemy["name"] + " in the area with you."
+    nice_print(warning)
+    while True:
+        #Checks too see if the player has the correct item to defeat the enemy
+        for item in player["inventory"]:
+            if item["id"] == enemy["vuln"]:
+                correct_item = 1
+                nice_print("You have the correct equipment to deal with the enemy")
+                print("USE", item["id"].upper(), "to attack", enemy["name"], "with", item["name"],".")
+        if not correct_item:
+            nice_print("You do not have the correct item to deal with the enemy you can only FLEE")
+        print ("FLEE to return to the previous area.")
+        #Gets the players command and normalises it
+        command = normalise_input(input(">"))
+        if command:
+            #checks what the player wants to do
+            if command[0] == "use":
+                success = "You succesfully hit " + enemy["name"] + " with " + item["name"] + " killing them."
+                nice_print(success)
+                player["current_location"]["enemy"] = ""
+                break
+
+            elif command[0] == "flee":
+                player["current_location"] = player["previous_location"]
+                break
+
+            else:
+                nice_print("You cannot do that now")
+        else:
+            nice_print("You cannot do nothing")
+
 def item_damage(item):
     #calculates item damage
     import math
@@ -252,6 +286,7 @@ def execute_go(direction):
     """
     global player
     if is_valid_exit(player["current_location"]['exits'], direction):
+        player["previous_location"] = player["current_location"]
         player["current_location"] = move(player["current_location"]['exits'], direction)
         return True
     else:
@@ -490,6 +525,9 @@ def main():
     while True:
         # Display game status (location description, inventory etc.)
         print_location(player["current_location"])
+        if player["current_location"]["enemy"]:
+            combat(player["current_location"]["enemy"])
+            print_location(player["current_location"])
         print_player(player)
         print_inventory_items(player["inventory"])
 

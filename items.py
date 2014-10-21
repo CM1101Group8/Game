@@ -1,4 +1,4 @@
-# PLANE ITEMS
+# PLANE ITEMS -------------------------------------------------------------------------
 item_toolkit = {
     "id": "toolkit",
 
@@ -10,16 +10,6 @@ item_toolkit = {
     "mass": 300
 }
 
-item_fireblanket = {
-    "id": "fireblanket",
-
-    "name": "a fire blanket",
-
-    "description":
-    """The fire blanket will shield you from flames, allowing you to access areas blocked off from fire.""",
-
-    "mass": 250
-}
 
 item_headtorch = {
     "id": "headtorch",
@@ -44,7 +34,7 @@ item_compass = {
 }
 
 
-# END-GAME ITEMS
+# END-GAME ITEMS ------------------------------------------------------------------------------
 item_parachute = {
     "id": "parachute",
 
@@ -100,7 +90,7 @@ item_wood = {
 }
 
 
-# SURVIVAL ITEMS
+# SURVIVAL ITEMS -----------------------------------------------------------------------
 item_medkit = {
     "id": "medkit",
 
@@ -150,8 +140,31 @@ item_bandaids = {
 
     "mass": 0 #TODO
 }
+#ACCESS ITEMS -----------------------------------------------------------------------
+item_fireblanket = {
+    "id": "fireblanket",
 
-# WEAPONS
+    "name": "a fire blanket",
+
+    "description":
+    """The fire blanket will shield you from flames, allowing you to access areas blocked off from fire.""",
+
+    "mass": 250
+}
+
+item_rope = {
+    "id": "rope",
+
+    "name": "climbimg rope",
+    
+    "description":
+    """ TODO """,
+
+    "mass": 300
+}
+
+
+# WEAPONS ---------------------------------------------------------------------------
 item_machete = {
     "id": "machete",
 

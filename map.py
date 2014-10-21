@@ -15,9 +15,11 @@ location_plane = {
     or simply lost amongst the destruction and rubble.
     """,
 
-    "exits": {"east": "MON1", "north": "MON2", "west": "MON3"},
+    "exits": {"west": "MON1", "north": "MON2", "east": "MON3"},
 
-    "items": []
+    "items": [],
+
+    "visited": False
 }
 
 location_mon1 = {
@@ -30,9 +32,11 @@ location_mon1 = {
     have no choice but to move on.
     """,
 
-    "exits": {"west": "Plane", "north": "Ravine", "west": "Rockside"},
+    "exits": {"east": "Plane", "north": "Ravine", "west": "Rockside"},
 
-    "items": []
+    "items": [],
+
+    "visited": False
 }
 
 location_mon2 = {
@@ -47,7 +51,9 @@ location_mon2 = {
 
     "exits": {"north": "HOF", "south": "Plane", "west": "Ravine", "east": "Woods"},
 
-    "items": []
+    "items": [],
+
+    "visited": False
 }
 
 location_mon3 = {
@@ -62,7 +68,9 @@ location_mon3 = {
 
     "exits": {"west": "Plane", "east": "Beach", "north": "Woods"},
 
-    "items": []
+    "items": [],
+
+    "visited": False
 }
 
 location_hof = {
@@ -80,7 +88,9 @@ location_hof = {
 
     "exits": {"south": "MON2", "north": "Passage"},
 
-    "items": [item_wood]
+    "items": [item_wood],
+
+    "visited": False
 }
 
 location_ravine = {
@@ -95,7 +105,9 @@ location_ravine = {
 
     "exits": {"south": "MON1", "west": "Brush", "east": "MON2", },
 
-    "items": []
+    "items": [],
+
+    "visited": False
 }
 
 location_brush = {
@@ -111,7 +123,9 @@ location_brush = {
 
     "exits": {"east": "Ravine"},
 
-    "items": [item_machete, item_wood]
+    "items": [item_machete, item_wood],
+
+    "visited": False
 }
 
 location_rockside = {
@@ -127,7 +141,9 @@ location_rockside = {
 
     "exits": {"east": "MON1"},
 
-    "items": [item_sparktool]
+    "items": [item_sparktool],
+
+    "visited": False
 }
 
 location_woods = {
@@ -142,7 +158,9 @@ location_woods = {
 
     "exits": {"west": "MON2", "east": "Cliffs", "south": "MON3"},
 
-    "items": [item_wood]
+    "items": [item_wood],
+
+    "visited": False
 }
 
 location_cliffs = {
@@ -157,7 +175,9 @@ location_cliffs = {
 
     "exits": {"west": "Woods"},
 
-    "items": []
+    "items": [],
+
+    "visited": False
 }
 
 location_beach = {
@@ -173,7 +193,9 @@ location_beach = {
 
     "exits": {"west": "MON3"},
 
-    "items": [item_medkit, item_crisps]
+    "items": [item_medkit, item_crisps],
+
+    "visited": False
 }
 
 location_passage = {
@@ -186,7 +208,9 @@ location_passage = {
 
     "exits": {"south": "HOF"},
 
-    "items": []
+    "items": [],
+
+    "visited": False
 }
 
 locations = {

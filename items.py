@@ -46,64 +46,6 @@ item_parachute = {
     "mass": 1500
 }
 
-item_petrol = {
-    "id": "petrol",
-
-    "name": "a canister of petrol",
-
-    "description":
-    """A canister of petrol which could be used to aid in firemaking.""",
-
-    "mass": 1200
-
-    "combine": item_combined_leaves_wood,
-
-    "combined_item": item_combined_petrol_pile
-}
-
-item_sparktool = {
-    "id": "sparktool",
-
-    "name": "a spark tool",
-
-    "description":
-    """The spark tool which is made out of flint can be used to create sparks. When combined with other items it could produce fire.""",
-
-    "mass": 250,
-
-    "combine": item_combined_petrol_pile,
-
-    "combined_item": item_fire
-}
-
-item_greenleaves = {
-    "id": "greenleaves",
-
-    "name": "a pile of green leaves",
-
-    "description":
-    """An ordinary pile of green leaves.""",
-
-    "mass": 100,
-
-    "combine": item_wood,
-
-    "combined_item": item_combined_leaves_wood
-}
-
-item_wood = {
-    "id": "wood",
-
-    "name": "a pile of wood",
-
-    "description": "The wood pile can be used as fuel for a fire.",
-
-    "mass": 1000, 
-
-    "combine": item_greenleaves,
-
-    "combined_item": item_combined_leaves_wood
-}
 
 item_combined_leaves_wood = {
     
@@ -140,15 +82,69 @@ item_fire = {
     
 }
 
-item_combinations = {
-    
-    "wood": item_wood,
-    "petrol": item_petrol,
-    "sparktool": item_sparktool,
-    "wood": item_wood,
+
+item_petrol = {
+    "id": "petrol",
+
+    "name": "a canister of petrol",
+
+    "description":
+    """A canister of petrol which could be used to aid in firemaking.""",
+
+    "mass": 1200,
+
+    "combined_item": item_combined_petrol_pile
+}
+
+item_sparktool = {
+    "id": "sparktool",
+
+    "name": "a spark tool",
+
+    "description":
+    """The spark tool which is made out of flint can be used to create sparks. When combined with other items it could produce fire.""",
+
+    "mass": 250,
+
+    "combined_item": item_fire
+}
+
+item_wood = {
+    "id": "wood",
+
+    "name": "a pile of wood",
+
+    "description": "The wood pile can be used as fuel for a fire.",
+
+    "mass": 1000, 
+
+    "combined_item": item_combined_leaves_wood
+}
+
+item_greenleaves = {
+    "id": "greenleaves",
+
+    "name": "a pile of green leaves",
+
+    "description":
+    """An ordinary pile of green leaves.""",
+
+    "mass": 100,
+
+    "combined_item": item_combined_leaves_wood
 }
 
 
+item_combinations = {
+
+    "wood": item_greenleaves,
+
+    "petrol": item_combined_leaves_wood,
+
+    "sparktool": item_combined_petrol_pile,
+
+    "leaves": item_wood
+}
 
 # SURVIVAL ITEMS -----------------------------------------------------------------------
 item_medkit = {

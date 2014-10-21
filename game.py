@@ -408,7 +408,15 @@ def nice_print_line(text, fore=Fore.WHITE, back=Back.BLACK):
 
 def title():
     print()
-    nice_print("STRANDED", Fore.BLACK, Back.CYAN)
+    nice_print_line(
+        """
+           _____ _______ _____            _   _ _____  ______ _____  
+          / ____|__   __|  __ \     /\   | \ | |  __ \|  ____|  __ \ 
+         | (___    | |  | |__) |   /  \  |  \| | |  | | |__  | |  | |
+          \___ \   | |  |  _  /   / /\ \ | . ` | |  | |  __| | |  | |
+          ____) |  | |  | | \ \  / ____ \| |\  | |__| | |____| |__| |
+         |_____/   |_|  |_|  \_\/_/    \_\_| \_|_____/|______|_____/                                                   
+        """, Fore.WHITE, Back.CYAN)
     print()
     nice_print(
     """

@@ -255,13 +255,13 @@ location_beach = {
 def on_enter_passage(player, locations, nice_print, Fore, Back, take_damage):
     if item_headtorch["on"]:
         nice_print("Your headtorch illuminates the darkness, lighting your path")
-        return False
+        return True
     else:
         nice_print("Ghouls rush forward from a darkness you cannot see into")
         nice_print("They strike at your chest and tear scraps from your skin")
         player["current_location"] = player["previous_location"]
         player["health"] -= 30
-        return False
+        return True
 
 location_passage = {
     "name": "Dark Passage",
@@ -363,8 +363,8 @@ location_hill = {
 def on_enter_cave(player, locations, nice_print, Fore, Back, take_damage):
     if locations["Cave"]["fire"]:
         take_damage(player, 70)
-        return False
-    return False
+        return True
+    return True
 
 location_cave = {
     "name": "Fire cave",
@@ -384,7 +384,7 @@ location_cave = {
 
     "enemy": "",
 
-    "fire": False,
+    "fire": True,
 
     "on_enter": on_enter_cave
 }

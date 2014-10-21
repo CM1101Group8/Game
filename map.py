@@ -1,6 +1,6 @@
 from items import *
 from enemies import *
-
+#starting location
 location_plane = {
     "name": "Plane",
 
@@ -404,6 +404,7 @@ location_lair = {
 
     "enemy": enemy_wolf
 }
+#dictionary of locations
 locations = {
     "Plane": location_plane,
     "MON1": location_mon1,

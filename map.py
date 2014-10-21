@@ -20,7 +20,7 @@ location_plane = {
 
     "items": [],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -40,7 +40,7 @@ location_mon1 = {
 
     "items": [item_wood],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -60,7 +60,7 @@ location_mon2 = {
 
     "items": [item_wood],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -80,7 +80,7 @@ location_mon3 = {
 
     "items": [item_wood],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -102,7 +102,7 @@ location_hof = {
 
     "items": [item_wood],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -123,7 +123,7 @@ location_ravine = {
 
     "items": [item_leaves],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -154,7 +154,7 @@ location_brush = {
 
     "items": [item_wood],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -178,7 +178,7 @@ location_rockside = {
 
     "items": [item_sparktool],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -202,7 +202,7 @@ location_woods = {
 
     "items": [item_wood, item_fireblanket],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -225,7 +225,7 @@ location_cliffs = {
 
     "items": [item_rope],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": enemy_kirill
 }
@@ -247,10 +247,21 @@ location_beach = {
 
     "items": [item_medkit, item_crisps],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
+
+def on_enter_passage(player, locations, nice_print, Fore, Back, take_damage):
+    if item_headtorch["on"]:
+        nice_print("Your headtorch illuminates the darkness, lighting your path")
+        return False
+    else:
+        nice_print("Ghouls rush forward from a darkness you cannot see into")
+        nice_print("They strike at your chest and tear scraps from your skin")
+        player["current_location"] = player["previous_location"]
+        player["health"] -= 30
+        return False
 
 location_passage = {
     "name": "Dark Passage",
@@ -260,16 +271,30 @@ location_passage = {
     You reach a very dark and ominous passage that is haunted 
     by cold and daunting whispers. You are greeted by a pack of 
     fiendish ghost creatures, ghouls, who prey on the dark and the 
-    weak. They have every intent to take your soul and kill you.
+    weak. They have every intent to take your soul and kill you. 
+    There is a cave to the west with flames blocking the entrance.
+    You can enter the cave if you wish but it will hurt; A LOT.
+    """,
+
+    "description_extinguished":
+    """
+    You reach a very dark and ominous passage that is haunted 
+    by cold and daunting whispers. You are greeted by a pack of 
+    fiendish ghost creatures, ghouls, who prey on the dark and the 
+    weak. They have every intent to take your soul and kill you. 
+    There is a cave to the west with a slightly burnt fire blanket
+    on the floor of the entrance.
     """,
 
     "exits": {"south": "HOF", "north": "Lair", "west": "Cave"},
 
     "items": [],
 
-    "visited": True,
+    "visited": False,
 
-    "enemy": ""
+    "enemy": "",
+
+    "on_enter": on_enter_passage
 }
 
 location_river = {
@@ -287,7 +312,7 @@ location_river = {
 
     "items": [],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -302,14 +327,14 @@ location_waterfall = {
     parachute. It is impossible to climb simply by yourself. 
     You notice that there is a very clear overhead between 
     the waterfall and the ravine, if only you had the means 
-    the traverse this open path….
+    the traverse this open path...
     """,
 
     "exits": {"east": "River"},
 
     "items": [item_parachute],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -330,33 +355,36 @@ location_hill = {
 
     "items": [item_wood],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
 
 def on_enter_cave(player, locations, nice_print, Fore, Back, take_damage):
-    take_damage(player, 70)
-    return True
+    if locations["Cave"]["fire"]:
+        take_damage(player, 70)
+        return False
+    return False
 
 location_cave = {
     "name": "Fire cave",
 
     "description": 
     """
-    You approach a sinister-looking cave with an entrance that 
-    is engulfed in flames. You see one of the plane's engines is 
-    lodged into the wall of the cave. You can enter the cave if 
-    you wish but it will hurt; A LOT.
+    You enter a sinister-looking cave. You see one of the plane's 
+    engines is lodged into the wall of the cave. There is a gun on
+    the ground.
     """,
 
     "exits": {"east": "Passage"},
 
     "items": [item_gun],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": "",
+
+    "fire": False,
 
     "on_enter": on_enter_cave
 }
@@ -375,7 +403,7 @@ location_cave2 = {
 
     "items": [item_bullets],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -400,7 +428,7 @@ location_lair = {
 
     "items": [item_petrol],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": enemy_wolf
 }

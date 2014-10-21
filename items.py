@@ -55,6 +55,10 @@ item_petrol = {
     """A canister of petrol which could be used to aid in firemaking.""",
 
     "mass": 1200
+
+    "combine": item_combined_leaves_wood,
+
+    "combined_item": item_combined_petrol_pile
 }
 
 item_sparktool = {
@@ -65,7 +69,11 @@ item_sparktool = {
     "description":
     """The spark tool which is made out of flint can be used to create sparks. When combined with other items it could produce fire.""",
 
-    "mass": 250
+    "mass": 250,
+
+    "combine": item_combined_petrol_pile,
+
+    "combined_item": item_fire
 }
 
 item_greenleaves = {
@@ -76,7 +84,11 @@ item_greenleaves = {
     "description":
     """An ordinary pile of green leaves.""",
 
-    "mass": 100
+    "mass": 100,
+
+    "combine": item_wood,
+
+    "combined_item": item_combined_leaves_wood
 }
 
 item_wood = {
@@ -86,8 +98,56 @@ item_wood = {
 
     "description": "The wood pile can be used as fuel for a fire.",
 
-    "mass": 1000
+    "mass": 1000, 
+
+    "combine": item_greenleaves,
+
+    "combined_item": item_combined_leaves_wood
 }
+
+item_combined_leaves_wood = {
+    
+    "id": "",
+
+    "name": "a pile of leaves and wood",
+
+    "description": "Can be used to help start a fire.",
+
+    "mass": 1100,
+}
+
+item_combined_petrol_pile = {
+
+    "id": "",
+
+    "name": "a pile of leaves and wood and petrol",
+
+    "description": "Can be used with a spark to start a fire.",
+
+    "mass": 2300,
+    
+}
+
+item_fire = {
+
+    "id": "",
+
+    "name": "a fire",
+
+    "description": "A large fire which can be used to signal for help.",
+
+    "mass": 2300,
+    
+}
+
+item_combinations = {
+    
+    "wood": item_wood,
+    "petrol": item_petrol,
+    "sparktool": item_sparktool,
+    "wood": item_wood,
+}
+
 
 
 # SURVIVAL ITEMS -----------------------------------------------------------------------

@@ -149,7 +149,6 @@ def print_location(location):
     else:
         nice_print_line(location["description"])
     print()
-    print_location_items(location)
 
 def exit_leads_to(exits, direction):
     """This function takes a dictionary of exits and a direction (a particular
@@ -318,6 +317,11 @@ def execute_use(item_id):
     nice_print("You don't have that!", Fore.RED)
     return False
 
+def execute_use_with(item_one, item_two):
+    #global locations
+    #if player["current_location"] == locations["Cliffs"]:
+        #for item in player["inventory"]: 
+        #nice_print_line("You combined "+ item_one + " with "+ item_two +" and made "+ created_item + ".")
 
 def execute_command(command):
     """This function takes a command (a list of words as returned by
@@ -349,7 +353,10 @@ def execute_command(command):
 
     elif command[0] == "use":
         if len(command) > 1:
-            return execute_use(command[1])
+            if command[2] == "with":
+                execute_use_with(command[1], command[3])
+            else:
+                return execute_use(command[1])
         else:
             nice_print("Use what?", Fore.YELLOW)
             return False
@@ -414,6 +421,7 @@ def title():
     print()
     nice_print_line(
         """
+
            _____ _______ _____            _   _ _____  ______ _____  
           / ____|__   __|  __ \     /\   | \ | |  __ \|  ____|  __ \ 
          | (___    | |  | |__) |   /  \  |  \| | |  | | |__  | |  | |
@@ -457,19 +465,19 @@ def credits():
     nice_print("CREDITS", Fore.BLACK, Back.WHITE)
     print()
     nice_print("   Stranded was developed by:", Fore.YELLOW)
-    nice_print_line("   Thomas Durston")
-    nice_print_line("   Isobel Speed")
-    nice_print_line("   Caitlin Taylor")
-    nice_print_line("   Edward Trist")
-    nice_print_line("   Samuil Velichkov")
-    nice_print_line("   Michael Whitfield")
-    nice_print_line("   Jamie Williamson")
+    nice_print_line("       Thomas Durston")
+    nice_print_line("       Isobel Speed")
+    nice_print_line("       Caitlin Taylor")
+    nice_print_line("       Edward Trist")
+    nice_print_line("       Samuil Velichkov")
+    nice_print_line("       Michael Whitfield")
+    nice_print_line("       Jamie Williamson")
     print()
     nice_print("   With thanks to:", Fore.YELLOW)
-    nice_print_line("   Colorama - https://pypi.python.org/pypi/colorama")
-    nice_print_line("   ASCII Text Art from - http://patorjk.com/software/taag")
+    nice_print_line("       Colorama - https://pypi.python.org/pypi/colorama")
+    nice_print_line("       ASCII Text Art from - http://patorjk.com/software/taag")
     print()
-    nice_print("   Thanks for playing!")
+    nice_print("   Thanks for playing!", Fore.GREEN)
     print()
     title_input()
 
@@ -483,8 +491,8 @@ def main():
     while True:
         # Display game status (location description, inventory etc.)
         print_location(player["current_location"])
-        print_inventory_items(player["inventory"])
         print_player(player)
+        print_inventory_items(player["inventory"])
 
         # Show the menu with possible actions and ask the player
         command = menu(player["current_location"]["exits"], player["current_location"]["items"], player["inventory"])

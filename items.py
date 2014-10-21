@@ -143,9 +143,10 @@ item_petrol = {
 }
 
 def use_item_sparktool(player, locations, nice_print, Fore, Back):
-    if player["current_location"] == locations["Brush"]:
+    if player["current_location"] == locations["Brush"] and not locations["Brush"]["fire"]:
         nice_print("You use the spark tool to set the barbed brush alight.", Fore.GREEN)
         locations["Brush"]["items"].append(item_machete)
+        locations["Brush"]["fire"] = True
         locations["Brush"]["description"] = locations["Brush"]["description_alight"]
         return True
     else:
@@ -273,7 +274,7 @@ def use_item_fireblanket(player, locations, nice_print, Fore, Back):
 item_fireblanket = {
     "id": "fireblanket",
 
-    "name": "a fire blanket",
+    "name": "fire blanket",
 
     "description":
     """The fire blanket will shield you from flames, allowing you to access areas blocked off from fire.""",
@@ -310,7 +311,7 @@ item_rope = {
 item_machete = {
     "id": "machete",
 
-    "name": "a rusty machete",
+    "name": "rusty machete",
 
     "description": "The machete can be used to attack any animals or people who might try to attack you.",
 
@@ -320,7 +321,7 @@ item_machete = {
 item_gun = {
     "id": "gun",
 
-    "name": "A gun",
+    "name": "gun",
 
     "description": "A gun can be used for protection against enemies",
 
@@ -330,7 +331,7 @@ item_gun = {
 item_bullets = {
     "id": "bullets",
 
-    "name": "Bullets",
+    "name": "bullets",
 
     "description": "Some extra bullets, just in case.",
 

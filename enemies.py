@@ -1,3 +1,6 @@
+def on_kill_enemy_kirill(player, locations):
+	locations["Cliffs"]["description"] = locations["Cliffs"]["description_killed"]
+
 enemy_kirill = {
 	"id": "kirill",
 
@@ -8,7 +11,9 @@ the peeling name tag on his chest says 'Kirill' but his
 burger based clothing offers little insight into the man
 he used to be""",
 
-	"vuln": "machete"
+	"vuln": "machete",
+
+	"on_kill": on_kill_enemy_kirill
 }
 
 enemy_wolf = {

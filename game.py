@@ -46,6 +46,8 @@ def combat(enemy):
                         success = "You succesfully hit " + enemy["name"] + " with " + item_used["name"] + ", killing them."
                         nice_print(success)
                         player["current_location"]["enemy"] = ""
+                        if "on_kill" in enemy.keys():
+                            enemy["on_kill"](player, locations)
                         break
                     #If the wrong item is used, it backfires on the player for some damage based on the weight of the item
                     else:
@@ -54,7 +56,7 @@ def combat(enemy):
                         print("The attack backfires and deals", item_damage(item_used), "damage to yourself.")
                         player["health"] -= item_damage(item_used)
             #FLEE only allows the player to return to their previous location so they do not get to locations they are not allowed to acess yet
-            #This is done by storing the previous location into a player variable every time the palyer moves
+            #This is done by storing the previous location into a player variable every time the player moves
             elif command[0] == "flee":
                 player["current_location"] = player["previous_location"]
                 break
@@ -72,8 +74,8 @@ def item_damage(item):
 def take_damage(player, damage):
     #inflicts damage on the player
     player['health'] = player['health'] - int(damage)
-    nice_print_line(""+ player['name'] +" took "+ str(damage) +" damage.")
-    nice_print_line(""+ player['name'] +" health is now "+ str(player['health']) +".")
+    nice_print_line("You took "+ str(damage) +" damage.")
+    nice_print_line("Your health is now "+ str(player['health']) +".")
     return player
 
 def print_player(player):
@@ -196,6 +198,8 @@ def print_location(location):
 
     Note: <BLANKLINE> here means that doctest should expect a blank line.
     """
+    if "on_print" in location.keys():
+        location["on_print"](player, locations, nice_print, Fore, Back, take_damage)
     print()
     nice_print(location["name"].upper(), Fore.BLACK, Back.WHITE)
     print()
@@ -328,7 +332,7 @@ def execute_take(item_id):
     for item in player["current_location"]["items"]:
         if item_id == item["id"]:
             item_taken = 1
-            if player["inventory_weight"] + item["mass"] < 3000:    #Checks if player inventory is light enough to carry item
+            if player["inventory_weight"] + item["mass"] < 4000:    #Checks if player inventory is light enough to carry item
                 player["current_location"]["items"].remove(item)
                 player["inventory"].append(item)
                 player["inventory_weight"] += item["mass"]
@@ -471,7 +475,7 @@ def nice_print(text, fore=Fore.WHITE, back=Back.BLACK):
     for character in text:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.035)
+        time.sleep(0.02)
     print(Fore.RESET + Back.RESET, end='\n')
 
 def nice_print_line(text, fore=Fore.WHITE, back=Back.BLACK):

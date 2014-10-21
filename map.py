@@ -27,9 +27,10 @@ location_mon1 = {
 
     "description": 
     """
-    You find yourself in the middle of nowhere. There is nothing 
-    here except the burning plane you just escaped from. You 
-    have no choice but to move on.
+    You reach the “The Middle of Nowhere”, and this is exactly
+    where you are situated. There is nothing of interest is in
+    the immediate vicinity, besides wood and trees. At this point, 
+    the only useful thing to do is to choose another direction to go in.
     """,
 
     "exits": {"east": "Woods", "north": "HOF", "west": "Ravine", "south": "Plane"},
@@ -44,9 +45,10 @@ location_mon2 = {
 
     "description":
     """
-    You find yourself in the middle of nowhere. There is nothing
-    here except the burning plane you just escaped from. You
-    have no choice but to move on.
+    You reach the “The Middle of Nowhere”, and this is exactly 
+    where you are situated. There is nothing of interest is in 
+    the immediate vicinity, besides wood and trees. At this point, 
+    the only useful thing to do is to choose another direction to go in.
     """,
 
     "exits": {"north": "Ravine", "west": "Rockside", "east": "Plane"},
@@ -61,9 +63,10 @@ location_mon3 = {
 
     "description":
     """
-    You find yourself in the middle of nowhere. You find
-    the charred corpses of Owen and Beru Lars. They have
-    nothing to help you survive, it is best to move on.
+    You reach the “The Middle of Nowhere”, and this is exactly 
+    where you are situated. You find the charred corpses of Owen 
+    and Beru Lars. They have nothing to help you survive, it is 
+    best to move on.
     """,
 
     "exits": {"west": "Plane", "east": "Beach", "north": "Woods"},
@@ -315,20 +318,7 @@ locations = {
     "Woods": location_woods,
     "Cliffs": location_cliffs,
     "Beach": location_beach,
-<<<<<<< HEAD
-    "Passage": location_passage
-    "River": location_river
-    "Waterfall": location_waterfall
-    "Hill": location_hill
-    "Cave": location_cave
-    "Cave2": location_cave2
-=======
     "Passage": location_passage,
-    "River": location_river,
-    "Waterfall": location_waterfall,
-    "Hill": location_hill,
-    "Cave": location_cave,
-    "Gate": location_gate,
->>>>>>> 39bfb96a6012f6191f7c01ac477c22c54ca5eadf
-    "Lair": location_lair
+
+
 }

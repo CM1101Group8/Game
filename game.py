@@ -274,9 +274,9 @@ def print_menu(exits, location_items, inv_items):
         if "use" in things.keys():
             nice_print_line("USE " + things["id"].upper() + " to use your " + things["name"] + ".")
     for things in location_items:
-        nice_print_line("TAKE " + things["id"].upper() + " to take " + things["name"] + ".")
+        nice_print_line("TAKE " + things["id"].upper() + " to take a " + things["name"] + ".")
     for things in inv_items:
-        nice_print_line("DROP " + things["id"].upper() + " to drop " + things["name"] + ".")
+        nice_print_line("DROP " + things["id"].upper() + " to drop your " + things["name"] + ".")
 
     nice_print("What do you want to do?")
 
@@ -328,19 +328,19 @@ def execute_take(item_id):
     for item in player["current_location"]["items"]:
         if item_id == item["id"]:
             item_taken = 1
-            if player["inventory_weight"] + item["mass"] < 3000:    #Checks if player inventory is light enough to carry item     
+            if player["inventory_weight"] + item["mass"] < 3000:    #Checks if player inventory is light enough to carry item
                 player["current_location"]["items"].remove(item)
                 player["inventory"].append(item)
                 player["inventory_weight"] += item["mass"]
-                nice_print("You picked up " + item["name"] + ".", Fore.GREEN)
+                nice_print("You picked up a " + item["name"] + ".", Fore.GREEN)
                 nice_print(item["description"])
                 print()
                 return True
             else:
-                nice_print("\nYou do not have room for an item that heavy", Fore.RED)
+                nice_print("\nYou do not have room for an item that heavy.", Fore.RED)
                 return False
     if not item_taken:
-        nice_print("You cannot take that", Fore.RED)
+        nice_print("You cannot take that.", Fore.RED)
         return False
 
 def execute_drop(item_ident):
@@ -355,15 +355,15 @@ def execute_drop(item_ident):
             player["inventory"].remove(item)
             player["current_location"]["items"].append(item)
             player["inventory_weight"] -= item["mass"]
-            nice_print("You dropped " + item["name"] + ".", Fore.GREEN)
+            nice_print("You dropped your " + item["name"] + ".", Fore.GREEN)
             return True
     if not item_dropped:
-        nice_print("You cannot drop that", Fore.RED)
+        nice_print("You cannot drop that.", Fore.RED)
         return False
 
 
 def execute_use(item_id):
-#Allows player to use items they have in their inventory. If not in inventory then it will print "You don't have that"     
+#Allows player to use items they have in their inventory. If not in inventory then it will print "You don't have that"
 
     for item in player["inventory"]:
         if item_id == item["id"]:
@@ -381,10 +381,10 @@ def execute_use(item_id):
 def execute_use_with(item_one, item_two):
     #global locations
     #if player["current_location"] == locations["Cliffs"]:
-        #for item in player["inventory"]: 
+        #for item in player["inventory"]:
         #nice_print_line("You combined "+ item_one + " with "+ item_two +" and made "+ created_item + ".")
     pass
-    
+
 def execute_command(command):
     """This function takes a command (a list of words as returned by
     normalise_input) and, depending on the type of action (the first word of
@@ -485,12 +485,12 @@ def title():    #prints title in large font with blue background. Uses colorama 
     nice_print_line(
         """
 
-           _____ _______ _____            _   _ _____  ______ _____  
-          / ____|__   __|  __ \     /\   | \ | |  __ \|  ____|  __ \ 
+           _____ _______ _____            _   _ _____  ______ _____
+          / ____|__   __|  __ \     /\   | \ | |  __ \|  ____|  __ \
          | (___    | |  | |__) |   /  \  |  \| | |  | | |__  | |  | |
           \___ \   | |  |  _  /   / /\ \ | . ` | |  | |  __| | |  | |
           ____) |  | |  | | \ \  / ____ \| |\  | |__| | |____| |__| |
-         |_____/   |_|  |_|  \_\/_/    \_\_| \_|_____/|______|_____/                                                   
+         |_____/   |_|  |_|  \_\/_/    \_\_| \_|_____/|______|_____/
         """, Fore.WHITE, Back.CYAN)
     print()
     nice_print(

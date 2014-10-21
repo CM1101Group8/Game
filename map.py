@@ -101,16 +101,22 @@ location_ravine = {
 
     "description":
     """
+<<<<<<< HEAD
     You have found the Ravine, easily the most colourful 
     and arguably the most beautiful part of the island. 
     The smooth aquamarine water softly kisses the area 
     that surrounds it. There is an abundance of plant 
     life here. It is possible that could be useful.
+=======
+    You are now at the ravine. It is peaceful here,
+    and there is a pile of leaves on the ground.
+    It is possible those may be useful.
+>>>>>>> 6350225cb1b2fcae9677c15e3ed6d30b1847f9ac
     """,
 
     "exits": {"south": "MON2", "west": "Brush", "east": "MON1", "north": "River"},
 
-    "items": [item_greenleaves],
+    "items": [item_leaves],
 
     "visited": False
 }
@@ -210,7 +216,7 @@ location_beach = {
     all, you are stranded on an island with a very high possibility 
     of remaining here and dying. There's a medi-kit and a bag of
     crisps. It's your lucky day... ish.
-    """,
+    """, 
 
     "exits": {"west": "MON3"},
 

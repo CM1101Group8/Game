@@ -121,13 +121,13 @@ item_wood = {
     "combined_item": item_combined_leaves_wood
 }
 
-item_greenleaves = {
-    "id": "greenleaves",
+item_leaves = {
+    "id": "leaves",
 
-    "name": "a pile of green leaves",
+    "name": "a pile of leaves",
 
     "description":
-    """An ordinary pile of green leaves.""",
+    """An ordinary pile of leaves.""",
 
     "mass": 100,
 
@@ -137,7 +137,7 @@ item_greenleaves = {
 
 item_combinations = {
 
-    "wood": item_greenleaves,
+    "wood": item_leaves,
 
     "petrol": item_combined_leaves_wood,
 

@@ -212,7 +212,7 @@ location_cliffs = {
 
     "description":
     """
-    Youfind yourself at the edge of a cliff. The sun graces 
+    You find yourself at the edge of a cliff. The sun graces 
     the sea and lights up your face and the surrounding area. 
     However, it isn't entirely idyllic here. At the cliffs, 
     is a man, a crazed man, with his clothes torn up, his face 

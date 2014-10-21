@@ -81,8 +81,8 @@ location_hof = {
     You are now in the heart of the forest. Without
     your head torch, you cannot see anything. It is 
     no use trying to look at your compass. Surrounded 
-    by the darkness, you begin to feel light-headed, 
-    and anxiously turn your head and trying to sharpen 
+    by the darkness, you begin to feel lightheaded, 
+    and anxiously turn your head and try to sharpen 
     your hearing; you fear something is approaching.
     """,
 
@@ -105,7 +105,7 @@ location_ravine = {
 
     "exits": {"south": "MON1", "west": "Brush", "east": "MON2", },
 
-    "items": [],
+    "items": [item_greenleaves],
 
     "visited": False
 }
@@ -115,7 +115,7 @@ location_brush = {
 
     "description":
     """
-    You’ve made it to some barbed brush. It looks
+    You've made it to some barbed brush. It looks
     spikey and there is the corpse of Danny Trejo. 
     It makes you want to turn around, but there is 
     some wood and a rusty machete there.
@@ -135,7 +135,7 @@ location_rockside = {
     """
     You are now at the rockside. Amongst all 
     the rocks there is a scary but satisfying sight: 
-    Bear Grylls’ corpse. At least you out-survived him. 
+    Bear Grylls' corpse. At least you out-survived him. 
     There appears to be some sort of tool on his body.
     """,
 
@@ -168,14 +168,14 @@ location_cliffs = {
 
     "description":
     """
-    You’re at the cliffs. It’s high up, and there is 
-    some climbing rope. You have a great view of…. 
+    You're at the cliffs. It's high up, and there is 
+    some climbing rope. You have a great view of... 
     CRAZY ANGRY KIRILL TRYING TO KILL YOU FOR YOUR POOR TEST SCORE. 
     """,
 
     "exits": {"west": "Woods"},
 
-    "items": [],
+    "items": [item_rope],
 
     "visited": False
 }
@@ -185,10 +185,10 @@ location_beach = {
 
     "description":
     """
-    You’re on a nice island beach. It’s pleasant... 
-    until you remember you’re stranded on an island 
-    trying not to die. There’s a medi-kit and a bag of 
-    crisps. It’s your lucky day... ish.
+    You're on a nice island beach. It's pleasant... 
+    until you remember you're stranded on an island 
+    trying not to die. There's a medi-kit and a bag of 
+    crisps. It's your lucky day... ish.
     """,
 
     "exits": {"west": "MON3"},
@@ -213,6 +213,96 @@ location_passage = {
     "visited": False
 }
 
+location_river = {
+    "name": "River",
+
+    "description":
+    """
+    TODO
+    """,
+
+    "exits": {"west": "Waterfall", "east": "HOF", "south": "Ravine"},
+
+    "items": [],
+
+    "visited": False
+
+}
+
+location_waterfall = {
+    "name": "Waterfall",
+
+    "description":
+    """
+    TODO
+    """,
+
+    "exits": {"east": "River"},
+
+    "items": [],
+
+    "visited": False
+}
+
+location_hill = {
+    "name": "Hill",
+
+    "description":
+    """
+    TODO
+    """,
+
+    "exits": {"west": "HOF", "south": "Woods", "north": "Gate"},
+
+    "items": [],
+
+    "visited": False
+}
+
+location_cave = {
+    "name": "Fire cave",
+
+    "description": 
+    """
+    TODO
+    """,
+
+    "exits": {"east": "Passage"},
+
+    "items": [],
+
+    "visited": False
+}
+
+location_gate = {
+    "name": "Flooded gate",
+
+    "description": 
+    """
+    TODO
+    """,
+
+    "exits": {"west": "Passage", "south": "Hill"},
+
+    "items": [],
+
+    "visited": False
+}
+
+location_lair = {
+    "name": "Wolf's lair",
+
+    "description": 
+    """
+    TODO
+    """,
+
+    "exits": {"south": "Passage"},
+
+    "items": [],
+
+    "visited": False
+}
 locations = {
     "Plane": location_plane,
     "MON1": location_mon1,
@@ -225,5 +315,11 @@ locations = {
     "Woods": location_woods,
     "Cliffs": location_cliffs,
     "Beach": location_beach,
-    "Passage": location_passage
+    "Passage": location_passage,
+    "River": location_river,
+    "Waterfall": location_waterfall,
+    "Hill": location_hill,
+    "Cave": location_cave,
+    "Gate": location_gate,
+    "Lair": location_lair
 }

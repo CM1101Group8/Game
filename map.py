@@ -1,6 +1,6 @@
 from items import *
 from enemies import *
-
+#starting location
 location_plane = {
     "name": "Plane",
 
@@ -20,7 +20,7 @@ location_plane = {
 
     "items": [],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -40,7 +40,7 @@ location_mon1 = {
 
     "items": [item_wood],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -60,7 +60,7 @@ location_mon2 = {
 
     "items": [item_wood],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -80,7 +80,7 @@ location_mon3 = {
 
     "items": [item_wood],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -102,7 +102,7 @@ location_hof = {
 
     "items": [item_wood],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -123,7 +123,7 @@ location_ravine = {
 
     "items": [item_leaves],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -154,7 +154,7 @@ location_brush = {
 
     "items": [item_wood],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -178,7 +178,7 @@ location_rockside = {
 
     "items": [item_sparktool],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -202,7 +202,7 @@ location_woods = {
 
     "items": [item_wood, item_fireblanket],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -225,7 +225,7 @@ location_cliffs = {
 
     "items": [item_rope],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": enemy_kirill
 }
@@ -247,10 +247,21 @@ location_beach = {
 
     "items": [item_medkit, item_crisps],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
+
+def on_enter_passage(player, locations, nice_print, Fore, Back, take_damage):
+    if item_headtorch["on"]:
+        nice_print("Your headtorch illuminates the darkness, lighting your path")
+        return True
+    else:
+        nice_print("Ghouls rush forward from a darkness you cannot see into")
+        nice_print("They strike at your chest and tear scraps from your skin")
+        player["current_location"] = player["previous_location"]
+        player["health"] -= 30
+        return True
 
 location_passage = {
     "name": "Dark Passage",
@@ -279,9 +290,11 @@ location_passage = {
 
     "items": [],
 
-    "visited": True,
+    "visited": False,
 
-    "enemy": ""
+    "enemy": "",
+
+    "on_enter": on_enter_passage
 }
 
 location_river = {
@@ -299,7 +312,7 @@ location_river = {
 
     "items": [],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -321,7 +334,7 @@ location_waterfall = {
 
     "items": [item_parachute],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -342,7 +355,7 @@ location_hill = {
 
     "items": [item_wood],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -367,7 +380,7 @@ location_cave = {
 
     "items": [item_gun],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": "",
 
@@ -390,7 +403,7 @@ location_cave2 = {
 
     "items": [item_bullets],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": ""
 }
@@ -415,11 +428,12 @@ location_lair = {
 
     "items": [item_petrol],
 
-    "visited": True,
+    "visited": False,
 
     "enemy": enemy_wolf
 }
 
+#dictionary of locations
 locations = {
     "Plane": location_plane,
     "MON1": location_mon1,

@@ -10,21 +10,24 @@ from gameparser import *
 
 def combat(enemy):
     correct_item = 0
+    #Informs the player of the enemies presense then holds them in the combat menuwith a while loop
     nice_print("WARNING")
     warning = "There is a " + enemy["name"] + " in the area with you."
     nice_print(warning)
     while True:
+        #Checks if the player died during the previous round of combat, and if so quits the game
         if player["health"] < 1:
             print("Player has died, RIP in peace")
             quit()
-        #Checks too see if the player has the correct item to defeat the enemy
+
         nice_print_line("Your health is: " + str(player["health"]), Fore.RED)
+        #Prints the list of USE options the player has based on his inventory
         for item in player["inventory"]:
             print("USE", item["id"].upper(), "to attack", enemy["name"], "with", item["name"] + ".")
             if item["id"] == enemy["vuln"]:
                 correct_item = 1
-        if correct_item:
-            nice_print("You have the correct equipment to defeat")
+                nice_print("You have the correct equipment to defeat")
+        #Only prints these lines if the correct item to defeat the enemy is not in the palyer's inventory
         if not correct_item:
             nice_print("You do not have the correct item to deal with the enemy")
             nice_print("You can attempt to attack him with other items or FLEE")
@@ -38,18 +41,20 @@ def combat(enemy):
                     for item in player["inventory"]:
                         if item["id"] == command[1]:
                             item_used = item
+                    #If the item chosen is the one the enemy is vulnerable too, the enemy is removed from the room and the While loop broken out of
                     if command[1] == enemy["vuln"]:
                         success = "You succesfully hit " + enemy["name"] + " with " + item_used["name"] + ", killing them."
                         nice_print(success)
                         player["current_location"]["enemy"] = ""
                         break
-
+                    #If the wrong item is used, it backfires on the player for some damage based on the weight of the item
                     else:
                         print("You attempt to attack", enemy["name"], "with", command[1])
                         print(enemy["name"], "is impervious to your", command[1], "based attack")
                         print("The attack backfires and deals", item_damage(item_used), "damage to yourself.")
                         player["health"] -= item_damage(item_used)
-
+            #FLEE only allows the player to return to their previous location so they do not get to locations they are not allowed to acess yet
+            #This is done by storing the previous location into a player variable every time the palyer moves
             elif command[0] == "flee":
                 player["current_location"] = player["previous_location"]
                 break
@@ -345,7 +350,7 @@ def execute_drop(item_ident):
     """
     item_dropped = 0
     for item in player["inventory"]:
-        if item_ident == item["id"]:
+        if item_ident == item["id"]:        #if player drops item it is removed from inventory and the mass subtracted
             item_dropped = 1
             player["inventory"].remove(item)
             player["current_location"]["items"].append(item)
@@ -358,7 +363,7 @@ def execute_drop(item_ident):
 
 
 def execute_use(item_id):
-#Allows player to use items they have in their inventory. If not in invewntory then it will print "You don't hav that"     
+#Allows player to use items they have in their inventory. If not in inventory then it will print "You don't have that"     
 
     for item in player["inventory"]:
         if item_id == item["id"]:
@@ -513,7 +518,7 @@ def title_input():      #starting menu at beginning of game. Allows user to star
     while command != "START" and command != "CREDITS":
         command = input("> ").upper()
 
-    if command == "START":
+    if command == "START":      #if user enters start, goes to main game function
         return
     elif command == "CREDITS":
         credits()

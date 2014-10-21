@@ -110,6 +110,16 @@ item_petrol = {
     "combined_item": item_combined_petrol_pile
 }
 
+def use_item_sparktool(player, locations, nice_print, Fore, Back):
+    if player["current_location"] == locations["Brush"]:
+        nice_print("You use the spark tool to set the barbed brush alight.", Fore.GREEN)
+        locations["Brush"]["items"].append(item_machete)
+        locations["Brush"]["description"] = locations["Brush"]["description_alight"]
+        return True
+    else:
+        nice_print("There is no way to use that here.", Fore.RED)
+        return False
+
 item_sparktool = {
     "id": "sparktool",
 
@@ -120,7 +130,9 @@ item_sparktool = {
 
     "mass": 250,
 
-    "combined_item": item_fire
+    "combined_item": item_fire,
+
+    "use": use_item_sparktool
 }
 
 item_wood = {

@@ -118,15 +118,26 @@ location_brush = {
 
     "description":
     """
-    You've made it to some barbed brush. It looks
-    spikey and there is the corpse of Danny Trejo.
-    It makes you want to turn around, but there is
-    some wood and a rusty machete there.
+    You have stumbled into the barbed brush, an area covered
+    in horrible looking plants, both sharp and dry in appearance,
+    it appears dead. The breathing here isn't entirely pleasant,
+    the atmosphere is humid and the air is salty. Although it
+    would appear to be a very salty area, the brush here could
+    be easily set alight.
+    """,
+
+    "description_alight":
+    """
+    Whatever life remained in the plants here quickly
+    escape and the flames uncover a body of an unusual man;
+    a scarred face, a long, thin moustache, and a muscular
+    body with large tattoos holding a well-intact machete.
+    It is unknown how long this body has been here for.
     """,
 
     "exits": {"east": "Ravine"},
 
-    "items": [item_machete, item_wood],
+    "items": [item_wood],
 
     "visited": False
 }

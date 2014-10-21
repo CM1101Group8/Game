@@ -25,9 +25,11 @@ location_plane = {
 location_mon1 = {
     "name": "Middle of Nowhere",
 
-    "description":
+    "description": 
     """
-    TODO
+    You find yourself in the middle of nowhere. There is nothing 
+    here except the burning plane you just escaped from. You 
+    have no choice but to move on.
     """,
 
     "exits": {"east": "Plane", "north": "Ravine", "west": "Rockside"},
@@ -42,7 +44,9 @@ location_mon2 = {
 
     "description":
     """
-    TODO
+    You find yourself in the middle of nowhere. There is nothing
+    here except the burning plane you just escaped from. You
+    have no choice but to move on.
     """,
 
     "exits": {"north": "HOF", "south": "Plane", "west": "Ravine", "east": "Woods"},
@@ -57,7 +61,9 @@ location_mon3 = {
 
     "description":
     """
-    TODO
+    You find yourself in the middle of nowhere. You find
+    the charred corpses of Owen and Beru Lars. They have
+    nothing to help you survive, it is best to move on.
     """,
 
     "exits": {"west": "Plane", "east": "Beach", "north": "Woods"},
@@ -72,7 +78,12 @@ location_hof = {
 
     "description":
     """
-    TODO
+    You are now in the heart of the forest. Without
+    your head torch, you cannot see anything. It is 
+    no use trying to look at your compass. Surrounded 
+    by the darkness, you begin to feel light-headed, 
+    and anxiously turn your head and trying to sharpen 
+    your hearing; you fear something is approaching.
     """,
 
     "exits": {"south": "MON2", "north": "Passage"},
@@ -87,7 +98,9 @@ location_ravine = {
 
     "description":
     """
-    TODO
+    You are now at the ravine. It is peaceful here, 
+    and there is a pile of green leaves on the floor. 
+    It is possible those may be useful.
     """,
 
     "exits": {"south": "MON1", "west": "Brush", "east": "MON2", },
@@ -102,7 +115,10 @@ location_brush = {
 
     "description":
     """
-    TODO
+    You’ve made it to some barbed brush. It looks
+    spikey and there is the corpse of Danny Trejo. 
+    It makes you want to turn around, but there is 
+    some wood and a rusty machete there.
     """,
 
     "exits": {"east": "Ravine"},
@@ -117,7 +133,10 @@ location_rockside = {
 
     "description":
     """
-    TODO
+    You are now at the rockside. Amongst all 
+    the rocks there is a scary but satisfying sight: 
+    Bear Grylls’ corpse. At least you out-survived him. 
+    There appears to be some sort of tool on his body.
     """,
 
     "exits": {"east": "MON1"},
@@ -132,7 +151,9 @@ location_woods = {
 
     "description":
     """
-    TODO
+    You are in the woods. It is dingy and 
+    very dry, much like the pile of wood on the floor.
+    
     """,
 
     "exits": {"west": "MON2", "east": "Cliffs", "south": "MON3"},
@@ -147,7 +168,9 @@ location_cliffs = {
 
     "description":
     """
-    TODO
+    You’re at the cliffs. It’s high up, and there is 
+    some climbing rope. You have a great view of…. 
+    CRAZY ANGRY KIRILL TRYING TO KILL YOU FOR YOUR POOR TEST SCORE. 
     """,
 
     "exits": {"west": "Woods"},
@@ -162,7 +185,10 @@ location_beach = {
 
     "description":
     """
-    TODO
+    You’re on a nice island beach. It’s pleasant... 
+    until you remember you’re stranded on an island 
+    trying not to die. There’s a medi-kit and a bag of 
+    crisps. It’s your lucky day... ish.
     """,
 
     "exits": {"west": "MON3"},

@@ -318,10 +318,10 @@ def execute_use(item_id):
     return False
 
 def execute_use_with(item_one, item_two):
-    global locations
-    if player["current_location"] == locations["Cliffs"]:
-        for item in player["inventory"]: 
-        nice_print_line("You combined "+ item_one + " with "+ item_two +" and made "+ created_item + ".")
+    #global locations
+    #if player["current_location"] == locations["Cliffs"]:
+        #for item in player["inventory"]: 
+        #nice_print_line("You combined "+ item_one + " with "+ item_two +" and made "+ created_item + ".")
 
 def execute_command(command):
     """This function takes a command (a list of words as returned by

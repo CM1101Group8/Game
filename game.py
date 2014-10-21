@@ -328,7 +328,7 @@ def execute_take(item_id):
     for item in player["current_location"]["items"]:
         if item_id == item["id"]:
             item_taken = 1
-            if player["inventory_weight"] + item["mass"] < 3000:
+            if player["inventory_weight"] + item["mass"] < 3000:    #Checks if player inventory is light enough to carry item     
                 player["current_location"]["items"].remove(item)
                 player["inventory"].append(item)
                 player["inventory_weight"] += item["mass"]
@@ -363,6 +363,8 @@ def execute_drop(item_ident):
 
 
 def execute_use(item_id):
+#Allows player to use items they have in their inventory. If not in invewntory then it will print "You don't hav that"     
+
     for item in player["inventory"]:
         if item_id == item["id"]:
             if "use" in item.keys():
@@ -464,6 +466,7 @@ def move(exits, direction):
     return locations[exits[direction]]
 
 def nice_print(text, fore=Fore.WHITE, back=Back.BLACK):
+    # Function stops text appearing in one block and instead makes it appear word by word
     print(fore + back, end='')
     for character in text:
         sys.stdout.write(character)
@@ -477,7 +480,7 @@ def nice_print_line(text, fore=Fore.WHITE, back=Back.BLACK):
     time.sleep(0.35)
     print(Fore.RESET + Back.RESET, end='\n')
 
-def title():
+def title():    #prints title in large font with blue background. Uses colorama library.
     print()
     nice_print_line(
         """
@@ -507,7 +510,7 @@ def title():
     print()
     title_input()
 
-def title_input():
+def title_input():      #starting menu at beginning of game. Allows user to start playing or view credits
     nice_print_line("Type START to start the game")
     nice_print_line("Type CREDITS for the credits")
 
@@ -520,7 +523,7 @@ def title_input():
     elif command == "CREDITS":
         credits()
 
-def credits():
+def credits():      #prints credits so you know we made the game
     print()
     nice_print("CREDITS", Fore.BLACK, Back.WHITE)
     print()

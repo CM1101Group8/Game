@@ -14,24 +14,41 @@ def combat(enemy):
     warning = "There is a " + enemy["name"] + " in the area with you."
     nice_print(warning)
     while True:
+        if player["health"] < 1:
+            print("Player has died, RIP in peace")
+            quit()
         #Checks too see if the player has the correct item to defeat the enemy
+        nice_print_line("Your health is: " + str(player["health"]), Fore.RED)
         for item in player["inventory"]:
+            print("USE", item["id"].upper(), "to attack", enemy["name"], "with", item["name"] + ".")
             if item["id"] == enemy["vuln"]:
                 correct_item = 1
-                nice_print("You have the correct equipment to deal with the enemy")
-                print("USE", item["id"].upper(), "to attack", enemy["name"], "with", item["name"],".")
+        if correct_item:
+            nice_print("You have the correct equipment to defeat")
         if not correct_item:
-            nice_print("You do not have the correct item to deal with the enemy you can only FLEE")
+            nice_print("You do not have the correct item to deal with the enemy")
+            nice_print("You can attempt to attack him with other items or FLEE")
         print ("FLEE to return to the previous area.")
         #Gets the players command and normalises it
         command = normalise_input(input(">"))
         if command:
             #checks what the player wants to do
             if command[0] == "use":
-                success = "You succesfully hit " + enemy["name"] + " with " + item["name"] + " killing them."
-                nice_print(success)
-                player["current_location"]["enemy"] = ""
-                break
+                if len(command) > 1:
+                    for item in player["inventory"]:
+                        if item["id"] == command[1]:
+                            item_used = item
+                    if command[1] == enemy["vuln"]:
+                        success = "You succesfully hit " + enemy["name"] + " with " + item_used["name"] + ", killing them."
+                        nice_print(success)
+                        player["current_location"]["enemy"] = ""
+                        break
+
+                    else:
+                        print("You attempt to attack", enemy["name"], "with", command[1])
+                        print(enemy["name"], "is impervious to your", command[1], "based attack")
+                        print("The attack backfires and deals", item_damage(item_used), "damage to yourself.")
+                        player["health"] -= item_damage(item_used)
 
             elif command[0] == "flee":
                 player["current_location"] = player["previous_location"]
@@ -342,7 +359,7 @@ def execute_use(item_id):
     for item in player["inventory"]:
         if item_id == item["id"]:
             if "use" in item.keys():
-                item["use"](player, locations, nice_print, Fore, Back)
+                item["use"]()
                 return True
             else:
                 nice_print("You cannot use this.", Fore.RED)
@@ -389,9 +406,10 @@ def execute_command(command):
 
     elif command[0] == "use":
         if len(command) > 1:
-            if len(command) > 2 and command[2] == "with":
-                return execute_use_with(command[1], command[3])
-            return execute_use(command[1])
+            if command[2] == "with":
+                execute_use_with(command[1], command[3])
+            else:
+                return execute_use(command[1])
         else:
             nice_print("Use what?", Fore.YELLOW)
             return False
@@ -449,13 +467,14 @@ def nice_print(text, fore=Fore.WHITE, back=Back.BLACK):
 def nice_print_line(text, fore=Fore.WHITE, back=Back.BLACK):
     print(fore + back, end='')
     print(text, end='')
-    time.sleep(0.1)
+    time.sleep(0.35)
     print(Fore.RESET + Back.RESET, end='\n')
 
 def title():
     print()
     nice_print_line(
         """
+
            _____ _______ _____            _   _ _____  ______ _____  
           / ____|__   __|  __ \     /\   | \ | |  __ \|  ____|  __ \ 
          | (___    | |  | |__) |   /  \  |  \| | |  | | |__  | |  | |
@@ -520,7 +539,7 @@ def main():
     # Initialise colorama
     init()
     # Show title screen
-    title()
+    #title()
     # Main game loop
     while True:
         # Display game status (location description, inventory etc.)

@@ -159,10 +159,10 @@ item_wood = {
 item_leaves = {
     "id": "leaves",
 
-    "name": "a pile of leaves",
+    "name": "a pile of green leaves",
 
     "description":
-    """An ordinary pile of leaves.""",
+    """An ordinary pile of green leaves.""",
 
     "mass": 100,
 

@@ -38,7 +38,7 @@ location_mon1 = {
 
     "exits": {"east": "Woods", "north": "HOF", "west": "Ravine", "south": "Plane"},
 
-    "items": [],
+    "items": [item_wood],
 
     "visited": False,
 
@@ -58,7 +58,7 @@ location_mon2 = {
 
     "exits": {"north": "Ravine", "west": "Rockside", "east": "Plane"},
 
-    "items": [],
+    "items": [item_wood],
 
     "visited": False,
 
@@ -78,7 +78,7 @@ location_mon3 = {
 
     "exits": {"west": "Plane", "east": "Beach", "north": "Woods"},
 
-    "items": [],
+    "items": [item_wood],
 
     "visited": False,
 

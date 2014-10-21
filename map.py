@@ -213,6 +213,96 @@ location_passage = {
     "visited": False
 }
 
+location_river = {
+    "name": "River",
+
+    "description":
+    """
+    TODO
+    """,
+
+    "exits": {"west": "Waterfall", "east": "HOF", "south": "Ravine"},
+
+    "items": [],
+
+    "visited": False
+
+}
+
+location_waterfall = {
+    "name": "Waterfall",
+
+    "description":
+    """
+    TODO
+    """,
+
+    "exits": {"east": "River"},
+
+    "items": [],
+
+    "visited": False
+}
+
+location_hill = {
+    "name": "Hill",
+
+    "description":
+    """
+    TODO
+    """,
+
+    "exits": {"west": "HOF", "south": "Woods", "north": "Gate"},
+
+    "items": [],
+
+    "visited": False
+}
+
+location_cave = {
+    "name": "Fire cave",
+
+    "description": 
+    """
+    TODO
+    """,
+
+    "exits": {"east": "Passage"},
+
+    "items" [],
+
+    "visited": False
+}
+
+location_gate = {
+    "name": "Flooded gate",
+
+    "description": 
+    """
+    TODO
+    """,
+
+    "exits": {"west": "Passage", "south": "Hill"},
+
+    "items" [],
+
+    "visited": False
+}
+
+location_lair = {
+    "name": "Wolf's lair",
+
+    "description": 
+    """
+    TODO
+    """,
+
+    "exits": {"south": "Passage"},
+
+    "items" [],
+
+    "visited": False
+}
 locations = {
     "Plane": location_plane,
     "MON1": location_mon1,
@@ -226,4 +316,10 @@ locations = {
     "Cliffs": location_cliffs,
     "Beach": location_beach,
     "Passage": location_passage
+    "River": location_river
+    "Waterfall": location_waterfall
+    "Hill": location_hill
+    "Cave": location_cave
+    "Gate": location_gate
+    "Lair": location_lair
 }

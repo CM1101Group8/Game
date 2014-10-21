@@ -271,7 +271,19 @@ location_passage = {
     You reach a very dark and ominous passage that is haunted 
     by cold and daunting whispers. You are greeted by a pack of 
     fiendish ghost creatures, ghouls, who prey on the dark and the 
-    weak. They have every intent to take your soul and kill you.
+    weak. They have every intent to take your soul and kill you. 
+    There is a cave to the west with flames blocking the entrance.
+    You can enter the cave if you wish but it will hurt; A LOT.
+    """,
+
+    "description_extinguished":
+    """
+    You reach a very dark and ominous passage that is haunted 
+    by cold and daunting whispers. You are greeted by a pack of 
+    fiendish ghost creatures, ghouls, who prey on the dark and the 
+    weak. They have every intent to take your soul and kill you. 
+    There is a cave to the west with a slightly burnt fire blanket
+    on the floor of the entrance.
     """,
 
     "exits": {"south": "HOF", "north": "Lair", "west": "Cave"},
@@ -315,7 +327,7 @@ location_waterfall = {
     parachute. It is impossible to climb simply by yourself. 
     You notice that there is a very clear overhead between 
     the waterfall and the ravine, if only you had the means 
-    the traverse this open path….
+    the traverse this open path...
     """,
 
     "exits": {"east": "River"},
@@ -349,7 +361,9 @@ location_hill = {
 }
 
 def on_enter_cave(player, locations, nice_print, Fore, Back, take_damage):
-    take_damage(player, 70)
+    if locations["Cave"]["fire"]:
+        take_damage(player, 70)
+        return True
     return True
 
 location_cave = {
@@ -357,10 +371,9 @@ location_cave = {
 
     "description": 
     """
-    You approach a sinister-looking cave with an entrance that 
-    is engulfed in flames. You see one of the plane's engines is 
-    lodged into the wall of the cave. You can enter the cave if 
-    you wish but it will hurt; A LOT.
+    You enter a sinister-looking cave. You see one of the plane's 
+    engines is lodged into the wall of the cave. There is a gun on
+    the ground.
     """,
 
     "exits": {"east": "Passage"},
@@ -370,6 +383,8 @@ location_cave = {
     "visited": True,
 
     "enemy": "",
+
+    "fire": True,
 
     "on_enter": on_enter_cave
 }

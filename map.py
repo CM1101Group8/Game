@@ -35,7 +35,7 @@ location_mon1 = {
 
     "exits": {"east": "Woods", "north": "HOF", "west": "Ravine", "south": "Plane"},
 
-    "items": [],
+    "items": [item_wood],
 
     "visited": False
 }
@@ -53,7 +53,7 @@ location_mon2 = {
 
     "exits": {"north": "Ravine", "west": "Rockside", "east": "Plane"},
 
-    "items": [],
+    "items": [item_wood],
 
     "visited": False
 }
@@ -71,7 +71,7 @@ location_mon3 = {
 
     "exits": {"west": "Plane", "east": "Beach", "north": "Woods"},
 
-    "items": [],
+    "items": [item_wood],
 
     "visited": False
 }
@@ -161,7 +161,7 @@ location_woods = {
 
     "exits": {"west": "MON1", "east": "Cliffs", "south": "MON3", "north": "Hill"},
 
-    "items": [item_wood],
+    "items": [item_wood, item_fireblanket],
 
     "visited": False
 }
@@ -242,7 +242,7 @@ location_waterfall = {
 
     "exits": {"east": "River"},
 
-    "items": [],
+    "items": [item_parachute],
 
     "visited": False
 }
@@ -260,7 +260,7 @@ location_hill = {
 
     "exits": {"west": "HOF", "south": "Woods"},
 
-    "items": [],
+    "items": [item_wood],
 
     "visited": False
 }
@@ -275,7 +275,7 @@ location_cave = {
 
     "exits": {"east": "Passage"},
 
-    "items": [],
+    "items": [item_gun],
 
     "visited": False
 }
@@ -290,7 +290,7 @@ location_cave2 = {
 
     "exits": {"west": "Passage", "south": "Hill"},
 
-    "items": [],
+    "items": [item_bullets],
 
     "visited": False
 }
@@ -305,7 +305,7 @@ location_lair = {
 
     "exits": {"south": "Passage"},
 
-    "items": [],
+    "items": [item_petrol],
 
     "visited": False
 }

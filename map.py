@@ -1,4 +1,5 @@
 from items import *
+from enemies import *
 
 location_plane = {
     "name": "Plane",
@@ -19,17 +20,19 @@ location_plane = {
 
     "items": [],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": ""
 }
 
 location_mon1 = {
     "name": "Middle of Nowhere",
 
-    "description":
+    "description": 
     """
-    You reach 'The Middle of Nowhere', and this is exactly
+    You reach the “The Middle of Nowhere”, and this is exactly
     where you are situated. There is nothing of interest is in
-    the immediate vicinity, besides wood and trees. At this point,
+    the immediate vicinity, besides wood and trees. At this point, 
     the only useful thing to do is to choose another direction to go in.
     """,
 
@@ -37,7 +40,9 @@ location_mon1 = {
 
     "items": [],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": ""
 }
 
 location_mon2 = {
@@ -45,9 +50,9 @@ location_mon2 = {
 
     "description":
     """
-    You reach 'The Middle of Nowhere', and this is exactly
-    where you are situated. There is nothing of interest is in
-    the immediate vicinity, besides wood and trees. At this point,
+    You reach the “The Middle of Nowhere”, and this is exactly 
+    where you are situated. There is nothing of interest is in 
+    the immediate vicinity, besides wood and trees. At this point, 
     the only useful thing to do is to choose another direction to go in.
     """,
 
@@ -55,7 +60,9 @@ location_mon2 = {
 
     "items": [],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": ""
 }
 
 location_mon3 = {
@@ -63,9 +70,9 @@ location_mon3 = {
 
     "description":
     """
-    You reach 'The Middle of Nowhere', and this is exactly
-    where you are situated. You find the charred corpses of Owen
-    and Beru Lars. They have nothing to help you survive, it is
+    You reach the “The Middle of Nowhere”, and this is exactly 
+    where you are situated. You find the charred corpses of Owen 
+    and Beru Lars. They have nothing to help you survive, it is 
     best to move on.
     """,
 
@@ -73,7 +80,9 @@ location_mon3 = {
 
     "items": [],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": ""
 }
 
 location_hof = {
@@ -82,10 +91,10 @@ location_hof = {
     "description":
     """
     You are now in the heart of the forest. Without
-    your head torch, you cannot see anything. It is
-    no use trying to look at your compass. Surrounded
-    by the darkness, you begin to feel lightheaded,
-    and anxiously turn your head and try to sharpen
+    your head torch, you cannot see anything. It is 
+    no use trying to look at your compass. Surrounded 
+    by the darkness, you begin to feel lightheaded, 
+    and anxiously turn your head and try to sharpen 
     your hearing; you fear something is approaching.
     """,
 
@@ -93,7 +102,9 @@ location_hof = {
 
     "items": [item_wood],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": ""
 }
 
 location_ravine = {
@@ -101,8 +112,8 @@ location_ravine = {
 
     "description":
     """
-    You are now at the ravine. It is peaceful here,
-    and there is a pile of green leaves on the floor.
+    You are now at the ravine. It is peaceful here, 
+    and there is a pile of green leaves on the floor. 
     It is possible those may be useful.
     """,
 
@@ -110,7 +121,9 @@ location_ravine = {
 
     "items": [item_greenleaves],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": ""
 }
 
 location_brush = {
@@ -119,8 +132,8 @@ location_brush = {
     "description":
     """
     You've made it to some barbed brush. It looks
-    spikey and there is the corpse of Danny Trejo.
-    It makes you want to turn around, but there is
+    spikey and there is the corpse of Danny Trejo. 
+    It makes you want to turn around, but there is 
     some wood and a rusty machete there.
     """,
 
@@ -128,7 +141,9 @@ location_brush = {
 
     "items": [item_machete, item_wood],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": ""
 }
 
 location_rockside = {
@@ -136,9 +151,9 @@ location_rockside = {
 
     "description":
     """
-    You are now at the rockside. Amongst all
-    the rocks there is a scary but satisfying sight:
-    Bear Grylls' corpse. At least you out-survived him.
+    You are now at the rockside. Amongst all 
+    the rocks there is a scary but satisfying sight: 
+    Bear Grylls' corpse. At least you out-survived him. 
     There appears to be some sort of tool on his body.
     """,
 
@@ -146,7 +161,9 @@ location_rockside = {
 
     "items": [item_sparktool],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": ""
 }
 
 location_woods = {
@@ -154,16 +171,18 @@ location_woods = {
 
     "description":
     """
-    You are in the woods. It is dingy and
+    You are in the woods. It is dingy and 
     very dry, much like the pile of wood on the floor.
-
+    
     """,
 
     "exits": {"west": "MON1", "east": "Cliffs", "south": "MON3", "north": "Hill"},
 
     "items": [item_wood],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": ""
 }
 
 location_cliffs = {
@@ -171,16 +190,18 @@ location_cliffs = {
 
     "description":
     """
-    You're at the cliffs. It's high up, and there is
-    some climbing rope. You have a great view of...
-    CRAZY ANGRY KIRILL TRYING TO KILL YOU FOR YOUR POOR TEST SCORE.
+    You're at the cliffs. It's high up, and there is 
+    some climbing rope. You have a great view of... 
+    CRAZY ANGRY KIRILL TRYING TO KILL YOU FOR YOUR POOR TEST SCORE. 
     """,
 
     "exits": {"west": "Woods"},
 
     "items": [item_rope],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": enemy_kirill
 }
 
 location_beach = {
@@ -188,9 +209,9 @@ location_beach = {
 
     "description":
     """
-    You're on a nice island beach. It's pleasant...
-    until you remember you're stranded on an island
-    trying not to die. There's a medi-kit and a bag of
+    You're on a nice island beach. It's pleasant... 
+    until you remember you're stranded on an island 
+    trying not to die. There's a medi-kit and a bag of 
     crisps. It's your lucky day... ish.
     """,
 
@@ -198,7 +219,9 @@ location_beach = {
 
     "items": [item_medkit, item_crisps],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": ""
 }
 
 location_passage = {
@@ -213,7 +236,9 @@ location_passage = {
 
     "items": [],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": ""
 }
 
 location_river = {
@@ -228,8 +253,9 @@ location_river = {
 
     "items": [],
 
-    "visited": False
+    "visited": False,
 
+    "enemy": ""
 }
 
 location_waterfall = {
@@ -244,7 +270,9 @@ location_waterfall = {
 
     "items": [],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": ""
 }
 
 location_hill = {
@@ -259,13 +287,15 @@ location_hill = {
 
     "items": [],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": ""
 }
 
 location_cave = {
     "name": "Fire cave",
 
-    "description":
+    "description": 
     """
     TODO
     """,
@@ -274,13 +304,15 @@ location_cave = {
 
     "items": [],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": ""
 }
 
 location_cave2 = {
     "name": "Flooded cave",
 
-    "description":
+    "description": 
     """
     TODO
     """,
@@ -289,13 +321,15 @@ location_cave2 = {
 
     "items": [],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": ""
 }
 
 location_lair = {
     "name": "Wolf's lair",
 
-    "description":
+    "description": 
     """
     TODO
     """,
@@ -304,7 +338,9 @@ location_lair = {
 
     "items": [],
 
-    "visited": False
+    "visited": False,
+
+    "enemy": enemy_wolf
 }
 locations = {
     "Plane": location_plane,

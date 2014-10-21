@@ -5,7 +5,8 @@ player = {
     "name": "Group 8",
     "health": 100,
     "experience": 100,
-    "inventory": [item_toolkit, item_fireblanket, item_headtorch, item_compass],
+    "inventory": [item_toolkit, item_fireblanket, item_headtorch, item_compass, item_machete],
     "inventory_weight": 950,
-    "current_location": locations["Plane"]
+    "current_location": locations["Plane"],
+    "previous_location": locations["Plane"]
 }

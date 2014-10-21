@@ -290,3 +290,14 @@ item_gun = {
 
     "mass": 2000
 }
+
+item_bullets = {
+    "id": "bullets",
+
+    "name": "Bullets",
+
+    "description": "Some extra bullets, just in case.",
+
+    "mass": 750
+}
+

@@ -454,9 +454,7 @@ location_lair = {
     is a foul stench that worsens the further you walk in this
     cave. You hear a vicious growl that vibrates the walls
     and floors, rendering you still where you stand. Suddenly,
-    a brooding Werewolf emerges from the shadows and hits you
-    from the side, making you crash into the ground with a
-    thump. You lose 30 health.
+    a brooding Werewolf emerges from the shadows...
     """,
 
     "exits": {"south": "Passage"},

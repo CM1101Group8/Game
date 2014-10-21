@@ -266,6 +266,7 @@ def use_item_fireblanket(player, locations, nice_print, Fore, Back):
         locations["Passage"]["description"] = locations["Passage"]["description_extinguished"]
         locations["Cave"]["fire"] = False
         player["inventory"].remove(item_fireblanket)
+        player["inventory_weight"] -= item_fireblanket["mass"]
         return True
     else:
         nice_print("There is no way to use that here.", Fore.RED)
@@ -288,6 +289,8 @@ def use_item_rope(player, locations, nice_print, Fore, Back):
     if player["current_location"] == locations["Hill"]:
         nice_print("You use the climbing rope to allow yourself to climb up to the flooded cave.", Fore.GREEN)
         player["current_location"]["exits"]["north"] = "Cave2"
+        player["inventory"].remove(item_fireblanket)
+        player["inventory_weight"] -= item_fireblanket["mass"]
         return True
     else:
         nice_print("There is no way to use that here.", Fore.RED)

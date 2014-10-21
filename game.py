@@ -43,7 +43,7 @@ def combat(enemy):
                             item_used = item
                     #If the item chosen is the one the enemy is vulnerable too, the enemy is removed from the room and the While loop broken out of
                     if command[1] == enemy["vuln"]:
-                        success = "You succesfully hit " + enemy["name"] + " with " + item_used["name"] + ", killing them."
+                        success = "You successfully hit " + enemy["name"] + " with " + item_used["name"] + ", killing them."
                         nice_print(success)
                         player["current_location"]["enemy"] = ""
                         if "on_kill" in enemy.keys():
@@ -481,7 +481,7 @@ def nice_print(text, fore=Fore.WHITE, back=Back.BLACK):
 def nice_print_line(text, fore=Fore.WHITE, back=Back.BLACK):
     print(fore + back, end='')
     print(text, end='')
-    time.sleep(0.35)
+    time.sleep(0.2)
     print(Fore.RESET + Back.RESET, end='\n')
 
 def title():    #prints title in large font with blue background. Uses colorama library.

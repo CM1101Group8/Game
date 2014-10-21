@@ -236,7 +236,7 @@ item_gun = {
 
     "name": "A gun",
 
-    "description": "A gun can be used for protection against enemies"
+    "description": "A gun can be used for protection against enemies",
 
     "mass": 2000
 }

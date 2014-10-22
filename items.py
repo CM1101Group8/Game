@@ -49,70 +49,6 @@ item_compass = {
 
 
 # END-GAME ITEMS ------------------------------------------------------------------------------
-def use_item_parachute(player, locations, nice_print, Fore, Back):
-    if player["current_location"] == locations["Waterfall"]:
-        nice_print("You parachute down to the ravine.", Fore.GREEN)
-        player["current_location"] = locations["Ravine"]
-        return True
-    else:
-        nice_print("There is no way to use that here.", Fore.RED)
-        return False
-
-item_parachute = {
-    "id": "parachute",
-
-    "name": "parachute",
-
-    "description":
-    """The parachute is still in good condition and could be used as a shelter.""",
-
-    "mass": 1500,
-
-    "use": use_item_parachute
-}
-
-item_combined_loaded_gun = {
-
-    "id": "loaded_gun",
-
-    "name": "a loaded gun",
-
-    "description":
-    """The gun is loaded and ready to fire with""",
-
-    "mass": 850
-}
-
-item_gun = {
-    "id": "gun",
-
-    "name": "gun",
-
-    "description":
-    """The gun is a powerful weapon that can stop almost any foe.""",
-
-    "mass": 700,
-
-    "use_with": "bullets",
-
-    "combined_item": item_combined_loaded_gun
-}
-
-item_bullets = {
-    "id": "bullets",
-
-    "name": "bullets",
-
-    "description":
-    """Powerful ammo for a gun""",
-
-    "mass": 150,
-
-    "use_with": "gun",
-
-    "combined_item": item_combined_loaded_gun,
-}
-
 item_fire = {
 
     "id": "fire",
@@ -134,10 +70,6 @@ item_combined_petrol_pile = {
     "description": "Can be used with a spark to start a fire.",
 
     "mass": 2300,
-
-    "use_with": "sparktool",
-
-    "combined_item": item_fire,
 }
 
 item_combined_leaves_wood = {
@@ -149,10 +81,6 @@ item_combined_leaves_wood = {
     "description": "Can be used to help start a fire.",
 
     "mass": 1100,
-
-    "use_with": "petrol",
-
-    "combined_item": item_combined_petrol_pile
 }
 
 
@@ -196,7 +124,7 @@ item_sparktool = {
 
     "use": use_item_sparktool,
 
-    "use_with": item_combined_petrol_pile
+    "use_with": "petrolpile"
 
 }
 
@@ -208,10 +136,6 @@ item_wood = {
     "description": "The wood pile can be used as fuel for a fire.",
 
     "mass": 1000,
-
-    "use_with": "leaves",
-
-    "combined_item": item_combined_leaves_wood
 }
 
 item_leaves = {
@@ -256,6 +180,28 @@ item_water = {
 }
 
 #ACCESS ITEMS -----------------------------------------------------------------------
+def use_item_parachute(player, locations, nice_print, Fore, Back):
+    if player["current_location"] == locations["Waterfall"]:
+        nice_print("You parachute down to the ravine.", Fore.GREEN)
+        player["current_location"] = locations["Ravine"]
+        return True
+    else:
+        nice_print("There is no way to use that here.", Fore.RED)
+        return False
+
+item_parachute = {
+    "id": "parachute",
+
+    "name": "parachute",
+
+    "description":
+    """The parachute is still in good condition and could be used as a shelter.""",
+
+    "mass": 1500,
+
+    "use": use_item_parachute
+}
+
 def use_item_fireblanket(player, locations, nice_print, Fore, Back):
     if player["current_location"] == locations["Passage"]:
         nice_print("You use the fire blanket to put out the fire in the entrance to the cave.", Fore.GREEN)
@@ -285,8 +231,8 @@ def use_item_rope(player, locations, nice_print, Fore, Back):
     if player["current_location"] == locations["Hill"]:
         nice_print("You use the climbing rope to allow yourself to climb up to the flooded cave.", Fore.GREEN)
         player["current_location"]["exits"]["north"] = "Cave2"
-        player["inventory"].remove(item_fireblanket)
-        player["inventory_weight"] -= item_fireblanket["mass"]
+        player["inventory"].remove(item_rope)
+        player["inventory_weight"] -= item_rope["mass"]
         return True
     else:
         nice_print("There is no way to use that here.", Fore.RED)
@@ -310,11 +256,23 @@ item_rope = {
 item_machete = {
     "id": "machete",
 
-    "name": "rusty machete",
+    "name": "machete",
 
     "description": "The machete can be used to attack any animals or people who might try to attack you.",
 
     "mass": 1000
+}
+
+item_combined_loaded_gun = {
+
+    "id": "loadedgun",
+
+    "name": "loaded gun",
+
+    "description":
+    """The gun is loaded and ready to fire with""",
+
+    "mass": 2150
 }
 
 item_gun = {
@@ -322,9 +280,14 @@ item_gun = {
 
     "name": "gun",
 
-    "description": "A gun can be used for protection against enemies",
+    "description":
+    """The gun is a powerful weapon that can stop almost any foe.""",
 
-    "mass": 2000
+    "mass": 2000,
+
+    "use_with": "bullets",
+
+    "combined_item": item_combined_loaded_gun
 }
 
 item_bullets = {
@@ -332,7 +295,8 @@ item_bullets = {
 
     "name": "bullets",
 
-    "description": "Some extra bullets, just in case.",
+    "description":
+    """Powerful ammo for a gun""",
 
-    "mass": 750
+    "mass": 150,
 }

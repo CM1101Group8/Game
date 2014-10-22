@@ -243,10 +243,10 @@ location_cliffs = {
     You find yourself at the edge of a cliff. The sun graces
     the sea and lights up your face and the surrounding area.
     However, it isn't entirely idyllic here. At the cliffs,
-    is a man, a crazed man, with his clothes torn up, his face
-    and hair covered in mud and blood, and with razor cuts
-    covering his face and arms. You realise it's an enraged
-    Kirill ready to attack!
+    is a man, a crazed man, with his burger based clothing
+    torn up, his face and hair covered in mud and blood,
+    and with razor cuts covering his face and arms. 
+    You realise it's an enraged Kirill ready to attack!
     """,
 
     "description_killed":

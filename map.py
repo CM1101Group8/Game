@@ -14,6 +14,12 @@ location_plane = {
     supplies were either lost when the plane was in freefall,
     taken considerable damage, been burnt out by the fires,
     or simply lost amongst the destruction and rubble.
+
+    The only surviving equipment on the plane is now in your
+    possession. Not all of it may even be useful, it is up to you
+    to decide how to interact with your surroundings using whatever
+    equipment or wits they possess, and hopefully escape the unknown
+    barren land you find yourself in.
     """,
 
     "exits": {"west": "MON2", "north": "MON1", "east": "MON3"},

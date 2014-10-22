@@ -615,7 +615,7 @@ def main():
             nice_print_line("Any passing planes or ships are sure to see you on the island")
             nice_print_line("But will anyone arrive in time, or is it already to late for you?")
             nice_print_line("Only time will decide")
-            nice_print_line("Thank you for playing:")
+            credits()
             nice_print("STRANDED")
             quit()
         # Display game status (location description, inventory etc.)

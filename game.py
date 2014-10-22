@@ -11,16 +11,15 @@ from gameparser import *
 def combat(enemy):
     correct_item = 0
     #Informs the player of the enemies presense then holds them in the combat menuwith a while loop
-    nice_print("WARNING")
-    warning = "There is a " + enemy["name"] + " in the area with you."
-    nice_print(warning)
+    nice_print("WARNING", Fore.BLACK, Back.WHITE)
+    nice_print("There is a " + enemy["name"] + " in the area with you.")
     while True:
         #Checks if the player died during the previous round of combat, and if so quits the game
         if player["health"] < 1:
             print("Player has died, RIP in peace")
             quit()
 
-        nice_print_line("Your health is: " + str(player["health"]), Fore.RED)
+        nice_print_line("\nYour health is: " + str(player["health"]), Fore.RED)
         #Prints the list of USE options the player has based on his inventory
         for item in player["inventory"]:
             print("USE", item["id"].upper(), "to attack", enemy["name"], "with", item["name"] + ".")
@@ -37,7 +36,9 @@ def combat(enemy):
         if command:
             #checks what the player wants to do
             if command[0] == "use":
+                item_used = ""
                 if len(command) > 1:
+                    #puts the used items list in to a variable for later reference
                     for item in player["inventory"]:
                         if item["id"] == command[1]:
                             item_used = item
@@ -51,10 +52,15 @@ def combat(enemy):
                         break
                     #If the wrong item is used, it backfires on the player for some damage based on the weight of the item
                     else:
-                        print("You attempt to attack", enemy["name"], "with", command[1])
-                        print(enemy["name"], "is impervious to your", command[1], "based attack")
-                        print("The attack backfires and deals", item_damage(item_used), "damage to yourself.")
-                        player["health"] -= item_damage(item_used)
+                        #This checks if the item actually exists, it is unessacery to check this earlier because if an enemy
+                        #is vulnerable to the item then the item must exist
+                        if item_used:
+                            print("You attempt to attack", enemy["name"], "with", command[1])
+                            print(enemy["name"], "is impervious to your", command[1], "based attack")
+                            print("The attack backfires and deals", item_damage(item_used), "damage to yourself.")
+                            player["health"] -= item_damage(item_used)
+                        else:
+                            print("Use what?")
             #FLEE only allows the player to return to their previous location so they do not get to locations they are not allowed to acess yet
             #This is done by storing the previous location into a player variable every time the player moves
             elif command[0] == "flee":

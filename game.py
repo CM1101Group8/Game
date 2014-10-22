@@ -11,16 +11,15 @@ from gameparser import *
 def combat(enemy):
     correct_item = 0
     #Informs the player of the enemies presense then holds them in the combat menuwith a while loop
-    nice_print("WARNING")
-    warning = "There is a " + enemy["name"] + " in the area with you."
-    nice_print(warning)
+    nice_print("WARNING", Fore.BLACK, Back.WHITE)
+    nice_print("There is a " + enemy["name"] + " in the area with you.")
     while True:
         #Checks if the player died during the previous round of combat, and if so quits the game
         if player["health"] < 1:
             print("Player has died, RIP in peace")
             quit()
 
-        nice_print_line("Your health is: " + str(player["health"]), Fore.RED)
+        nice_print_line("\nYour health is: " + str(player["health"]), Fore.RED)
         #Prints the list of USE options the player has based on his inventory
         for item in player["inventory"]:
             print("USE", item["id"].upper(), "to attack", enemy["name"], "with", item["name"] + ".")
@@ -37,7 +36,9 @@ def combat(enemy):
         if command:
             #checks what the player wants to do
             if command[0] == "use":
+                item_used = ""
                 if len(command) > 1:
+                    #puts the used items list in to a variable for later reference
                     for item in player["inventory"]:
                         if item["id"] == command[1]:
                             item_used = item
@@ -51,10 +52,15 @@ def combat(enemy):
                         break
                     #If the wrong item is used, it backfires on the player for some damage based on the weight of the item
                     else:
-                        print("You attempt to attack", enemy["name"], "with", command[1])
-                        print(enemy["name"], "is impervious to your", command[1], "based attack")
-                        print("The attack backfires and deals", item_damage(item_used), "damage to yourself.", Fore.RED)
-                        player["health"] -= item_damage(item_used)
+                        #This checks if the item actually exists, it is unessacery to check this earlier because if an enemy
+                        #is vulnerable to the item then the item must exist
+                        if item_used:
+                            nice_print("You attempt to attack", enemy["name"], "with", command[1])
+                            nice_print(enemy["name"], "is impervious to your", command[1], "based attack")
+                            nice_print("The attack backfires and deals", item_damage(item_used), "damage to yourself.", Fore.RED)
+                            player["health"] -= item_damage(item_used)
+                        else:
+                            nice_print("Use what?", Fore.YELLOW)
             #FLEE only allows the player to return to their previous location so they do not get to locations they are not allowed to acess yet
             #This is done by storing the previous location into a player variable every time the player moves
             elif command[0] == "flee":
@@ -81,6 +87,7 @@ def take_damage(player, damage):
 def heal_player(player, item, heal_amount):
     # heals the player
     player["health"] = player["health"] + int(heal_amount)
+    #Health cannot go over a pre-defined max
     if player["health"] > 100:
         player["health"] = 100
     nice_print_line("You use the "+ str(item) +" and gain "+ str(heal_amount) +" health.", Fore.GREEN)
@@ -96,11 +103,11 @@ def list_of_items(items):
     """This function takes a list of items (see items.py for the definition) and
     returns a comma-separated list of item names (as a string). For example:
 
-    >>> list_of_items([item_pen, item_handbook])
-    'a pen, a student handbook'
+    >>> list_of_items([item_machete, item_parachute])
+    'rusty machete, parachute'
 
-    >>> list_of_items([item_id])
-    'id card'
+    >>> list_of_items([item_gun])
+    'gun'
 
     >>> list_of_items([])
     ''
@@ -123,15 +130,15 @@ def print_location_items(location):
     items.py for the definition of an item. This function uses list_of_items()
     to produce a comma-separated list of item names. For example:
 
-    >>> print_location_items(locations["Reception"])
-    There is a pack of biscuits, a student handbook here.
+    >>> print_location_items(locations["HOF"])
+    There is pile of wood here.
     <BLANKLINE>
 
-    >>> print_location_items(locations["Office"])
-    There is a pen here.
+    >>> print_location_items(locations["Ravine"])
+    There is pile of green leaves.
     <BLANKLINE>
 
-    >>> print_location_items(locations["Robs"])
+    >>> print_location_items(locations["Passage"])
 
     (no output)
 
@@ -211,9 +218,11 @@ def print_location(location):
     print()
     nice_print(location["name"].upper(), Fore.BLACK, Back.WHITE)
     print()
+    #If the area is visited for the first time, the whole description is nice printed, and the visited variable is changed
     if not location["visited"]:
         nice_print(location["description"])
         location["visited"] = True
+    #Otherwise the whole description is printed at once to save the players time
     else:
         nice_print_line(location["description"])
     print()
@@ -385,6 +394,7 @@ def execute_use(item_id):
 
     for item in player["inventory"]:
         if item_id == item["id"]:
+            #The item uses are functions referenced inside the item list, the item is checked for a function and if one is found it is executed
             if "heal" in item.keys():
                 heal_player(player, item["name"], item["heal"])
                 player["inventory"].remove(item)

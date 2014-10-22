@@ -620,7 +620,7 @@ def main():
         if item_fire in player["inventory"]:
             nice_print_line("Your fire now burns brightly on the top of the cliffs")
             nice_print_line("Any passing planes or ships are sure to see you on the island")
-            nice_print_line("But will anyone arrive in time, or is it already to late for you?")
+            nice_print_line("But will anyone arrive in time, or is it already too late for you?")
             nice_print_line("Only time will decide")
             credits(1)
             quit()

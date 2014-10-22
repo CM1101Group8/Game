@@ -8,8 +8,8 @@ location_plane = {
     """
     The plane ends up crash landing into a forest on an island,
     killing all passengers & crew on board, apart from YOU,
-    as far as you're aware anyway. Upon waking, it seems you
-    do not know where the plane took off from, where it is,
+    as far as you're aware anyway. Upon waking, you
+    cannot remember where the plane took off from, where it is,
     and where it was going; amnesia it seems. Most of the
     supplies were either lost when the plane was in freefall,
     taken considerable damage, been burnt out by the fires,
@@ -199,7 +199,9 @@ location_rockside = {
     figure and recognise the corpse of ex-SAS and survivalist
     expert Bear Grylls, stripped down to absolutely nothing but
     the skin of a seal carcass. At least you out-survived him.
-    There appears to be some sort of tool on his body.
+    There appears to be some sort of tool on his body. You spot
+    a spilled bottle half filled with a yellow liquid, and move
+    away in disgust
     """,
 
     "exits": {"east": "MON2"},
@@ -290,6 +292,8 @@ location_beach = {
 def on_enter_location_passage(player, locations, nice_print, Fore, Back, take_damage):
     if item_headtorch in player["inventory"] and item_headtorch["on"]:
         nice_print("Your headtorch illuminates the darkness, lighting your path.", Fore.GREEN)
+        nice_print("The vile creatures of the cave are scared off by the light", Fore.GREEN)
+        nice_print("They will afford you no trouble while it remains on", Fore.GREEN)
         return True
     else:
         nice_print("Ghouls rush forward from a darkness you cannot see into.", Fore.RED)

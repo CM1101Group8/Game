@@ -274,13 +274,13 @@ location_beach = {
     Although it is a beautiful vista to behold, especially when
     the sun sets, you can't help but distrust its beauty as after
     all, you are stranded on an island with a very high possibility
-    of remaining here and dying. There's a medi-kit and a bag of
-    crisps. It's your lucky day... ish.
+    of remaining here and dying. There's a medi-kit here. It's your
+    lucky day... ish.
     """,
 
     "exits": {"west": "MON3"},
 
-    "items": [item_medkit, item_crisps],
+    "items": [item_medkit],
 
     "visited": False,
 
@@ -345,7 +345,7 @@ location_river = {
 
     "exits": {"west": "Waterfall", "east": "HOF", "south": "Ravine"},
 
-    "items": [],
+    "items": [item_water],
 
     "visited": False,
 

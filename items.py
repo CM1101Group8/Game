@@ -238,17 +238,9 @@ item_medkit = {
 
     "description": "The medkit can be used to heal yourself.",
 
-    "mass": 400
-}
+    "mass": 400,
 
-item_crisps = {
-    "id": "crisps",
-
-    "name": "bag of crisps",
-
-    "description": "a bag of crisps will replenish your hunger.",
-
-    "mass": 50
+    "heal": 50
 }
 
 item_water = {
@@ -258,28 +250,11 @@ item_water = {
 
     "description": "Water can be used to replenish your thirst.",
 
-    "mass": 150
+    "mass": 150,
+
+    "heal": 20
 }
 
-item_chocolate = {
-    "id": "chocolate",
-
-    "name": "chocolate bar",
-
-    "description": "A chocolate bar provides nutrition which replenishes your hunger.",
-
-    "mass": 75
-}
-
-item_bandaids = {
-    "id": "bandaids",
-
-    "name": "band aid",
-
-    "description": "Bandaids can be used to heal yourself.",
-
-    "mass": 75
-}
 #ACCESS ITEMS -----------------------------------------------------------------------
 def use_item_fireblanket(player, locations, nice_print, Fore, Back):
     if player["current_location"] == locations["Passage"]:

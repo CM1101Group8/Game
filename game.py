@@ -80,7 +80,16 @@ def item_damage(item):
 def take_damage(player, damage):
     #inflicts damage on the player
     player['health'] = player['health'] - int(damage)
-    nice_print_line("You took "+ str(damage) +" damage.")
+    nice_print_line("You took "+ str(damage) +" damage.", Fore.RED)
+    nice_print_line("Your health is now "+ str(player['health']) +".")
+    return player
+
+def heal_player(player, item, heal_amount):
+    # heals the player
+    player["health"] = player["health"] + int(heal_amount)
+    if player["health"] > 100:
+        player["health"] = 100
+    nice_print_line("You use the "+ str(item) +" and gain "+ str(heal_amount) +" health.", Fore.GREEN)
     nice_print_line("Your health is now "+ str(player['health']) +".")
     return player
 
@@ -280,7 +289,9 @@ def print_menu(exits, location_items, inv_items):
     for direction in exits:
         print_exit(direction, exit_leads_to(exits, direction))
     for things in inv_items:
-        if "use" in things.keys():
+        if "heal" in things.keys():
+            nice_print_line("USE " + things["id"].upper() + " to heal using your " + things["name"] + ".")
+        elif "use" in things.keys():
             nice_print_line("USE " + things["id"].upper() + " to use your " + things["name"] + ".")
     for things in location_items:
         nice_print_line("TAKE " + things["id"].upper() + " to take a " + things["name"] + ".")
@@ -376,7 +387,12 @@ def execute_use(item_id):
 
     for item in player["inventory"]:
         if item_id == item["id"]:
-            if "use" in item.keys():
+            if "heal" in item.keys():
+                heal_player(player, item["name"], item["heal"])
+                player["inventory"].remove(item)
+                player["inventory_weight"]  -= item["mass"]
+                return True
+            elif "use" in item.keys():
                 item["use"](player, locations, nice_print, Fore, Back)
                 return True
             else:

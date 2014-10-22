@@ -87,6 +87,7 @@ def take_damage(player, damage):
 def heal_player(player, item, heal_amount):
     # heals the player
     player["health"] = player["health"] + int(heal_amount)
+    #Health cannot go over a pre-defined max
     if player["health"] > 100:
         player["health"] = 100
     nice_print_line("You use the "+ str(item) +" and gain "+ str(heal_amount) +" health.", Fore.GREEN)
@@ -217,9 +218,11 @@ def print_location(location):
     print()
     nice_print(location["name"].upper(), Fore.BLACK, Back.WHITE)
     print()
+    #If the area is visited for the first time, the whole description is nice printed, and the visited variable is changed
     if not location["visited"]:
         nice_print(location["description"])
         location["visited"] = True
+    #Otherwise the whole description is printed at once to save the players time
     else:
         nice_print_line(location["description"])
     print()
@@ -387,6 +390,7 @@ def execute_use(item_id):
 
     for item in player["inventory"]:
         if item_id == item["id"]:
+            #The item uses are functions referenced inside the item list, the item is checked for a function and if one is found it is executed
             if "heal" in item.keys():
                 heal_player(player, item["name"], item["heal"])
                 player["inventory"].remove(item)

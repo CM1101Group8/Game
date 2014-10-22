@@ -55,9 +55,9 @@ def combat(enemy):
                         #This checks if the item actually exists, it is unessacery to check this earlier because if an enemy
                         #is vulnerable to the item then the item must exist
                         if item_used:
-                            nice_print("You attempt to attack", enemy["name"], "with", command[1])
-                            nice_print(enemy["name"], "is impervious to your", command[1], "based attack")
-                            nice_print("The attack backfires and deals", item_damage(item_used), "damage to yourself.", Fore.RED)
+                            nice_print("You attempt to attack " + enemy["name"] + " with " + command[1])
+                            nice_print(enemy["name"] + " is impervious to your " + command[1] + " based attack")
+                            nice_print("The attack backfires and deals " + str(item_damage(item_used)) + " damage to yourself.", Fore.RED)
                             player["health"] -= item_damage(item_used)
                         else:
                             nice_print("Use what?", Fore.YELLOW)
@@ -418,17 +418,21 @@ def execute_use_with(item_one_id, item_two_id):
                 for item_two in player["inventory"]:
                     if item_two_id == item_two["id"]:
                         if item_one["use_with"] == item_two["id"]:
-                            if player["inventory_weight"] - item_one["mass"] - item_two["mass"] + item_one["combined_item"]["mass"] < 4000:
-                                player["inventory"].remove(item_one)
-                                player["inventory_weight"] -= item_one["mass"]
-                                player["inventory"].remove(item_two)
-                                player["inventory_weight"] -= item_two["mass"]
-                                player["inventory"].append(item_one["combined_item"])
-                                player["inventory_weight"] += item_one["combined_item"]["mass"]
-                                nice_print("You combined "+ item_one["name"] + " with "+ item_two["name"] +" and made "+ item_one["combined_item"]["name"] + ".", Fore.GREEN)
-                                return True
+                            if "combine_location" in item_one.keys() and player["current_location"]["name"] == item_one["combine_location"]:
+                                if player["inventory_weight"] - item_one["mass"] - item_two["mass"] + item_one["combined_item"]["mass"] < 4000:
+                                    player["inventory"].remove(item_one)
+                                    player["inventory_weight"] -= item_one["mass"]
+                                    player["inventory"].remove(item_two)
+                                    player["inventory_weight"] -= item_two["mass"]
+                                    player["inventory"].append(item_one["combined_item"])
+                                    player["inventory_weight"] += item_one["combined_item"]["mass"]
+                                    nice_print("You combined "+ item_one["name"] + " with "+ item_two["name"] +" and made "+ item_one["combined_item"]["name"] + ".", Fore.GREEN)
+                                    return True
+                                else:
+                                    nice_print("You could combine these items, but it would be too heavy for you to carry.", Fore.RED)
+                                    return False
                             else:
-                                nice_print("You could combine these items, but it would be too heavy for you to carry.", Fore.RED)
+                                nice_print("You can't combine those items here. Try somewhere else. " + item_one["combine_location"] + " maybe...", Fore.RED)
                                 return False
                         else:
                             nice_print("Those items don't go together. Try another combination.", Fore.RED)
@@ -617,7 +621,6 @@ def main():
             nice_print_line("But will anyone arrive in time, or is it already to late for you?")
             nice_print_line("Only time will decide")
             credits(1)
-            nice_print("STRANDED")
             quit()
         # Display game status (location description, inventory etc.)
         print_location(player["current_location"])

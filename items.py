@@ -96,7 +96,9 @@ item_petrol = {
 
     "use_with": "woodpile",
 
-    "combined_item": item_combined_petrol_pile
+    "combined_item": item_combined_petrol_pile,
+
+    "combine_location": "Cliffs"
 }
 
 def use_item_sparktool(player, locations, nice_print, Fore, Back):
@@ -124,7 +126,9 @@ item_sparktool = {
 
     "use": use_item_sparktool,
 
-    "use_with": "petrolpile"
+    "use_with": "petrolpile",
+
+    "combine_location": "Cliffs"
 
 }
 
@@ -150,7 +154,9 @@ item_leaves = {
 
     "use_with": "wood",
 
-    "combined_item": item_combined_leaves_wood
+    "combined_item": item_combined_leaves_wood,
+
+    "combine_location": "Cliffs"
 }
 
 

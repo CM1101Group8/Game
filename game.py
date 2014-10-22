@@ -44,7 +44,7 @@ def combat(enemy):
                     #If the item chosen is the one the enemy is vulnerable too, the enemy is removed from the room and the While loop broken out of
                     if command[1] == enemy["vuln"]:
                         success = "You successfully hit " + enemy["name"] + " with " + item_used["name"] + ", killing them."
-                        nice_print(success)
+                        nice_print(success, Fore.GREEN)
                         player["current_location"]["enemy"] = ""
                         if "on_kill" in enemy.keys():
                             enemy["on_kill"](player, locations)
@@ -53,7 +53,7 @@ def combat(enemy):
                     else:
                         print("You attempt to attack", enemy["name"], "with", command[1])
                         print(enemy["name"], "is impervious to your", command[1], "based attack")
-                        print("The attack backfires and deals", item_damage(item_used), "damage to yourself.")
+                        print("The attack backfires and deals", item_damage(item_used), "damage to yourself.", Fore.RED)
                         player["health"] -= item_damage(item_used)
             #FLEE only allows the player to return to their previous location so they do not get to locations they are not allowed to acess yet
             #This is done by storing the previous location into a player variable every time the player moves
@@ -287,6 +287,10 @@ def print_menu(exits, location_items, inv_items):
             nice_print_line("USE " + things["id"].upper() + " to heal using your " + things["name"] + ".")
         elif "use" in things.keys():
             nice_print_line("USE " + things["id"].upper() + " to use your " + things["name"] + ".")
+        if "use_with" in things.keys():
+            for item in inv_items:
+                if things["use_with"] == item["id"]:
+                    nice_print_line("USE " + things["id"].upper() + " WITH "+ things["use_with"].upper() +" to create " + things["combined_item"]["name"] + ".")
     for things in location_items:
         nice_print_line("TAKE " + things["id"].upper() + " to take a " + things["name"] + ".")
     for things in inv_items:
@@ -397,12 +401,34 @@ def execute_use(item_id):
     nice_print("You don't have that!", Fore.RED)
     return False
 
-def execute_use_with(item_one, item_two):
-    #global locations
-    #if player["current_location"] == locations["Cliffs"]:
-        #for item in player["inventory"]:
-        #nice_print_line("You combined "+ item_one + " with "+ item_two +" and made "+ created_item + ".")
-    pass
+def execute_use_with(item_one_id, item_two_id):
+    for item_one in player["inventory"]:
+        if item_one_id == item_one["id"]:
+            if "use_with" in item_one.keys():
+                for item_two in player["inventory"]:
+                    if item_two_id == item_two["id"]:
+                        if item_one["use_with"] == item_two["id"]:
+                            if player["inventory_weight"] - item_one["mass"] - item_two["mass"] + item_one["combined_item"]["mass"] < 4000:
+                                player["inventory"].remove(item_one)
+                                player["inventory_weight"] -= item_one["mass"]
+                                player["inventory"].remove(item_two)
+                                player["inventory_weight"] -= item_two["mass"]
+                                player["inventory"].append(item_one["combined_item"])
+                                player["inventory_weight"] += item_one["combined_item"]["mass"]
+                                nice_print("You combined "+ item_one["name"] + " with "+ item_two["name"] +" and made "+ item_one["combined_item"]["name"] + ".", Fore.GREEN)
+                                return True
+                            else:
+                                nice_print("You could combine these items, but it would be too heavy for you to carry.", Fore.RED)
+                                return False
+                        else:
+                            nice_print("Those items don't go together. Try another combination.", Fore.RED)
+                            return False
+            else:
+                nice_print("Those items don't go together. Try another combination.", Fore.RED)
+                return False
+
+    nice_print("You don't have that item.", Fore.RED)
+    return False                    
 
 def execute_command(command):
     """This function takes a command (a list of words as returned by
@@ -435,7 +461,7 @@ def execute_command(command):
     elif command[0] == "use":
         if len(command) > 1:
             if len(command) > 2 and command[2] == "with" and len(command[3]) > 0:
-                execute_use_with(command[1], command[3])
+                return execute_use_with(command[1], command[3])
             else:
                 return execute_use(command[1])
         else:

@@ -29,7 +29,7 @@ you can see its sinewy muscle shift under it's skin with
 every movement, perfectly developed to hunt its prey,
 perfectly formed to hunt you...""",
 
-	"vuln": "loaded_gun",
+	"vuln": "loadedgun",
 
 	"on_kill": on_kill_enemy_wolf
 }

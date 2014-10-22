@@ -578,7 +578,7 @@ def title_input():      #starting menu at beginning of game. Allows user to star
     elif command == "CREDITS":
         credits()
 
-def credits():      #prints credits so you know we made the game
+def credits(end=False):      #prints credits so you know we made the game
     print()
     nice_print("CREDITS", Fore.BLACK, Back.WHITE)
     print()
@@ -597,7 +597,8 @@ def credits():      #prints credits so you know we made the game
     print()
     nice_print("   Thanks for playing!", Fore.GREEN)
     print()
-    title_input()
+    if not end:
+        title_input()
 
 # This is the entry point of our program
 def main():

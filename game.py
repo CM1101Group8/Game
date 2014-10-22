@@ -103,11 +103,11 @@ def list_of_items(items):
     """This function takes a list of items (see items.py for the definition) and
     returns a comma-separated list of item names (as a string). For example:
 
-    >>> list_of_items([item_pen, item_handbook])
-    'a pen, a student handbook'
+    >>> list_of_items([item_machete, item_parachute])
+    'rusty machete, parachute'
 
-    >>> list_of_items([item_id])
-    'id card'
+    >>> list_of_items([item_gun])
+    'gun'
 
     >>> list_of_items([])
     ''
@@ -130,15 +130,15 @@ def print_location_items(location):
     items.py for the definition of an item. This function uses list_of_items()
     to produce a comma-separated list of item names. For example:
 
-    >>> print_location_items(locations["Reception"])
-    There is a pack of biscuits, a student handbook here.
+    >>> print_location_items(locations["HOF"])
+    There is pile of wood here.
     <BLANKLINE>
 
-    >>> print_location_items(locations["Office"])
-    There is a pen here.
+    >>> print_location_items(locations["Ravine"])
+    There is pile of green leaves.
     <BLANKLINE>
 
-    >>> print_location_items(locations["Robs"])
+    >>> print_location_items(locations["Passage"])
 
     (no output)
 

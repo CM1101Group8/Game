@@ -33,7 +33,7 @@ def combat(enemy):
             nice_print("You can attempt to attack him with other items or FLEE")
         print ("FLEE to return to the previous area.")
         #Gets the players command and normalises it
-        command = normalise_input(input(">"))
+        command = normalise_input(input("> "))
         if command:
             #checks what the player wants to do
             if command[0] == "use":
@@ -81,7 +81,6 @@ def take_damage(player, damage):
 def print_player(player):
     #prints the player status
     nice_print_line("Your health is: " + str(player["health"]), Fore.RED)
-    nice_print_line("Your experience is: "+str(player["experience"]), Fore.YELLOW)
     print()
 
 def list_of_items(items):

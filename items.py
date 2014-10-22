@@ -71,6 +71,18 @@ item_parachute = {
     "use": use_item_parachute
 }
 
+item_combined_loaded_gun = {
+
+    "id": "loaded_gun",
+
+    "name": "a loaded gun",
+
+    "description":
+    """The gun is loaded and ready to fire with""",
+
+    "mass": 850
+}
+
 item_gun = {
     "id": "gun",
 
@@ -79,7 +91,11 @@ item_gun = {
     "description":
     """The gun is a powerful weapon that can stop almost any foe.""",
 
-    "mass": 700
+    "mass": 700,
+
+    "use_with": "bullets",
+
+    "combined_item": item_combined_loaded_gun
 }
 
 item_bullets = {
@@ -90,30 +106,11 @@ item_bullets = {
     "description":
     """Powerful ammo for a gun""",
 
-    "mass": 150
-}
+    "mass": 150,
 
-item_combined_leaves_wood = {
+    "use_with": "gun",
 
-    "id": "woodpile",
-
-    "name": "pile of leaves and wood",
-
-    "description": "Can be used to help start a fire.",
-
-    "mass": 1100,
-}
-
-item_combined_petrol_pile = {
-
-    "id": "petrolpile",
-
-    "name": "pile of leaves and wood and petrol",
-
-    "description": "Can be used with a spark to start a fire.",
-
-    "mass": 2300,
-
+    "combined_item": item_combined_loaded_gun,
 }
 
 item_fire = {
@@ -128,6 +125,36 @@ item_fire = {
 
 }
 
+item_combined_petrol_pile = {
+
+    "id": "petrolpile",
+
+    "name": "pile of leaves and wood and petrol",
+
+    "description": "Can be used with a spark to start a fire.",
+
+    "mass": 2300,
+
+    "use_with": "sparktool",
+
+    "combined_item": item_fire,
+}
+
+item_combined_leaves_wood = {
+
+    "id": "woodpile",
+
+    "name": "pile of leaves and wood",
+
+    "description": "Can be used to help start a fire.",
+
+    "mass": 1100,
+
+    "use_with": "petrol",
+
+    "combined_item": item_combined_petrol_pile
+}
+
 
 item_petrol = {
     "id": "petrol",
@@ -138,6 +165,8 @@ item_petrol = {
     """A canister of petrol which could be used to aid in firemaking.""",
 
     "mass": 1200,
+
+    "use_with": "woodpile",
 
     "combined_item": item_combined_petrol_pile
 }
@@ -165,7 +194,10 @@ item_sparktool = {
 
     "combined_item": item_fire,
 
-    "use": use_item_sparktool
+    "use": use_item_sparktool,
+
+    "use_with": item_combined_petrol_pile
+
 }
 
 item_wood = {
@@ -176,6 +208,8 @@ item_wood = {
     "description": "The wood pile can be used as fuel for a fire.",
 
     "mass": 1000,
+
+    "use_with": "leaves",
 
     "combined_item": item_combined_leaves_wood
 }
@@ -190,24 +224,11 @@ item_leaves = {
 
     "mass": 100,
 
+    "use_with": "wood",
+
     "combined_item": item_combined_leaves_wood
 }
 
-
-item_combinations = {
-
-    "wood": item_leaves,
-
-    "petrol": item_combined_leaves_wood,
-
-    "sparktool": item_combined_petrol_pile,
-
-    "leaves": item_wood,
-
-    "gun": item_bullets,
-
-    "bullets": item_gun
-}
 
 # SURVIVAL ITEMS -----------------------------------------------------------------------
 item_medkit = {

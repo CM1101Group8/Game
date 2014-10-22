@@ -43,7 +43,7 @@ def combat(enemy):
                         if item["id"] == command[1]:
                             item_used = item
                     #If the item chosen is the one the enemy is vulnerable too, the enemy is removed from the room and the While loop broken out of
-                    if command[1] == enemy["vuln"]:
+                    if command[1] == enemy["vuln"] and item_used:
                         success = "You successfully hit " + enemy["name"] + " with " + item_used["name"] + ", killing them."
                         nice_print(success, Fore.GREEN)
                         player["current_location"]["enemy"] = ""
@@ -609,6 +609,14 @@ def main():
     while True:
         if player["health"] <= 0:
             nice_print("You have died! Game over!", Fore.RED)
+            quit()
+        if item_fire in player["inventory"]:
+            nice_print_line("Your fire now burns brightly on the top of the cliffs")
+            nice_print_line("Any passing planes or ships are sure to see you on the island")
+            nice_print_line("But will anyone arrive in time, or is it already to late for you?")
+            nice_print_line("Only time will decide")
+            nice_print_line("Thank you for playing:")
+            nice_print("STRANDED")
             quit()
         # Display game status (location description, inventory etc.)
         print_location(player["current_location"])

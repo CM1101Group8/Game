@@ -185,41 +185,41 @@ def execute_command(command):
     execute_take, execute_drop, execute_use or execute_use_with, supplying 
     the other command as the argument.
     """
-
-    if command[0] == "go":
-        if len(command) > 1:
-            return execute_go(command[1])
-        else:
-            nice_print("Go where?", Fore.YELLOW)
-            return False
-
-    elif command[0] == "take":
-        if len(command) > 1:
-            return execute_take(command[1])
-        else:
-            nice_print("Take what?", Fore.YELLOW)
-            return False
-
-    elif command[0] == "drop":
-        if len(command) > 1:
-            return execute_drop(command[1])
-        else:
-            nice_print("Drop what?", Fore.YELLOW)
-            return False
-
-    elif command[0] == "use":
-        if len(command) > 1:
-            if len(command) > 2 and command[2] == "with" and len(command[3]) > 0:
-                return execute_use_with(command[1], command[3])
+    if len(command) > 1:
+        if command[0] == "go":
+            if len(command) > 1:
+                return execute_go(command[1])
             else:
-                return execute_use(command[1])
-        else:
-            nice_print("Use what?", Fore.YELLOW)
-            return False
+                nice_print("Go where?", Fore.YELLOW)
+                return False
 
-    else:
-        nice_print("This makes no sense.", Fore.YELLOW)
-        return False
+        elif command[0] == "take":
+            if len(command) > 1:
+                return execute_take(command[1])
+            else:
+                nice_print("Take what?", Fore.YELLOW)
+                return False
+
+        elif command[0] == "drop":
+            if len(command) > 1:
+                return execute_drop(command[1])
+            else:
+                nice_print("Drop what?", Fore.YELLOW)
+                return False
+
+        elif command[0] == "use":
+            if len(command) > 1:
+                if len(command) > 2 and command[2] == "with" and len(command[3]) > 0:
+                    return execute_use_with(command[1], command[3])
+                else:
+                    return execute_use(command[1])
+            else:
+                nice_print("Use what?", Fore.YELLOW)
+                return False
+
+        else:
+            nice_print("This makes no sense.", Fore.YELLOW)
+            return False
 
 
 def menu(exits, location_items, inv_items):

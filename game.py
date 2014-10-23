@@ -539,6 +539,7 @@ def nice_print_line(text, fore=Fore.WHITE, back=Back.BLACK):
     print(text, end='')
     time.sleep(0.2)
     print(Fore.RESET + Back.RESET, end='\n')
+    
 
 def title():    #prints title in large font with blue background. Uses colorama library.
     print()

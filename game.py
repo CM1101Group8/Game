@@ -540,10 +540,11 @@ def nice_print_line(text, fore=Fore.WHITE, back=Back.BLACK):
     time.sleep(0.2)
     print(Fore.RESET + Back.RESET, end='\n')
 
+
 def title():    #prints title in large font with blue background. Uses colorama library.
     print()
     nice_print_line(
-        """
+            """
         _______________________________________________________________
        |    _____ _______ _____            _   _ _____  ______ _____   |
        |   / ____|__   __|  __ \     /\   | \ | |  __ \|  ____|  __ \  |
@@ -552,7 +553,7 @@ def title():    #prints title in large font with blue background. Uses colorama 
        |   ____) |  | |  | | \ \  / ____ \| |\  | |__| | |____| |__| | |
        |  |_____/   |_|  |_|  \_\/_/    \_\_| \_|_____/|______|_____/  |
        |_______________________________________________________________|
-        """, Fore.WHITE, Back.CYAN)
+                                                                        """, Fore.WHITE, Back.CYAN)
     print()
     nice_print(
     """

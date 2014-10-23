@@ -11,6 +11,9 @@ item_toolkit = {
 }
 
 def use_item_headtorch(player, locations, nice_print, Fore, Back):
+    """This function is called when the player uses the headtorch. It
+    switches it on or off depending on its current state.
+    """
     if not item_headtorch["on"]:
         item_headtorch["on"] = True
         nice_print("You turned on your headtorch. Everything looks a little bit brighter.", Fore.GREEN)
@@ -102,6 +105,10 @@ item_petrol = {
 }
 
 def use_item_sparktool(player, locations, nice_print, Fore, Back):
+    """This function is called when the player uses the sparktool. It
+    checks if the player is in the correct location, and sets alight
+    the brush, allowing the player to pick up the machete.
+    """
     if player["current_location"] == locations["Brush"] and not locations["Brush"]["fire"]:
         nice_print("You use the spark tool to set the barbed brush alight.", Fore.GREEN)
         locations["Brush"]["items"].append(item_machete)
@@ -187,6 +194,10 @@ item_water = {
 
 #ACCESS ITEMS -----------------------------------------------------------------------
 def use_item_parachute(player, locations, nice_print, Fore, Back):
+    """This function is called when the player uses the parachute. If
+    the player is in the correct location, it transports them to the
+    Ravine.
+    """
     if player["current_location"] == locations["Waterfall"]:
         nice_print("You parachute down to the ravine.", Fore.GREEN)
         player["current_location"] = locations["Ravine"]
@@ -209,6 +220,11 @@ item_parachute = {
 }
 
 def use_item_fireblanket(player, locations, nice_print, Fore, Back):
+    """This function is called when the player uses the fireblanket. If
+    the player is in the correct location, it removes the fire from the
+    entrance to the cave, allowing the player to enter without taking
+    damage.
+    """
     if player["current_location"] == locations["Passage"]:
         nice_print("You use the fire blanket to put out the fire in the entrance to the cave.", Fore.GREEN)
         locations["Passage"]["description"] = locations["Passage"]["description_extinguished"]
@@ -234,6 +250,10 @@ item_fireblanket = {
 }
 
 def use_item_rope(player, locations, nice_print, Fore, Back):
+    """This function is called when the player uses the rope. If
+    the player is in the correct location, it allows them to
+    access the flooded cave.
+    """
     if player["current_location"] == locations["Hill"]:
         nice_print("You use the climbing rope to allow yourself to climb up to the flooded cave.", Fore.GREEN)
         player["current_location"]["exits"]["north"] = "Cave2"

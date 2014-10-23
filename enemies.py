@@ -1,4 +1,7 @@
 def on_kill_enemy_kirill(player, locations):
+	"""This function is called when the player kills Kirill. It changes the
+	description of the Cliffs to reflect this.
+	"""
 	locations["Cliffs"]["description"] = locations["Cliffs"]["description_killed"]
 
 enemy_kirill = {
@@ -17,6 +20,9 @@ he used to be""",
 }
 
 def on_kill_enemy_wolf(player, locations):
+	"""This function is called when the player kills the Wolf. It changes the
+	description of the Lair to reflect this.
+	"""
 	locations["Lair"]["description"] = locations["Lair"]["description_killed"]
 
 enemy_wolf = {

@@ -7,256 +7,8 @@ from map import locations
 from player import *
 from items import *
 from gameparser import *
-
-def combat(enemy):
-    correct_item = 0
-    #Informs the player of the enemies presense then holds them in the combat menuwith a while loop
-    nice_print("WARNING", Fore.BLACK, Back.WHITE)
-    nice_print("There is a " + enemy["name"] + " in the area with you.")
-    while True:
-        #Checks if the player died during the previous round of combat, and if so quits the game
-        if player["health"] < 1:
-            print("Player has died, RIP in peace")
-            quit()
-
-        nice_print_line("\nYour health is: " + str(player["health"]), Fore.RED)
-        #Prints the list of USE options the player has based on his inventory
-        for item in player["inventory"]:
-            print("USE", item["id"].upper(), "to attack", enemy["name"], "with", item["name"] + ".")
-            if item["id"] == enemy["vuln"]:
-                correct_item = 1
-                nice_print("You have the correct equipment to defeat")
-        #Only prints these lines if the correct item to defeat the enemy is not in the palyer's inventory
-        if not correct_item:
-            nice_print("You do not have the correct item to deal with the enemy")
-            nice_print("You can attempt to attack him with other items or FLEE")
-        print ("FLEE to return to the previous area.")
-        #Gets the players command and normalises it
-        command = normalise_input(input("> "))
-        if command:
-            #checks what the player wants to do
-            if command[0] == "use":
-                item_used = ""
-                if len(command) > 1:
-                    #puts the used items list in to a variable for later reference
-                    for item in player["inventory"]:
-                        if item["id"] == command[1]:
-                            item_used = item
-                    #If the item chosen is the one the enemy is vulnerable too, the enemy is removed from the room and the While loop broken out of
-                    if command[1] == enemy["vuln"] and item_used:
-                        success = "You successfully hit " + enemy["name"] + " with " + item_used["name"] + ", killing them."
-                        nice_print(success, Fore.GREEN)
-                        player["current_location"]["enemy"] = ""
-                        if "on_kill" in enemy.keys():
-                            enemy["on_kill"](player, locations)
-                        break
-                    #If the wrong item is used, it backfires on the player for some damage based on the weight of the item
-                    else:
-                        #This checks if the item actually exists, it is unessacery to check this earlier because if an enemy
-                        #is vulnerable to the item then the item must exist
-                        if item_used:
-                            nice_print("You attempt to attack " + enemy["name"] + " with " + command[1])
-                            nice_print(enemy["name"] + " is impervious to your " + command[1] + " based attack")
-                            nice_print("The attack backfires and deals " + str(item_damage(item_used)) + " damage to yourself.", Fore.RED)
-                            player["health"] -= item_damage(item_used)
-                        else:
-                            nice_print("Use what?", Fore.YELLOW)
-            #FLEE only allows the player to return to their previous location so they do not get to locations they are not allowed to acess yet
-            #This is done by storing the previous location into a player variable every time the player moves
-            elif command[0] == "flee":
-                player["current_location"] = player["previous_location"]
-                break
-
-            else:
-                nice_print("You cannot do that now")
-        else:
-            nice_print("You cannot do nothing")
-
-def item_damage(item):
-    #calculates item damage
-    import math
-    return int(math.sqrt(item['mass']))
-
-def take_damage(player, damage):
-    #inflicts damage on the player
-    player['health'] = player['health'] - int(damage)
-    nice_print_line("You took "+ str(damage) +" damage.", Fore.RED)
-    nice_print_line("Your health is now "+ str(player['health']) +".")
-    return player
-
-def heal_player(player, item, heal_amount):
-    # heals the player
-    player["health"] = player["health"] + int(heal_amount)
-    #Health cannot go over a pre-defined max
-    if player["health"] > 100:
-        player["health"] = 100
-    nice_print_line("You use the "+ str(item) +" and gain "+ str(heal_amount) +" health.", Fore.GREEN)
-    nice_print_line("Your health is now "+ str(player['health']) +".")
-    return player
-
-def print_player(player):
-    #prints the player status
-    nice_print_line("Your health is: " + str(player["health"]), Fore.RED)
-    print()
-
-def list_of_items(items):
-    """This function takes a list of items (see items.py for the definition) and
-    returns a comma-separated list of item names (as a string). For example:
-
-    >>> list_of_items([item_machete, item_parachute])
-    'rusty machete, parachute'
-
-    >>> list_of_items([item_gun])
-    'gun'
-
-    >>> list_of_items([])
-    ''
-
-    >>> list_of_items([item_money, item_handbook, item_laptop])
-    'money, a student handbook, laptop'
-
-    """
-    list = []
-    for x in items:
-     list.append(x["name"])
-
-    return ', '.join(list)
-
-
-def print_location_items(location):
-    """This function takes a location as an input and nicely displays a list of items
-    found in this location (followed by a blank line). If there are no items in
-    the location, nothing is printed. See map.py for the definition of a location, and
-    items.py for the definition of an item. This function uses list_of_items()
-    to produce a comma-separated list of item names. For example:
-
-    >>> print_location_items(locations["HOF"])
-    There is pile of wood here.
-    <BLANKLINE>
-
-    >>> print_location_items(locations["Ravine"])
-    There is pile of green leaves.
-    <BLANKLINE>
-
-    >>> print_location_items(locations["Passage"])
-
-    (no output)
-
-    Note: <BLANKLINE> here means that doctest should expect a blank line.
-
-    """
-    items = list_of_items(location["items"])
-    if items:
-        nice_print_line("There is "+ items + " here.")
-        print()
-
-
-def print_inventory_items(items):
-    """This function takes a list of inventory items and displays it nicely, in a
-    manner similar to print_location_items(). The only difference is in formatting:
-    print "You have ..." instead of "There is ... here.". For example:
-
-    >>> print_inventory_items(inventory)
-    You have id card, laptop, money.
-    <BLANKLINE>
-
-    """
-    items = list_of_items(items)
-    if items:
-      nice_print_line("You have "+ items + ".")
-      print()
-
-
-def print_location(location):
-    """This function takes a location as an input and nicely displays its name
-    and description. The location argument is a dictionary with entries "name",
-    "description" etc. (see map.py for the definition). The name of the location
-    is printed in all capitals and framed by blank lines. Then follows the
-    description of the location and a blank line again. If there are any items
-    in the location, the list of items is printed next followed by a blank line
-    (use print_location_items() for this). For example:
-
-    >>> print_location(locations["Office"])
-    <BLANKLINE>
-    THE GENERAL OFFICE
-    <BLANKLINE>
-    You are standing next to the cashier's till at
-    30-36 Newport Road. The cashier looks at you with hope
-    in their eyes. If you go west you can return to the
-    Queen's Buildings.
-    <BLANKLINE>
-    There is a pen here.
-    <BLANKLINE>
-
-    >>> print_location(locations["Reception"])
-    <BLANKLINE>
-    RECEPTION
-    <BLANKLINE>
-    You are in a maze of twisty little passages, all alike.
-    Next to you is the School of Computer Science and
-    Informatics reception. The receptionist, Matt Strangis,
-    seems to be playing an old school text-based adventure
-    game on his computer. There are corridors leading to the
-    south and east. The exit is to the west.
-    <BLANKLINE>
-    There is a pack of biscuits, a student handbook here.
-    <BLANKLINE>
-
-    >>> print_location(locations["Robs"])
-    <BLANKLINE>
-    ROBS' ROOM
-    <BLANKLINE>
-    You are leaning agains the door of the systems managers'
-    location. Inside you notice Rob Evans and Rob Davies. They
-    ignore you. To the north is the reception.
-    <BLANKLINE>
-
-    Note: <BLANKLINE> here means that doctest should expect a blank line.
-    """
-    if "on_print" in location.keys():
-        location["on_print"](player, locations, nice_print, Fore, Back, take_damage)
-    print()
-    nice_print(location["name"].upper(), Fore.BLACK, Back.WHITE)
-    print()
-    #If the area is visited for the first time, the whole description is nice printed, and the visited variable is changed
-    if not location["visited"]:
-        nice_print(location["description"])
-        location["visited"] = True
-    #Otherwise the whole description is printed at once to save the players time
-    else:
-        nice_print_line(location["description"])
-    print()
-
-def exit_leads_to(exits, direction):
-    """This function takes a dictionary of exits and a direction (a particular
-    exit taken from this dictionary). It returns the name of the location into which
-    this exit leads. For example:
-
-    >>> exit_leads_to(locations["Reception"]["exits"], "south")
-    "Robs' room"
-    >>> exit_leads_to(locations["Reception"]["exits"], "east")
-    "your personal tutor's office"
-    >>> exit_leads_to(locations["Tutor"]["exits"], "west")
-    'Reception'
-    """
-    return locations[exits[direction]]["name"]
-
-
-def print_exit(direction, leads_to):
-    """This function prints a line of a menu of exits. It takes a direction (the
-    name of an exit) and the name of the location into which it leads (leads_to),
-    and should print a menu line in the following format:
-
-    GO <EXIT NAME UPPERCASE> to <where it leads>.
-
-    For example:
-    >>> print_exit("east", "you personal tutor's office")
-    GO EAST to you personal tutor's office.
-    >>> print_exit("south", "Robs' room")
-    GO SOUTH to Robs' room.
-    """
-    nice_print_line("GO " + direction.upper() + " to the " + leads_to + ".")
-
+from combat import *
+from helpers import *
 
 def print_menu(exits, location_items, inv_items):
     """This function displays the menu of available actions to the player. The
@@ -273,19 +25,6 @@ def print_menu(exits, location_items, inv_items):
     and for each item in the inventory print
 
     "DROP <ITEM ID> to drop <item name>."
-
-    For example, the menu of actions available at the Reception may look like this:
-
-    You can:
-    GO EAST to your personal tutor's office.
-    GO WEST to the parking lot.
-    GO SOUTH to Robs' room.
-    TAKE BISCUITS to take a pack of biscuits.
-    TAKE HANDBOOK to take a student handbook.
-    DROP ID to drop your id card.
-    DROP LAPTOP to drop your laptop.
-    DROP MONEY to drop your money.
-    What do you want to do?
 
     """
     nice_print_line("You can:")
@@ -306,26 +45,6 @@ def print_menu(exits, location_items, inv_items):
         nice_print_line("DROP " + things["id"].upper() + " to drop your " + things["name"] + ".")
 
     nice_print("What do you want to do?")
-
-
-def is_valid_exit(exits, chosen_exit):
-    """This function checks, given a dictionary "exits" (see map.py) and
-    a players's choice "chosen_exit" whether the player has chosen a valid exit.
-    It returns True if the exit is valid, and False otherwise. Assume that
-    the name of the exit has been normalised by the function normalise_input().
-    For example:
-
-    >>> is_valid_exit(locations["Reception"]["exits"], "south")
-    True
-    >>> is_valid_exit(locations["Reception"]["exits"], "up")
-    False
-    >>> is_valid_exit(locations["Parking"]["exits"], "west")
-    False
-    >>> is_valid_exit(locations["Parking"]["exits"], "east")
-    True
-    """
-    return chosen_exit in exits
-
 
 def execute_go(direction):
     """This function, given the direction (e.g. "south") updates the current location
@@ -390,7 +109,9 @@ def execute_drop(item_ident):
 
 
 def execute_use(item_id):
-#Allows player to use items they have in their inventory. If not in inventory then it will print "You don't have that"
+    """Allows player to use items they have in their inventory. If not in inventory 
+        then it will print "You don't have that"
+    """
 
     for item in player["inventory"]:
         if item_id == item["id"]:
@@ -412,17 +133,29 @@ def execute_use(item_id):
     return False
 
 def execute_use_with(item_one_id, item_two_id):
+    """This function deals with the combination of items. It first checks
+    if the player has the items in their inventory and if the items
+    can be combined. Some items can only be combined in a certain
+    location.
+    """
+    # Check if the first item is in the player's inventory
     for item_one in player["inventory"]:
         if item_one_id == item_one["id"]:
+            # Check if this item has another item it can be used with
             if "use_with" in item_one.keys():
+                # Check if the second item is in the player's inventory
                 for item_two in player["inventory"]:
                     if item_two_id == item_two["id"]:
+                        # Check if these items can be combined
                         if item_one["use_with"] == item_two["id"]:
+                            # Check if we are in the correct location to combine this items, if applicable
                             if "combine_location" in item_one.keys() and player["current_location"]["name"] != item_one["combine_location"]:
                                 nice_print("You can't combine those items here. Try somewhere else. " + item_one["combine_location"] + " maybe...", Fore.RED)
                                 return False
 
+                            # Check the player's inventory won't be too heavy after combining these items
                             if player["inventory_weight"] - item_one["mass"] - item_two["mass"] + item_one["combined_item"]["mass"] < 4000:
+                                # Remove the weight of the original items and add the weight of the new item
                                 player["inventory"].remove(item_one)
                                 player["inventory_weight"] -= item_one["mass"]
                                 player["inventory"].remove(item_two)
@@ -448,10 +181,11 @@ def execute_use_with(item_one_id, item_two_id):
 def execute_command(command):
     """This function takes a command (a list of words as returned by
     normalise_input) and, depending on the type of action (the first word of
-    the command: "go", "take", or "drop"), executes either execute_go,
-    execute_take, or execute_drop, supplying the second word as the argument.
-
+    the command: "go", "take", "drop" or "use"), executes either execute_go,
+    execute_take, execute_drop, execute_use or execute_use_with, supplying 
+    the other command as the argument.
     """
+
     if command[0] == "go":
         if len(command) > 1:
             return execute_go(command[1])
@@ -494,7 +228,6 @@ def menu(exits, location_items, inv_items):
     actions using print_menu() function. It then prompts the player to type an
     action. The players's input is normalised using the normalise_input()
     function before being returned.
-
     """
 
     # Display menu
@@ -513,48 +246,30 @@ def menu(exits, location_items, inv_items):
 def move(exits, direction):
     """This function returns the location into which the player will move if, from a
     dictionary "exits" of avaiable exits, they choose to move towards the exit
-    with the name given by "direction". For example:
-
-    >>> move(locations["Reception"]["exits"], "south") == locations["Robs"]
-    True
-    >>> move(locations["Reception"]["exits"], "east") == locations["Tutor"]
-    True
-    >>> move(locations["Reception"]["exits"], "west") == locations["Office"]
-    False    """
+    with the name given by "direction".
+    """
 
     # Next location to go to
     return locations[exits[direction]]
 
-def nice_print(text, fore=Fore.WHITE, back=Back.BLACK):
-    # Function stops text appearing in one block and instead makes it appear word by word
-    print(fore + back, end='')
-    for character in text:
-        sys.stdout.write(character)
-        sys.stdout.flush()
-        time.sleep(0.02)
-    print(Fore.RESET + Back.RESET, end='\n')
+def title():
+    """This function prints title in large font with blue background,
+    as well as the introduction text. Uses colorama library to add 
+    colour to the title.
+    """
 
-def nice_print_line(text, fore=Fore.WHITE, back=Back.BLACK):
-    print(fore + back, end='')
-    print(text, end='')
-    time.sleep(0.2)
-    print(Fore.RESET + Back.RESET, end='\n')
-    
-
-
-def title():    #prints title in large font with blue background. Uses colorama library.
     print()
     nice_print_line(
             """
-        _______________________________________________________________
-       |    _____ _______ _____            _   _ _____  ______ _____   |
-       |   / ____|__   __|  __ \     /\   | \ | |  __ \|  ____|  __ \  |
-       |  | (___    | |  | |__) |   /  \  |  \| | |  | | |__  | |  | | |
-       |   \___ \   | |  |  _  /   / /\ \ | . ` | |  | |  __| | |  | | |
-       |   ____) |  | |  | | \ \  / ____ \| |\  | |__| | |____| |__| | |
-       |  |_____/   |_|  |_|  \_\/_/    \_\_| \_|_____/|______|_____/  |
-       |_______________________________________________________________|
-                                                                        """, Fore.WHITE, Back.CYAN)
+        _______________________________________________________________        
+       |    _____ _______ _____            _   _ _____  ______ _____   |       
+       |   / ____|__   __|  __ \     /\   | \ | |  __ \|  ____|  __ \  |       
+       |  | (___    | |  | |__) |   /  \  |  \| | |  | | |__  | |  | | |       
+       |   \___ \   | |  |  _  /   / /\ \ | . ` | |  | |  __| | |  | | |       
+       |   ____) |  | |  | | \ \  / ____ \| |\  | |__| | |____| |__| | |       
+       |  |_____/   |_|  |_|  \_\/_/    \_\_| \_|_____/|______|_____/  |       
+       |_______________________________________________________________|       
+                                                                               """, Fore.WHITE, Back.CYAN)
     print()
     nice_print(
     """
@@ -573,7 +288,10 @@ def title():    #prints title in large font with blue background. Uses colorama 
     print()
     title_input()
 
-def title_input():      #starting menu at beginning of game. Allows user to start playing or view credits
+def title_input():
+    """This function displays the menu and accepts input at the beginning
+    of the game. Allows user to start playing or view credits.
+    """
     nice_print_line("Type START to start the game")
     nice_print_line("Type CREDITS for the credits")
 
@@ -586,7 +304,12 @@ def title_input():      #starting menu at beginning of game. Allows user to star
     elif command == "CREDITS":
         credits()
 
-def credits(end=False):      #prints credits so you know we made the game
+def credits(end=False):
+    """This function prints the credits so you know we made the game. Has an end
+    parameter to specify whether the credits are being displayed after the game
+    has been completed.
+    """
+
     print()
     nice_print("CREDITS", Fore.BLACK, Back.WHITE)
     print()
@@ -616,9 +339,12 @@ def main():
     title()
     # Main game loop
     while True:
+        # Check if the player's health is below zero and end the game
         if player["health"] <= 0:
             nice_print("You have died! Game over!", Fore.RED)
             quit()
+
+        # Check if the player has met the victory condition and end the game    
         if item_fire in player["inventory"]:
             nice_print_line("Your fire now burns brightly on the top of the cliffs")
             nice_print_line("Any passing planes or ships are sure to see you on the island")
@@ -626,6 +352,7 @@ def main():
             nice_print_line("Only time will decide")
             credits(1)
             quit()
+
         # Display game status (location description, inventory etc.)
         print_location(player["current_location"])
         if player["current_location"]["enemy"]:
@@ -637,7 +364,7 @@ def main():
         # Show the menu with possible actions and ask the player
         command = menu(player["current_location"]["exits"], player["current_location"]["items"], player["inventory"])
 
-        # Execute the player's command
+        # Execute the player's command - repeat the options if the command cannot be performed
         while not execute_command(command):
             command = menu(player["current_location"]["exits"], player["current_location"]["items"], player["inventory"])
 

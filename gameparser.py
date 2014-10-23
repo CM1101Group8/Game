@@ -70,7 +70,7 @@ def normalise_input(user_input):
     >>> normalise_input("Now, drop the sword please.")
     ['drop', 'sword']
     >>> normalise_input("Kill ~ tHe :-  gObLiN,. wiTH my SWORD!!!")
-    ['kill', 'goblin', 'sword']
+    ['kill', 'goblin', 'with', 'sword']
     >>> normalise_input("I would like to drop my laptop here.")
     ['drop', 'laptop']
     >>> normalise_input("I wish to take this large gem now!")
@@ -83,6 +83,3 @@ def normalise_input(user_input):
     user_input = remove_punct(user_input).strip().lower().split()
     user_input = filter_words(user_input, skip_words)
     return user_input
-    #
-    # COMPLETE ME!
-    #

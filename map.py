@@ -92,6 +92,10 @@ location_mon3 = {
 }
 
 def on_print_location_hof(player, locations, nice_print, Fore, Back, take_damage):
+    """This function is called each time the Heart of the Forest location is
+    printed. It checks if the headtorch is on, and changes the description
+    appropriately.
+    """
     if item_headtorch in player["inventory"] and item_headtorch["on"]:
         locations["HOF"]["description"] = locations["HOF"]["description_on"]
         return True
@@ -296,6 +300,10 @@ location_beach = {
 }
 
 def on_enter_location_passage(player, locations, nice_print, Fore, Back, take_damage):
+    """This function is called when the player enters the passage. It checks if the
+    headtorch is on or off. If it is off, it deals damage to the player and pushes
+    them back to the previous location.
+    """
     if item_headtorch in player["inventory"] and item_headtorch["on"]:
         nice_print("Your headtorch illuminates the darkness, lighting your path.", Fore.GREEN)
         nice_print("The vile creatures of the cave are scared off by the light", Fore.GREEN)
@@ -369,10 +377,7 @@ location_waterfall = {
     """
     At the end of the river lies a waterfall, and clinging
     onto a tree on top of that waterfall is a fluorescent
-    parachute. It is impossible to climb simply by yourself.
-    You notice that there is a very clear overhead between
-    the waterfall and the ravine, if only you had the means
-    the traverse this open path...
+    parachute. It is possible to scale to the top.
     """,
 
     "exits": {"east": "River"},
@@ -406,6 +411,9 @@ location_hill = {
 }
 
 def on_enter_cave(player, locations, nice_print, Fore, Back, take_damage):
+    """This function is called when the player enters the cave. If the fire
+    is still active, and if it is, deals 70 damage to the player.
+    """
     if locations["Cave"]["fire"]:
         take_damage(player, 70)
         return True
